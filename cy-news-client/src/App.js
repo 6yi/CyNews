@@ -1,6 +1,6 @@
 import NewsInterface from './containers/NewsInterface/news-interface'
 import UserInterface from './containers/UserInterface/user-interface'
-import {HashRouter,Route,Switch} from 'react-router-dom'
+import {HashRouter,Route,Switch,Router} from 'react-router-dom'
 function App() {
   return (
     <HashRouter>
