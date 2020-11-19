@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/cy-news-api/pom.xml" />
         <option value="$PROJECT_DIR$/cy-news-pojo/pom.xml" />
         <option value="$PROJECT_DIR$/cy-news-api_gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/cy-news-user-provider/pom.xml" />
       </list>
     </option>
   </component>

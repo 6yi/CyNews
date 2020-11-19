@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/cy-news-api/cy-news-api.iml" filepath="$PROJECT_DIR$/cy-news-api/cy-news-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-api_gateway/cy-news-api_gateway.iml" filepath="$PROJECT_DIR$/cy-news-api_gateway/cy-news-api_gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-pojo/cy-news-pojo.iml" filepath="$PROJECT_DIR$/cy-news-pojo/cy-news-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cy-news-user-provider/cy-news-user-provider.iml" filepath="$PROJECT_DIR$/cy-news-user-provider/cy-news-user-provider.iml" />
     </modules>
   </component>
 </project>
