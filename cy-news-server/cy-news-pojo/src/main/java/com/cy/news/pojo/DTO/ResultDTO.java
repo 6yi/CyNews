@@ -1,9 +1,8 @@
 package com.cy.news.pojo.DTO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.io.Serializable;
 
 /**
  * @ClassName ResultDTO
@@ -17,7 +16,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResultDTO {
+@Setter
+@Getter
+public class ResultDTO implements Serializable {
 
     Integer code;
 
