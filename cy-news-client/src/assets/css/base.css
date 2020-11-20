@@ -1,0 +1,12 @@
+.am-list-body {
+    background-color: #fcfcfc !important;
+} 
+.am-list-body::after {
+    background-color: #fcfcfc !important;
+}
+.am-list-line::after {
+    background-color: #fcfcfc !important;
+}
+.am-list-item {
+    background-color: #fcfcfc !important;
+}

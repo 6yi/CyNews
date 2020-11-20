@@ -4,7 +4,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 1;
+    
     background: url('../../assets/img/时事_新闻_资讯.svg') no-repeat fixed 20% 15%,
                 url('../../assets/img/休闲娱乐.svg') no-repeat fixed 20% 25%,
                 url('../../assets/img/人.svg') no-repeat fixed 20% 35%,
@@ -21,7 +21,7 @@
                 url('../../assets/img/时事_新闻_资讯.svg') no-repeat fixed 40% 45%,
                 url('../../assets/img/明星_star156.svg') no-repeat fixed 40% 55%,
                 url('../../assets/img/书.svg') no-repeat fixed 40% 65%,
-                url('../../assets/img/游戏.svg') no-repeat fixed 35% 75%,
+                url('../../assets/img/书.svg') no-repeat fixed 40% 75%,
                 url('../../assets/img/休闲2.svg') no-repeat fixed 40% 85%,
                 url('../../assets/img/休闲娱乐.svg') no-repeat fixed 40% 95%,
 
@@ -68,21 +68,8 @@
     margin-left: 7%;
     
 }
-.am-list-body::before {
-    background-color: #fcfcfc !important;
-}
-.am-list-body {
-    background-color: #fcfcfc !important;
-} 
-.am-list-body::after {
-    background-color: #fcfcfc !important;
-}
-.am-list-line::after {
-    background-color: #fcfcfc !important;
-}
-.am-list-item {
-    background-color: #fcfcfc !important;
-}
+
+
 .list {
     
     margin-left: 3%;
