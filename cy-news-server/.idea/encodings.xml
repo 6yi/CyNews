@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/cy-news-api_gateway/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/cy-news-dependencies/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cy-news-emailserver/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cy-news-test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cy-news-user-provider/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cy-news-user-server/src/main/java" charset="UTF-8" />
