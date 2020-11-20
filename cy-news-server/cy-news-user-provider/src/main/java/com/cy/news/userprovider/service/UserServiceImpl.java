@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultDTO login() {
-        return ResultDTO.builder().code(200).data("dubbo调用成功").build();
+        return new ResultDTO().builder().code(2000).data("dubbo调用成功").build();
     }
 
 }
