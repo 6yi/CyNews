@@ -1,9 +1,7 @@
 package com.cy.news.api.service;
 
 import com.cy.news.pojo.DTO.ResultDTO;
-import com.cy.news.pojo.VO.UserNameLoginUserVO;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.cy.news.pojo.VO.UserNameLoginVO;
 
 /**
  * @ClassName UserService
@@ -17,7 +15,7 @@ public interface UserService {
 
 
 
-    ResultDTO login(UserNameLoginUserVO userVO);
+    ResultDTO login(UserNameLoginVO userVO);
 
 
 }

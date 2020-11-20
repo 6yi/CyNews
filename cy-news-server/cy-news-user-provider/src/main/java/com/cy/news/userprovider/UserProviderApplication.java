@@ -1,10 +1,12 @@
 package com.cy.news.userprovider;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@MapperScan("com.cy.news.userprovider.dao")
 @EnableDubbo(scanBasePackages = "com.cy.news.userprovider.service")
 public class UserProviderApplication {
 
