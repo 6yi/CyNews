@@ -27,12 +27,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
-<<<<<<< HEAD
 
 
-=======
-    
->>>>>>> 23:15
+
+
     /**
      * @author 6yi
      * @date 2020/11/20
@@ -43,10 +41,7 @@ public class UserServiceImpl implements UserService {
      *  1.判断用户密码是否正确
      *  2.根据用户状态返回响应码
      **/
-<<<<<<< HEAD
-=======
 
->>>>>>> 23:15
     @Override
     public ResultDTO login(UserNameLoginVO userVO) {
 
@@ -84,10 +79,6 @@ public class UserServiceImpl implements UserService {
 
 
     }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 23:15
 
 }
