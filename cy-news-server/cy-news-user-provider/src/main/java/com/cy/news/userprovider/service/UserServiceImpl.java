@@ -2,6 +2,7 @@ package com.cy.news.userprovider.service;
 
 import com.cy.news.api.service.UserService;
 import com.cy.news.pojo.DTO.ResultDTO;
+import com.cy.news.pojo.VO.UserNameLoginUserVO;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public ResultDTO login() {
-        return ResultDTO.builder().code(200).data("dubbo调用成功+lz").build();
+    public ResultDTO login(UserNameLoginUserVO userVO) {
+        return null;
     }
 
 }
