@@ -1,6 +1,7 @@
 package com.cy.news.api.service;
 
 import com.cy.news.pojo.DTO.ResultDTO;
+import com.cy.news.pojo.VO.UserNameLoginUserVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,12 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @Version 1.0
  * @Description:
  */
-@FeignClient("userProvider")
+
 public interface UserService {
 
 
-    @GetMapping("/user/login")
-    ResultDTO login();
+
+    ResultDTO login(UserNameLoginUserVO userVO);
 
 
 }
