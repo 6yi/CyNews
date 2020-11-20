@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
                 LoginSuccessVO loginSuccessVO = LoginSuccessVO.builder().user(user).JWT_TOKEN("jwt").build();
                 return ResultDTO.builder().code(UserRetErrorCode.OK).data(loginSuccessVO).build();
-                
+
             }
 
         }else {
