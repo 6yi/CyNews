@@ -1,5 +1,6 @@
 package com.cy.news.userprovider.service;
 
+import com.cy.news.api.service.EmailService;
 import com.cy.news.api.service.UserService;
 import com.cy.news.pojo.DTO.ResultDTO;
 import com.cy.news.pojo.Exception.UserRetErrorCode;
@@ -8,6 +9,7 @@ import com.cy.news.pojo.Exception.UserStatusCode;
 import com.cy.news.pojo.VO.LoginSuccessVO;
 import com.cy.news.pojo.VO.UserNameLoginVO;
 import com.cy.news.userprovider.dao.UserDao;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
+    @DubboReference
+    EmailService emailService;
 
 
 

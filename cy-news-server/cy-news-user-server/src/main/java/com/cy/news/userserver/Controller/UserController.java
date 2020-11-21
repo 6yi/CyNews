@@ -20,9 +20,9 @@ public class UserController {
     @DubboReference(version = "1.0.0")
     private UserService userService;
 
-    @GetMapping("/user/login")
+    @GetMapping("/login")
     public ResultDTO login(){
-        return userService.login();
+        return userService.login(null);
     }
 
 

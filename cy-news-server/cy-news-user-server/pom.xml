@@ -9,9 +9,9 @@
     </parent>
 
     <groupId>com.cy.news</groupId>
-    <artifactId>user-server</artifactId>
+    <artifactId>cy-news-user-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>user-server</name>
+    <name>cy-news-user-server</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

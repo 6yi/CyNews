@@ -2,22 +2,23 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cy-news-api_gateway" />
-        <module name="cy-news-dependencies" />
+        <module name="user-server" />
         <module name="api_gateway" />
         <module name="user-provider" />
-        <module name="emailserver" />
+        <module name="test" />
         <module name="cy-news-api" />
         <module name="cy-news-emailserver" />
         <module name="cy-news-user-provider" />
         <module name="cy-news-user-server" />
+        <module name="email-server" />
+        <module name="cy-news-dependencies" />
         <module name="cy-news-test" />
-        <module name="test" />
-        <module name="user-server" />
         <module name="cy-news-pojo" />
       </profile>
     </annotationProcessing>
@@ -31,7 +32,7 @@
       <module name="cy-news-test" target="1.8" />
       <module name="cy-news-user-provider" target="1.8" />
       <module name="cy-news-user-server" target="1.8" />
-      <module name="emailserver" target="1.8" />
+      <module name="email-server" target="1.8" />
       <module name="test" target="1.8" />
       <module name="user-provider" target="1.8" />
       <module name="user-server" target="1.8" />
@@ -46,7 +47,7 @@
       <module name="cy-news-test" options="-parameters" />
       <module name="cy-news-user-provider" options="-parameters" />
       <module name="cy-news-user-server" options="-parameters" />
-      <module name="emailserver" options="-parameters" />
+      <module name="email-server" options="-parameters" />
       <module name="test" options="-parameters" />
       <module name="user-provider" options="-parameters" />
       <module name="user-server" options="-parameters" />
