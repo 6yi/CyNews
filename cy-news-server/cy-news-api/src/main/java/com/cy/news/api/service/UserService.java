@@ -17,5 +17,6 @@ public interface UserService {
 
     ResultDTO login(UserNameLoginVO userVO);
 
+    ResultDTO updateUserStatus(Integer userStatusCode,Integer userId);
 
 }

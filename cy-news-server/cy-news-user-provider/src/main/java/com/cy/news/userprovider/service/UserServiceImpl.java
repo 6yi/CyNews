@@ -6,6 +6,7 @@ import com.cy.news.pojo.DTO.ResultDTO;
 import com.cy.news.pojo.Exception.UserRetErrorCode;
 import com.cy.news.pojo.User;
 import com.cy.news.pojo.Exception.UserStatusCode;
+import com.cy.news.pojo.Utils.JWTUtils;
 import com.cy.news.pojo.VO.LoginSuccessVO;
 import com.cy.news.pojo.VO.UserNameLoginVO;
 import com.cy.news.userprovider.dao.UserDao;
@@ -66,11 +67,12 @@ public class UserServiceImpl implements UserService {
                 return ResultDTO.builder().code(UserRetErrorCode.NOT_AUTHORITY).build();
             }else{
                 //登录成功,抹除敏感信息
-                //todo 签发JWT
                 user.setuPassword(null);
                 user.setuStatus(null);
 
-                LoginSuccessVO loginSuccessVO = LoginSuccessVO.builder().user(user).JWT_TOKEN("jwt").build();
+                //todo 签发JWT
+                String jwtString = JWTUtils.userLoginJwtString(user);
+                LoginSuccessVO loginSuccessVO = LoginSuccessVO.builder().user(user).JWT_TOKEN(jwtString).build();
                 return ResultDTO.builder().code(UserRetErrorCode.OK).data(loginSuccessVO).build();
 
             }
@@ -80,7 +82,16 @@ public class UserServiceImpl implements UserService {
             return ResultDTO.builder().code(UserRetErrorCode.PASS_WORD_ERROR).build();
 
         }
+    }
 
+    @Override
+    public ResultDTO updateUserStatus(Integer userStatusCode,Integer userId) {
+        try {
+            userDao.updateUserStatusById(userStatusCode,userId);
+            return ResultDTO.builder().code(UserRetErrorCode.OK).build();
+        }catch (Exception e){
+            return ResultDTO.builder().code(UserRetErrorCode.ERROR).build();
+        }
 
     }
 
