@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
-    @DubboReference
-    EmailService emailService;
+//    @DubboReference(version = "1.0.0")
+//    EmailService emailService;
 
 
 
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
             if (UserStatusCode.NOT_ACTIVATED.equals(user.getuStatus())){
                 //未激活
                 // todo 调用邮箱服务
-
+//                emailService.SendEmail(user.getuId(),user.getuEmail());
                 return ResultDTO.builder().code(UserRetErrorCode.NOT_ACTIVATED).build();
             }else if(UserStatusCode.BAN.equals(user.getuStatus())){
 

@@ -2,6 +2,7 @@ package com.cy.news.userserver.Controller;
 
 import com.cy.news.api.service.UserService;
 import com.cy.news.pojo.DTO.ResultDTO;
+import com.cy.news.pojo.VO.UserNameLoginVO;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,11 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/login")
-    public ResultDTO login(){
-        return userService.login(null);
+    public ResultDTO login(UserNameLoginVO userNameLoginVO){
+
+
+        return  userService.login(userNameLoginVO);
+
     }
 
 
