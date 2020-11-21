@@ -10,8 +10,8 @@
         <option value="$PROJECT_DIR$/cy-news-test/pom.xml" />
         <option value="$PROJECT_DIR$/cy-news-dependencies/pom.xml" />
         <option value="$PROJECT_DIR$/cy-news-user-server/pom.xml" />
-        <option value="$PROJECT_DIR$/cy-news-email-server/pom.xml" />
         <option value="$PROJECT_DIR$/cy-news-emailserver/pom.xml" />
+        <option value="$PROJECT_DIR$/cy-news-email-server/pom.xml" />
       </list>
     </option>
   </component>

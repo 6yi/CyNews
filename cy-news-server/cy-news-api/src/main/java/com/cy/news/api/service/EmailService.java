@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 public interface EmailService {
 
-        ResultDTO SendEmail(Integer id, String email);
+        ResultDTO sendEmail(Integer id, String email);
 
 }
