@@ -11,15 +11,17 @@ spring:
     username: yj979399417@163.com
     # 密码是邮箱提供商的授权码
     password: PDIVXWEXEPZWGXDR
-    title: "点击链接验证邮箱完成注册";
+    title: 点击链接验证邮箱完成注册;
+    addr: http://192.168.123.81:8088/activation
 
     # 编码格式
     default-encoding: UTF-8
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://192.168.123.17:3306/cy_news?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
     username: root
     password: root
+    driver-class-name: com.mysql.jdbc.Driver
 server:
   port: 8088
 
