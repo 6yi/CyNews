@@ -1,6 +1,7 @@
 package com.cy.news.emailserver.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -12,18 +13,19 @@ public class EmailUtils{
 
     private JavaMailSender mailSender;
 
+
     public String send(String sender,String receiver,String title,String text){
         SimpleMailMessage message = new SimpleMailMessage();
 
 
-        message.setFrom("yj979399417@163.com");
-        message.setCc("yj979399417@163.com");
+        message.setFrom(sender);
+        message.setCc(sender);
 
-        message.setTo("lzhengycy@foxmail.com");
+        message.setTo(receiver);
 
-        message.setSubject("it is a test for spring boot");
+        message.setSubject(title);
 
-        message.setText("你好 我正在测试发送邮件。");
+        message.setText(text);
         mailSender.send(message);
         return "1";
     }
