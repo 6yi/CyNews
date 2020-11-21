@@ -1,0 +1,27 @@
+spring:
+  redis:
+    port: 6379
+    host: 192.168.123.17
+    password:
+
+  mail:
+    # 邮件服务器地址 我的是网易126邮箱
+    host: smtp.163.com
+    # 登录用户名
+    username: yj979399417@163.com
+    # 密码是邮箱提供商的授权码
+    password: PDIVXWEXEPZWGXDR
+    title: 点击链接验证邮箱完成注册;
+
+    # 编码格式
+    default-encoding: UTF-8
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.123.17:3306/cy_news?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+server:
+  port: 8088
+
+
+
