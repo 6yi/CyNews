@@ -21,15 +21,13 @@ import java.util.concurrent.TimeUnit;
 public class EmailServiceImpl implements EmailService {
 
      @Value("${spring.mail.username}")
-    private   String sender;//发件人
+     private   String sender;//发件人
 
     @Value("${spring.mail.title}")
     private String title;
 
     @Value("${spring.mail.addr}")
     private String addr;
-
-
 
     @Autowired
     EmailUtils emailUtils;
@@ -38,7 +36,7 @@ public class EmailServiceImpl implements EmailService {
     StringRedisTemplate redisTemplate;
 
     @Override
-    public ResultDTO SendEmail(Integer id, String email) {
+    public ResultDTO sendEmail(Integer id, String email) {
 
         String rand= RandomUtil.randomString(8);//随机生成数
 
