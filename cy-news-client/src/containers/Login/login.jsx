@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { List, InputItem,Icon,Button } from 'antd-mobile';
 import login from './login.module.css'
+
 export default class Login extends Component {
     constructor() {
         super()
@@ -14,9 +15,14 @@ export default class Login extends Component {
         }
     }
 
+    componentDidMount() {   //获取用户设备高度
+        var _box = document.getElementsByClassName('loginbox')[0]
+        _box.style.height = _box.clientHeight +'px'
+    }
+
     render() {
         return (
-            <div className= {login.background}>
+            <div className= {login.background+ ' loginbox'}>
                <div className= {login.cancleicon}>
                 <Icon type='cross' size='lg'/>
                </div>
@@ -24,7 +30,7 @@ export default class Login extends Component {
                 <span className={login.logintitle}>账号密码登录</span>
                 <List className={login.list}>
                     <List.Item className={login.listItem}>
-                    <input type="text" placeholder='请输入账号' className={login.input}/>
+                    <input type="text" placeholder='请输入账号' className={login.input + ' l-input'}/>
                     </List.Item>
                     <List.Item className={login.listItem}>
                     <input type="text" placeholder='请输入密码' className={login.input}/>

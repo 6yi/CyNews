@@ -4,6 +4,7 @@ import Login from './containers/Login/login'
 import Register from './containers/Register/register'
 import {HashRouter,Route,Switch} from 'react-router-dom'
 function App() {
+  
   return (
     <HashRouter>
       <Switch>
