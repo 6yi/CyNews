@@ -14,16 +14,21 @@ export default class Login extends Component {
             }
         }
     }
-    inputOnChange(e,value) {
-        /* this.setState({
-            [field]:value
-        }) */
-        console.log(e,value);
+    inputOnChange(name,value) {
+        this.setState({
+            [name]:value
+        })
+        
+    }
+
+    componentDidMount() {   //获取用户设备高度
+        var _box = document.getElementsByClassName('registerbox')[0]
+        _box.style.height = _box.clientHeight +'px'
     }
 
     render() {
         return (
-            <div className={register.background}>
+            <div className={register.background + ' registerbox'}>
                <div className={register.cancleicon}>
                 <Icon type='cross' size='lg'/>
                </div>
@@ -31,13 +36,13 @@ export default class Login extends Component {
                 <span className={register.logintitle}>注册</span>
                 <List className={register.list}>
                     <List.Item className={register.listItem}>
-                <input type="text" placeholder='请输入账号' className={register.input}  value={this.state.user.u_username} onChange={(e) => {this.inputOnChange(this.user.u_username,e)}}/>
+                <input type="text" placeholder='请输入账号' className={register.input}    onChange={(e) => {this.inputOnChange('user.u_username',e.target.value)}}/>
                     </List.Item>
                     <List.Item className='listItem'>
-                    <input type="text" placeholder='请输入密码' className={register.input}  value={this.state.user.u_password}/>
+                    <input type="text" placeholder='请输入密码' className={register.input}   onChange={(e) => {this.inputOnChange('user.u_password',e.target.value)}}/>
                     </List.Item>
                     <List.Item>
-                    <input type="text" placeholder='请再次输入密码' className={register.input}  value={this.state.user.u_affirmpassword}/>
+                    <input type="text" placeholder='请再次输入密码' className={register.input}   onChange={(e) => {this.inputOnChange('user.u_affirmpassword',e.target.value)}}/>
                     </List.Item>
                     <Button className={register.button}>登录</Button>
                 </List>
