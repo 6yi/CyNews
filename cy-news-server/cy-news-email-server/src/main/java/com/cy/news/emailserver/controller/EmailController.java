@@ -16,10 +16,6 @@ public class EmailController {
     @Autowired
     StringRedisTemplate redisTemplate;
 
-    @GetMapping("/test")
-    public String test(){
-        return "test";
-    }
     @GetMapping("/activation")
     public ResultDTO activation(String id, String code){
 

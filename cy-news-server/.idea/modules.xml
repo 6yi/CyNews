@@ -6,12 +6,11 @@
       <module fileurl="file://$PROJECT_DIR$/cy-news-api/cy-news-api.iml" filepath="$PROJECT_DIR$/cy-news-api/cy-news-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-api_gateway/cy-news-api_gateway.iml" filepath="$PROJECT_DIR$/cy-news-api_gateway/cy-news-api_gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-dependencies/cy-news-dependencies.iml" filepath="$PROJECT_DIR$/cy-news-dependencies/cy-news-dependencies.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cy-news-email-server/cy-news-emailserver.iml" filepath="$PROJECT_DIR$/cy-news-email-server/cy-news-emailserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cy-news-email-server/cy-news-email-server.iml" filepath="$PROJECT_DIR$/cy-news-email-server/cy-news-email-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-pojo/cy-news-pojo.iml" filepath="$PROJECT_DIR$/cy-news-pojo/cy-news-pojo.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-test/cy-news-test.iml" filepath="$PROJECT_DIR$/cy-news-test/cy-news-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-user-provider/cy-news-user-provider.iml" filepath="$PROJECT_DIR$/cy-news-user-provider/cy-news-user-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-user-server/cy-news-user-server.iml" filepath="$PROJECT_DIR$/cy-news-user-server/cy-news-user-server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cy-news-email-server/email-server.iml" filepath="$PROJECT_DIR$/cy-news-email-server/email-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-test/test.iml" filepath="$PROJECT_DIR$/cy-news-test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-user-provider/user-provider.iml" filepath="$PROJECT_DIR$/cy-news-user-provider/user-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-user-server/user-server.iml" filepath="$PROJECT_DIR$/cy-news-user-server/user-server.iml" />
