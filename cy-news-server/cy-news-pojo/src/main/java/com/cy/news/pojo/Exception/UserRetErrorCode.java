@@ -14,11 +14,13 @@ public class UserRetErrorCode {
 
     public static final Integer OK = 200;
 
-    public static final Integer PASS_WORD_ERROR = 500;
+    public static final Integer PASS_WORD_ERROR = 501;
+
+    public static final Integer ERROR = 500;
 
     public static final Integer NOT_ACTIVATED = 300;
 
-    public static final Integer DELETED = 501;
+    public static final Integer DELETED = 502;
 
     public static final Integer NOT_LOGIN = 304;
 

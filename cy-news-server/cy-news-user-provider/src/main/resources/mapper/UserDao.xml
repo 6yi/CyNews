@@ -157,4 +157,11 @@
       u_status = #{uStatus,jdbcType=INTEGER}
     where u_id = #{uId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateUserStatusById">
+      update user
+      set u_status = #{userStatusCoder,jdbcType=INTEGER}
+      where u_id = #{userId,jdbcType=INTEGER}
+  </update>
+
 </mapper>
