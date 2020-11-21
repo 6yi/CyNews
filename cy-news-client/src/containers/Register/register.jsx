@@ -5,13 +5,14 @@ import '../../assets/css/base.css'
 export default class Login extends Component {
     constructor() {
         super()
-
+        const buttonRef = React.createRef()
         this.state = {
             user: {
                 u_username: '',
                 u_password: '',
                 u_affirmpassword: '',
-            }
+            },
+            buttonActive: '0'
         }
     }
     inputOnChange(name,value) {
@@ -36,7 +37,7 @@ export default class Login extends Component {
                 <span className={register.logintitle}>注册</span>
                 <List className={register.list}>
                     <List.Item className={register.listItem}>
-                <input type="text" placeholder='请输入账号' className={register.input}    onChange={(e) => {this.inputOnChange('user.u_username',e.target.value)}}/>
+                <input type="text" placeholder='请输入邮箱' className={register.input}    onChange={(e) => {this.inputOnChange('user.u_username',e.target.value)}}/>
                     </List.Item>
                     <List.Item className='listItem'>
                     <input type="text" placeholder='请输入密码' className={register.input}   onChange={(e) => {this.inputOnChange('user.u_password',e.target.value)}}/>
@@ -44,7 +45,7 @@ export default class Login extends Component {
                     <List.Item>
                     <input type="text" placeholder='请再次输入密码' className={register.input}   onChange={(e) => {this.inputOnChange('user.u_affirmpassword',e.target.value)}}/>
                     </List.Item>
-                    <Button className={register.button}>登录</Button>
+                    <Button ref={this.buttonRef} className={register.button} disabled={this.state.buttonActive === '0'}>登录</Button>
                 </List>
                </div>
                <div className={register.footer}>
@@ -52,7 +53,7 @@ export default class Login extends Component {
                     <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605717095531&di=8ea976b885c0d7783c402b2053f4ba41&imgtype=0&src=http%3A%2F%2Fimgcdn1.gzhtedu.cn%2Fimages%2Fxiaohui%2F20161124034151-27.jpg" alt=""/>
                    <p>城院新闻</p>
 
-                
+
                    <p className={register.form}>注册即视为同意《城院新闻服务及隐私条款》</p>
                 
                </div>

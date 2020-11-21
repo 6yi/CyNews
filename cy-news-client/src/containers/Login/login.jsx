@@ -11,7 +11,8 @@ export default class Login extends Component {
                 u_username: '',
                 u_password: '',
                 
-            }
+            },
+            buttonActive : '0'
         }
     }
 
@@ -30,12 +31,12 @@ export default class Login extends Component {
                 <span className={login.logintitle}>账号密码登录</span>
                 <List className={login.list}>
                     <List.Item className={login.listItem}>
-                    <input type="text" placeholder='请输入账号' className={login.input + ' l-input'}/>
+                    <input type="text" placeholder='请输入邮箱' className={login.input + ' l-input'}/>
                     </List.Item>
                     <List.Item className={login.listItem}>
                     <input type="text" placeholder='请输入密码' className={login.input}/>
                     </List.Item>
-                    <Button className={login.button}>登录</Button>
+                    <Button className={login.button} disabled={this.state.buttonActive === '0'}>登录</Button>
                 </List>
                </div>
                <div className={login.footer}>
