@@ -17,11 +17,11 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
-@DubboService(version = "1.0.0")
+@DubboService(version = "1.0.1")
 public class EmailServiceImpl implements EmailService {
 
-     @Value("${spring.mail.username}")
-     private   String sender;//发件人
+    @Value("${spring.mail.username}")
+    private   String sender;//发件人
 
     @Value("${spring.mail.title}")
     private String title;
