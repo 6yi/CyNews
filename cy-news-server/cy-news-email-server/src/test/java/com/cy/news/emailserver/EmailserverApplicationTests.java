@@ -23,7 +23,7 @@ class EmailserverApplicationTests {
     @Test
     void contextLoads() {
 
-        emailService.SendEmail(12344,"979399417@qq.com");
+        emailService.sendEmail(12344,"979399417@qq.com");
     }
 
 }
