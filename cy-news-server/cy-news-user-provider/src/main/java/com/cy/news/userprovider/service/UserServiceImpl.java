@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
 
         }else {
 
-            return ResultDTO.builder().code(UserRetErrorCode.PASS_WORD_ERROR).build();
+            return ResultDTO.builder().code(UserRetErrorCode.PASS_WORD_ERROR).data("账户或密码错误").build();
 
         }
     }

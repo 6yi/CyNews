@@ -16,6 +16,8 @@ public class UserRetErrorCode {
 
     public static final Integer PASS_WORD_ERROR = 501;
 
+    public static final Integer UNAME_OR_PWD_LEN_ERROR = 501;
+
     public static final Integer ERROR = 500;
 
     public static final Integer NOT_ACTIVATED = 300;

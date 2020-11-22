@@ -30,22 +30,21 @@ public class EmailController {
 
         String saveCode= redisTemplate.opsForValue().get("mailServer-sendCode:"+id);
 
-
         if(saveCode==null){
             log.info("code is null");
-            return ResultDTO.builder().code(EmailRetErrorCode.ERROR).build();
+            return ResultDTO.builder().code(EmailRetErrorCode.ERROR).data("不存在该激活码或已过期").build();
         }else if(code.equals(saveCode)){
 
             //todo 调用用户服务更改激活状态
 
            userService.updateUserStatus(1,Convert.toInt(id));
 
-           redisTemplate.delete(id);
+           redisTemplate.delete("mailServer-sendCode:"+id);
 
-           return ResultDTO.builder().code(EmailRetErrorCode.OK).build();
+           return ResultDTO.builder().code(EmailRetErrorCode.OK).data("激活成功").build();
         }
         log.info("code error");
-        return ResultDTO.builder().code(EmailRetErrorCode.ERROR).build();
+        return ResultDTO.builder().code(EmailRetErrorCode.ERROR).data("激活失败").build();
     }
 
 
