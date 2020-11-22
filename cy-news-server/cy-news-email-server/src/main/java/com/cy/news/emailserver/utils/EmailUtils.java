@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service("serdbyemail")
+@Component
 public class EmailUtils{
 
     @Autowired
-
     private JavaMailSender mailSender;
 
 
-    public String send(String sender,String receiver,String title,String text){
+    public Integer send(String sender,String receiver,String title,String text){
         SimpleMailMessage message = new SimpleMailMessage();
 
 
@@ -26,8 +26,14 @@ public class EmailUtils{
         message.setSubject(title);
 
         message.setText(text);
-        mailSender.send(message);
-        return "1";
+        try {
+            mailSender.send(message);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+
+
     }
 
 
