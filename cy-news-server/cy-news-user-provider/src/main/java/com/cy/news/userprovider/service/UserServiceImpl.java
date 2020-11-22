@@ -9,6 +9,7 @@ import com.cy.news.pojo.User;
 import com.cy.news.pojo.Exception.UserStatusCode;
 import com.cy.news.pojo.Utils.JWTUtils;
 import com.cy.news.pojo.VO.LoginSuccessVO;
+import com.cy.news.pojo.VO.RegisterUserByEmailVO;
 import com.cy.news.pojo.VO.UserNameLoginVO;
 import com.cy.news.userprovider.dao.UserDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName UserServiceImpl
@@ -75,9 +79,7 @@ public class UserServiceImpl implements UserService {
 
             if (UserStatusCode.NOT_ACTIVATED.equals(user.getuStatus())){
                 //未激活
-
                 //异步发送至消息队列
-
                 sendEmailMQ(user.getuId(),
                         EmailMQEntity
                                 .builder()
@@ -100,7 +102,6 @@ public class UserServiceImpl implements UserService {
                 String jwtString = JWTUtils.userLoginJwtString(user);
                 LoginSuccessVO loginSuccessVO = LoginSuccessVO.builder().user(user).JWT_TOKEN(jwtString).build();
                 return ResultDTO.builder().code(UserRetErrorCode.OK).data(loginSuccessVO).build();
-
             }
 
         }else {
@@ -108,6 +109,42 @@ public class UserServiceImpl implements UserService {
             return ResultDTO.builder().code(UserRetErrorCode.PASS_WORD_ERROR).data("账户或密码错误").build();
 
         }
+    }
+
+
+    @Override
+    public ResultDTO register(RegisterUserByEmailVO registerUserVO) {
+
+        if(userDao.selectByUserName(registerUserVO.getUserName())!=null){
+            return ResultDTO.builder().code(UserRetErrorCode.REGISTER_ERROR).data("用户名已存在").build();
+        }
+        if(userDao.findUserByMail(registerUserVO.getEmail())!=null){
+            return ResultDTO.builder().code(UserRetErrorCode.REGISTER_ERROR).data("该邮箱已被注册").build();
+        }
+
+        User user= null;
+
+        try {
+
+            user = User.builder()
+                    .uUsername(registerUserVO.getUserName())
+                    .uPassword(registerUserVO.getPassWord())
+                    .uNickname(registerUserVO.getNickName())
+                    .uEmail(registerUserVO.getEmail())
+                    .uStatus(0)
+                    .uDate(new Date())
+                    .build();
+
+             userDao.insert(user);
+
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            return ResultDTO.builder().code(UserRetErrorCode.REGISTER_ERROR).data("未知错误,请联系管理员").build();
+
+        }
+
+        sendEmailMQ(user.getuId(), EmailMQEntity.builder().uId(user.getuId()).email(user.getuEmail()).build());
+        return ResultDTO.builder().code(UserRetErrorCode.OK).build();
     }
 
     /**
@@ -139,16 +176,20 @@ public class UserServiceImpl implements UserService {
 
 
 
+
     @Override
     public ResultDTO updateUserStatus(Integer userStatusCode,Integer userId) {
         try {
             userDao.updateUserStatusById(userStatusCode,userId);
+
             return ResultDTO.builder().code(UserRetErrorCode.OK).build();
         }catch (Exception e){
             return ResultDTO.builder().code(UserRetErrorCode.ERROR).build();
         }
 
     }
+
+
 
 
 }

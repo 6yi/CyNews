@@ -14,6 +14,12 @@
     <result column="u_status" jdbcType="INTEGER" property="uStatus" />
   </resultMap>
 
+  <select id="findUserByMail" resultMap="BaseResultMap">
+    select
+    u_email
+    from user
+    where u_email = #{mail,jdbcType=VARCHAR}
+  </select>
 
 
 

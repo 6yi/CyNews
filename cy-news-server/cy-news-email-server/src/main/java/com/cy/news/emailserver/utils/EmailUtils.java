@@ -16,8 +16,6 @@ public class EmailUtils{
 
     public Integer send(String sender,String receiver,String title,String text){
         SimpleMailMessage message = new SimpleMailMessage();
-
-
         message.setFrom(sender);
         message.setCc(sender);
 
