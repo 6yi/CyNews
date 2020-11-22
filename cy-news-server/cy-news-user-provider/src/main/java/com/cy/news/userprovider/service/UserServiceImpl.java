@@ -4,17 +4,24 @@ import com.cy.news.api.service.EmailService;
 import com.cy.news.api.service.UserService;
 import com.cy.news.pojo.DTO.ResultDTO;
 import com.cy.news.pojo.Exception.UserRetErrorCode;
+import com.cy.news.pojo.MQ.EmailMQEntity;
 import com.cy.news.pojo.User;
 import com.cy.news.pojo.Exception.UserStatusCode;
 import com.cy.news.pojo.Utils.JWTUtils;
 import com.cy.news.pojo.VO.LoginSuccessVO;
 import com.cy.news.pojo.VO.UserNameLoginVO;
 import com.cy.news.userprovider.dao.UserDao;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.rocketmq.client.producer.SendCallback;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -31,7 +38,16 @@ public class UserServiceImpl implements UserService {
     private final static Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
+
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
+
+    @Value("${mq.user.topic}")
+    private String topic;
+
+    @Value("${mq.user.tag.send}")
+    private String tag;
 
     @DubboReference(version = "1.0.0")
     EmailService emailService;
@@ -59,21 +75,28 @@ public class UserServiceImpl implements UserService {
 
             if (UserStatusCode.NOT_ACTIVATED.equals(user.getuStatus())){
                 //未激活
-                // todo 调用邮箱服务
-                emailService.sendEmail(user.getuId(),user.getuEmail());
-                return ResultDTO.builder().code(UserRetErrorCode.NOT_ACTIVATED).build();
+
+                //异步发送至消息队列
+
+                sendEmailMQ(user.getuId(),
+                        EmailMQEntity
+                                .builder()
+                                .uId(user.getuId())
+                                .email(user.getuEmail())
+                                .build());
+
+                return ResultDTO.builder().code(UserRetErrorCode.NOT_ACTIVATED).data("未激活邮箱").build();
             }else if(UserStatusCode.BAN.equals(user.getuStatus())){
 
-                return ResultDTO.builder().code(UserRetErrorCode.NOT_AUTHORITY).build();
+                return ResultDTO.builder().code(UserRetErrorCode.NOT_AUTHORITY).data("账户已封禁").build();
             }else if(UserStatusCode.DELETED.equals(user.getuStatus())){
 
-                return ResultDTO.builder().code(UserRetErrorCode.NOT_AUTHORITY).build();
+                return ResultDTO.builder().code(UserRetErrorCode.NOT_AUTHORITY).data("账户已封禁").build();
             }else{
                 //登录成功,抹除敏感信息
                 user.setuPassword(null);
                 user.setuStatus(null);
 
-                //todo 签发JWT
                 String jwtString = JWTUtils.userLoginJwtString(user);
                 LoginSuccessVO loginSuccessVO = LoginSuccessVO.builder().user(user).JWT_TOKEN(jwtString).build();
                 return ResultDTO.builder().code(UserRetErrorCode.OK).data(loginSuccessVO).build();
@@ -86,6 +109,35 @@ public class UserServiceImpl implements UserService {
 
         }
     }
+
+    /**
+     * @author 6yi
+     * @date 2020/11/22
+     * @return
+     * @Description 异步发送消息
+     **/
+    private void sendEmailMQ(Integer id, EmailMQEntity entity){
+        try {
+            Message message = new Message(topic, tag, id.toString(), new ObjectMapper().writeValueAsString(entity).getBytes());
+            logger.info("消息正在写入");
+            rocketMQTemplate.getProducer().send(message, new SendCallback() {
+                @Override
+                public void onSuccess(SendResult sendResult) {
+                    logger.info("消息写入成功");
+                }
+
+                @Override
+                public void onException(Throwable throwable) {
+                    logger.info("消息写入失败");
+                }
+            });
+        } catch (Exception e) {
+            logger.info("消息写入失败");
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public ResultDTO updateUserStatus(Integer userStatusCode,Integer userId) {
