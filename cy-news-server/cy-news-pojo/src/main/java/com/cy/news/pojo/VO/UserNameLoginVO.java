@@ -1,9 +1,8 @@
 package com.cy.news.pojo.VO;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.io.Serializable;
 
 /**
  * @ClassName LoginUserVO
@@ -17,7 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserNameLoginVO {
+@Setter
+@Getter
+public class UserNameLoginVO implements Serializable {
 
     private String userName;
 

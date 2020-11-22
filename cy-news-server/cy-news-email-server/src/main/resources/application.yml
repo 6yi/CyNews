@@ -1,8 +1,4 @@
 spring:
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: 192.168.123.17:8848,192.168.123.17:8849,192.168.123.17:8850
   application:
     name: cy.news.email-server
   redis:
@@ -10,7 +6,7 @@ spring:
     host: 192.168.123.17
     password:
   mail:
-    # 邮件服务器地址 我的是网易163邮箱
+    # 邮件服务器地址 我的是网易126邮箱
     host: smtp.163.com
     # 登录用户名
     username: yj979399417@163.com
@@ -18,6 +14,7 @@ spring:
     password: PDIVXWEXEPZWGXDR
     title: 点击链接验证邮箱完成注册;
     addr: http://192.168.123.81:8088/activation
+    content: 请点击{ADDR}?id={ID}&code={CODE};
     # 编码格式
     default-encoding: UTF-8
   datasource:
@@ -27,18 +24,7 @@ spring:
       url: jdbc:mysql://192.168.123.17:3306/cy_news?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
       username: root
       password: root
-#dubbo:
-#  protocol:
-#    name: dubbo
-#    host: 192.168.123.81
-#    port: -1
-#  application:
-#    id: cy.news.email.server
-#    name: serverdubbo
-#  registry:
-#    address: nacos://192.168.123.17:8848,nacos://192.168.123.17:8849,nacos://192.168.123.17:8850
-#  metadata-report:
-#    address: nacos://192.168.123.17:8848,nacos://192.168.123.17:8849,nacos://192.168.123.17:8850
+
 server:
   port: 8088
 

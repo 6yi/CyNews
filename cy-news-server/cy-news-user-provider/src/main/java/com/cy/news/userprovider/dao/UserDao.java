@@ -4,6 +4,8 @@ import com.cy.news.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface UserDao {
@@ -22,4 +24,11 @@ public interface UserDao {
     int updateByPrimaryKey(User record);
 
     int updateUserStatusById(Integer userStatusCoder,Integer userId);
+
+
+    User findUserByMail(String mail);
+
+
+
+
 }

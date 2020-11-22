@@ -1,6 +1,5 @@
-package com.cy.news.pojo.VO;
+package com.cy.news.pojo.MQ;
 
-import com.cy.news.pojo.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,9 +8,9 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * @ClassName LoginSucessVO
+ * @ClassName EmailMQEntity
  * @Author 6yi
- * @Date 2020/11/20 21:36
+ * @Date 2020/11/22 19:24
  * @Version 1.0
  * @Description:
  */
@@ -20,9 +19,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LoginSuccessVO implements Serializable {
+public class EmailMQEntity implements Serializable {
 
-    private String JWT_TOKEN;
-    private User user;
+    private Integer uId;
+    private String email;
 
 }

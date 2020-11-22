@@ -5,16 +5,17 @@ import cn.hutool.http.HtmlUtil;
 import com.cy.news.api.service.UserService;
 import com.cy.news.pojo.DTO.ResultDTO;
 import com.cy.news.pojo.Exception.EmailRetErrorCode;
-import com.cy.news.userprovider.dao.UserDao;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Slf4j
 public class EmailController {
 
     @Autowired
@@ -25,25 +26,27 @@ public class EmailController {
 
 
     @GetMapping("/activation")
-    public ResultDTO activation(String id, String code){
+    public ResultDTO activation(@RequestParam() String id, @RequestParam() String code){
 
-       String saveCode= redisTemplate.opsForValue().get(id);
-        HtmlUtil.unescape(saveCode);
+        String saveCode= redisTemplate.opsForValue().get("mailServer-sendCode:"+id);
+
 
         if(saveCode==null){
+            log.info("code is null");
             return ResultDTO.builder().code(EmailRetErrorCode.ERROR).build();
         }else if(code.equals(saveCode)){
 
             //todo 调用用户服务更改激活状态
+
            userService.updateUserStatus(1,Convert.toInt(id));
 
            redisTemplate.delete(id);
 
-            return ResultDTO.builder().code(EmailRetErrorCode.OK).build();
+           return ResultDTO.builder().code(EmailRetErrorCode.OK).build();
         }
-
+        log.info("code error");
         return ResultDTO.builder().code(EmailRetErrorCode.ERROR).build();
-
-
     }
+
+
 }
