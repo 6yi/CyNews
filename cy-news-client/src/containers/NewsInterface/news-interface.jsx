@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import Nav from '../../components/NavBar/Nav'
+import Tabs from '../../components/Tabs/Tab'
 export default class NewInterface extends Component {
     
     
@@ -7,6 +8,7 @@ export default class NewInterface extends Component {
         return(
             <div>
                 <Nav></Nav>
+                <Tabs></Tabs>
             </div>
         )
     }

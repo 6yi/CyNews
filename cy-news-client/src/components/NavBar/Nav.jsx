@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import {Icon,SearchBar} from 'antd-mobile';
-import Tabs from '../Tabs/Tab'
+
 import '../NavBar/Nav.less'
 export default function Nav() {
     const [search,setSearch] = useState()
@@ -15,10 +15,7 @@ export default function Nav() {
                
             <span className='right'></span>
             </div>
-                
-            <div className='bottom-nav'>
-                <Tabs></Tabs>
-            </div>
+
         </div>
     )
 }

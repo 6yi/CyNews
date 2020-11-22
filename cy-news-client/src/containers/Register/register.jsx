@@ -30,7 +30,7 @@ export default class Login extends Component {
     render() {
         return (
             <div className={register.background + ' registerbox'}>
-               <div className={register.cancleicon}>
+               <div onClick={() => {this.props.history.go(-1)}} className={register.cancleicon}>
                 <Icon type='cross' size='lg'/>
                </div>
                <div className={register.Formdata}>

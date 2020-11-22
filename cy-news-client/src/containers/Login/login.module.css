@@ -118,3 +118,11 @@ p {
     font-family: 宋体;
 }
 
+.toregister {
+    float: right;
+    margin-right: 15%;
+    font-size: large;
+    margin-top: 5%;
+    color: #aaaaaa;
+}
+
