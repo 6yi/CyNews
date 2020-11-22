@@ -1,5 +1,7 @@
 package com.cy.news.test;
 
+import cn.hutool.crypto.SecureUtil;
+import com.alibaba.nacos.common.utils.MD5Utils;
 import com.cy.news.api.service.UserService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.junit.jupiter.api.Test;
@@ -22,8 +24,10 @@ class TestApplicationTests {
 
     @Test
     void contextLoads() {
-
-        redisTemplate.opsForValue().set("mail:lzheng","aasdasd",1L, TimeUnit.SECONDS);
+        String pwd = "admin";
+        String s = SecureUtil.md5(pwd);
+        System.out.println(s);
+//        redisTemplate.opsForValue().set("mail:lzheng","aasdasd",1L, TimeUnit.SECONDS);
 
     }
 

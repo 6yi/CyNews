@@ -13,7 +13,7 @@ class UserProviderApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(userDao.selectByPrimaryKey(1));
+
         
     }
 

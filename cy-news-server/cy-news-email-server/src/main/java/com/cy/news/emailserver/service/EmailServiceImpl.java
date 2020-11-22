@@ -5,6 +5,7 @@ import com.cy.news.api.service.EmailService;
 import com.cy.news.emailserver.utils.EmailUtils;
 import com.cy.news.pojo.DTO.ResultDTO;
 import com.cy.news.pojo.Exception.EmailRetErrorCode;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.TimeUnit;
 
 @Service
+@Slf4j
 @DubboService(version = "1.0.0")
 public class EmailServiceImpl implements EmailService {
 
@@ -35,6 +37,7 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     StringRedisTemplate redisTemplate;
 
+    //同步消息
     @Override
     public ResultDTO sendEmail(Integer id, String email) {
         String rand;
@@ -50,7 +53,8 @@ public class EmailServiceImpl implements EmailService {
                              .replace("{CODE}", rand);
 
         //使用redis存储验证码跟id信息
-        redisTemplate.opsForValue().set("mailServer-sendCode:"+id.toString(),rand,5, TimeUnit.MINUTES);
+        log.info("key:   mailServer-sendCode:"+id.toString());
+        redisTemplate.opsForValue().set("mailServer-sendCode:"+id.toString(),rand,5L, TimeUnit.MINUTES);
         //发送邮件
         Integer sendStatus = emailUtils.send(sender, email, title, text);
         if (sendStatus.equals(1)){

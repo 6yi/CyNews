@@ -25,7 +25,10 @@ public interface UserDao {
 
     int updateUserStatusById(Integer userStatusCoder,Integer userId);
 
-    List<User> findAllUsers();
+
+    User findUserByMail(String mail);
+
+
 
 
 }

@@ -30,6 +30,8 @@ public class UserRetErrorCode {
 
     public static final Integer MAIL_ERROR=503;
 
+    public static final Integer REGISTER_ERROR=504;
+
     public static final Integer ISEMPTY_ERROR=504;
 
 

@@ -14,12 +14,15 @@
     <result column="u_status" jdbcType="INTEGER" property="uStatus" />
   </resultMap>
 
-
-
-
-  <select id="findAllUsers" resultType="com.cy.news.pojo.User">
-    select * from user;
+  <select id="findUserByMail" resultMap="BaseResultMap">
+    select
+    u_email
+    from user
+    where u_email = #{mail,jdbcType=VARCHAR}
   </select>
+
+
+
 
   <sql id="Base_Column_List">
     u_id, u_username, u_password, u_nickname, u_avatar, u_email, u_phone, u_points, u_date, 
