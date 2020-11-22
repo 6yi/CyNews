@@ -11,7 +11,6 @@
       <module fileurl="file://$PROJECT_DIR$/cy-news-test/cy-news-test.iml" filepath="$PROJECT_DIR$/cy-news-test/cy-news-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-user-provider/cy-news-user-provider.iml" filepath="$PROJECT_DIR$/cy-news-user-provider/cy-news-user-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-user-server/cy-news-user-server.iml" filepath="$PROJECT_DIR$/cy-news-user-server/cy-news-user-server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cy-news-email-server/email-server.iml" filepath="$PROJECT_DIR$/cy-news-email-server/email-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-test/test.iml" filepath="$PROJECT_DIR$/cy-news-test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-user-provider/user-provider.iml" filepath="$PROJECT_DIR$/cy-news-user-provider/user-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/cy-news-user-server/user-server.iml" filepath="$PROJECT_DIR$/cy-news-user-server/user-server.iml" />

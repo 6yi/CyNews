@@ -12,8 +12,12 @@ import com.cy.news.pojo.VO.UserNameLoginVO;
 import com.cy.news.userprovider.dao.UserDao;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @ClassName UserServiceImpl
@@ -26,11 +30,12 @@ import org.springframework.stereotype.Service;
 @DubboService(version = "1.0.0")
 @Service
 public class UserServiceImpl implements UserService {
+    private final static Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     UserDao userDao;
 
-    @DubboReference
+    @DubboReference(version = "1.0.0")
     EmailService emailService;
 
 
@@ -49,15 +54,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultDTO login(UserNameLoginVO userVO) {
-
+        logger.info(userVO.toString());
         User user = userDao.selectByUserName(userVO.getUserName());
 
-        if(userVO.getPassWord().equals(user.getuPassword())){
+        if(user!=null&&userVO.getPassWord().equals(user.getuPassword())){
 
             if (UserStatusCode.NOT_ACTIVATED.equals(user.getuStatus())){
                 //未激活
                 // todo 调用邮箱服务
-
+                emailService.sendEmail(user.getuId(),user.getuEmail());
                 return ResultDTO.builder().code(UserRetErrorCode.NOT_ACTIVATED).build();
             }else if(UserStatusCode.BAN.equals(user.getuStatus())){
 
@@ -84,6 +89,16 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+//    @Override
+//    public ResultDTO register(User user) {
+//
+//        user.setuStatus(0);
+//        userDao.insert(user);
+//        User user1=userDao.selectByUserName(user.getuUsername());
+//        emailService.sendEmail(user.getuId(),user.getuEmail());
+//        return ResultDTO.builder().code(UserRetErrorCode.OK).build();
+//    }
+
     @Override
     public ResultDTO updateUserStatus(Integer userStatusCode,Integer userId) {
         try {
@@ -94,6 +109,11 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+//
+//    @Override
+//    public List<User> findAllUsers() {
+//        return userDao.findAllUsers();
+//    }
 
 
 }

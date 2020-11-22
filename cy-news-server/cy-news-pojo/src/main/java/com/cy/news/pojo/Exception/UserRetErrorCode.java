@@ -26,6 +26,11 @@ public class UserRetErrorCode {
 
     public static final Integer NOT_AUTHORITY = 304;
 
+    public static final Integer USERNAME_ERROR=502;
+
+    public static final Integer MAIL_ERROR=503;
+
+    public static final Integer ISEMPTY_ERROR=504;
 
 
 }

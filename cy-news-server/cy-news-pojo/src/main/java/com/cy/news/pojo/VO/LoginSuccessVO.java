@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @ClassName LoginSucessVO
  * @Author 6yi
@@ -18,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LoginSuccessVO {
+public class LoginSuccessVO implements Serializable {
 
     private String JWT_TOKEN;
     private User user;
