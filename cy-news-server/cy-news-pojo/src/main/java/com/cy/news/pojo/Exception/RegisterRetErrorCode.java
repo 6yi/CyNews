@@ -3,7 +3,7 @@ package com.cy.news.pojo.Exception;
 public class RegisterRetErrorCode {
     public static final Integer OK = 200;
 
-    public static final Integer EMAIL_EMPTY = 201;
+    public static final Integer PASSWORD_DIFFERENT = 201;
 
     public static final Integer USERNAME_LENGTG_ERROR = 202;
 
@@ -14,8 +14,5 @@ public class RegisterRetErrorCode {
     public static final Integer EMAIL_ERROR = 205;
 
     public static final Integer ISSPECIALCHAR_ERROR = 206;
-
-
-
 
 }

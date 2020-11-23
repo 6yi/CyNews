@@ -1,6 +1,6 @@
 package com.cy.news.emailserver.MQ;
 
-import com.cy.news.api.service.EmailService;
+
 import com.cy.news.emailserver.service.EmailServiceImpl;
 import com.cy.news.pojo.MQ.EmailMQEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;

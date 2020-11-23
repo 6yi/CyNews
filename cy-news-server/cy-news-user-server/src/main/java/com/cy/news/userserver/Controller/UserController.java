@@ -48,9 +48,10 @@ public class UserController {
         
     }
 
+
+
     @PostMapping("/register")
     public ResultDTO  register(@RequestBody RegisterUserByEmailVO registerUserVO) {
-
         //验证registerUserVO是否有值为空
         if (registerUserVO == null) {
             return ResultDTO.builder().code(UserRetErrorCode.ERROR).build();
@@ -63,9 +64,13 @@ public class UserController {
             return ResultDTO.builder().code(RegisterRetErrorCode.NICKNAME_LENGTG_ERROR).data("名称长度为3-8").build();
         } else if (registerUserVO.getPassWord().length() < 8 || registerUserVO.getPassWord().length() > 12) {
             return ResultDTO.builder().code(RegisterRetErrorCode.PASSWORD_LENGTG_ERROR).data("密码长度为8-32").build();
-        } else if (Validator.isEmail(registerUserVO.getEmail())==false) {
+        } else if (!Validator.isEmail(registerUserVO.getEmail())) {
 
             return ResultDTO.builder().code(RegisterRetErrorCode.EMAIL_ERROR).data("邮箱格式错误").build();
+        }
+        else if (!registerUserVO.getPassWord().equals(registerUserVO.getConfirmPassword())) {
+
+            return ResultDTO.builder().code(RegisterRetErrorCode.PASSWORD_DIFFERENT).data("邮箱格式错误").build();
         }
 
         if(RegisterUtils.isSpecialChar(registerUserVO.getUserName())||
