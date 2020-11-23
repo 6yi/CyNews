@@ -47,7 +47,9 @@
     "mockjs": "^1.1.0",
     "node-sass": "^5.0.0",
     "react-app-rewired": "^2.1.6",
+    "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0"
   }

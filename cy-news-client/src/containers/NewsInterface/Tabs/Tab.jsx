@@ -1,15 +1,13 @@
 import React,{Component} from 'react'
 import { Tabs, WhiteSpace } from 'antd-mobile';
 import TabCss from './Tab.module.css'
+import NavList from '../NewsList/NewsList'
 export default class Demo extends Component {
     
-    renderContent = tab =>
-    
-    (<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '150px', backgroundColor: '#fff' }}>
-    {console.log('-------',tab.title)}
-   <p>Content of {tab.title}</p>
-   
-    </div>);
+    state = {
+      activeTab:'0',
+      activeIndex: '0'
+    }
 
 render() {
     
@@ -29,8 +27,8 @@ render() {
     return (
       <div className={TabCss.content}>
         <WhiteSpace />
-        <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4} />} >
-         {this.renderContent}
+        <Tabs tabs={tabs} page={this.state.activeIndex} onTabClick={(e,index) => {this.setState({activeIndex: index})}} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4} />} >
+         {() => <NavList tab={this.state.activeIndex}></NavList>}
         </Tabs>
         <WhiteSpace />
       </div>

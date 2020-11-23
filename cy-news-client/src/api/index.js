@@ -1,8 +1,8 @@
 import axios from 'axios'
-
+import {Toast} from 'antd-mobile'
 const instance = axios.create({
-
-  timeout: 1000
+  baseURL:'http://59.110.173.180:8089/',
+  timeout: 3000.
 })
 
 // 添加请求拦截器
@@ -21,9 +21,19 @@ instance.interceptors.request.use(function (config) {
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
   // 对响应数据做点什么
-  return response;
+  Toast.loading('loading...')
+  if(response.data.code != 200) {
+    Toast.fail(response.data.data,2)
+    return Promise.reject(response);
+  } else {
+    Toast.success('成功',1)
+    return response;
+  }
+  
 }, function (error) {
   // 对响应错误做点什么
+  console.log(error);
+  /* Toast.info(error.data,1) */
   return Promise.reject(error);
 })
 

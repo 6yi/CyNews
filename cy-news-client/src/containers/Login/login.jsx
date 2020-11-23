@@ -9,11 +9,11 @@ export default class Login extends Component {
 
         this.state = {
             user: {
-                u_username: '',
-                u_password: '',
+                userName: '',
+                passWord: '',
 
             },
-            buttonActive: '0'
+            buttonActive: '1'
         }
     }
 
@@ -24,12 +24,25 @@ export default class Login extends Component {
     }
 
     loginClick() {
-        toLogin('/login').then(res => {
+        toLogin('/cy.news.user-server/login',this.state.user).then(res => {
             console.log(res);
+        }).catch((err) => {
+            console.log(err);
         })
     }
 
+    handlerChange(name,value) {
+        
+        this.setState(
+            {
+               user: Object.assign({}, this.state.user, { [name]: value })
+            }
+        )
+        console.log(this.state);
+    }
+
     render() {
+        
         return (
             <div className={login.background + ' loginbox'}>
                 <div onClick={() => { this.props.history.go(-1) }} className={login.cancleicon}>
@@ -39,10 +52,10 @@ export default class Login extends Component {
                     <span className={login.logintitle}>账号密码登录</span>
                     <List className={login.list}>
                         <List.Item className={login.listItem}>
-                            <input type="text" placeholder='请输入邮箱' className={login.input + ' l-input'} />
+                            <input type="text" placeholder='请输入邮箱' className={login.input + ' l-input'} onChange={(e) => {this.handlerChange('userName',e.target.value)}} />
                         </List.Item>
                         <List.Item className={login.listItem}>
-                            <input type="text" placeholder='请输入密码' className={login.input} />
+                            <input type="text" placeholder='请输入密码' className={login.input} onChange={(e) => {this.handlerChange('passWord',e.target.value)}} />
                         </List.Item>
                         <Button className={login.button} disabled={this.state.buttonActive === '0'} onClick={() => { this.loginClick() }}>登录</Button>
                         <div className={login.toregister} onClick={() => { this.props.history.push('/register') }}>去注册</div>
