@@ -1,24 +1,40 @@
 import React, { Component } from 'react'
-import { List, InputItem,Icon,Button } from 'antd-mobile';
+import { List, InputItem,Icon,Button, Toast } from 'antd-mobile';
 import register from './register.module.css'
 import '../../assets/css/base.css'
+import {toRegister} from '../../api/Register/register'
 export default class Login extends Component {
     constructor() {
         super()
-
+        const buttonRef = React.createRef()
         this.state = {
             user: {
-                u_username: '',
-                u_password: '',
-                u_affirmpassword: '',
-            }
+                userName:'',
+                nickName:'',
+                email: '',
+                passWord: '',
+               /*  u_affirmpassword: '', */
+            },
+            buttonActive: '1'
         }
     }
     inputOnChange(name,value) {
-        this.setState({
-            [name]:value
-        })
+        this.setState(
+            {
+            user: Object.assign({}, this.state.user, { [name]: value })
+            }
+        )
         
+    }
+
+    registerClick() {
+        console.log(this.state.user);
+        toRegister('/cy.news.user-server/register',this.state.user).then((res) => {
+            Toast.success('注册成功，请查看邮箱以激活',2)
+            setTimeout(() => {
+                this.props.history.push('/login')
+            },2000)
+        })
     }
 
     componentDidMount() {   //获取用户设备高度
@@ -29,22 +45,25 @@ export default class Login extends Component {
     render() {
         return (
             <div className={register.background + ' registerbox'}>
-               <div className={register.cancleicon}>
+               <div onClick={() => {this.props.history.go(-1)}} className={register.cancleicon}>
                 <Icon type='cross' size='lg'/>
                </div>
                <div className={register.Formdata}>
                 <span className={register.logintitle}>注册</span>
                 <List className={register.list}>
                     <List.Item className={register.listItem}>
-                <input type="text" placeholder='请输入账号' className={register.input}    onChange={(e) => {this.inputOnChange('user.u_username',e.target.value)}}/>
+                <input type="text" placeholder='请输入邮箱' className={register.input}    onChange={(e) => {this.inputOnChange('email',e.target.value)}}/>
                     </List.Item>
-                    <List.Item className='listItem'>
-                    <input type="text" placeholder='请输入密码' className={register.input}   onChange={(e) => {this.inputOnChange('user.u_password',e.target.value)}}/>
+                    <List.Item className={register.listItem}>
+                    <input type="text" placeholder='请输入密码' className={register.input}   onChange={(e) => {this.inputOnChange('passWord',e.target.value)}}/>
                     </List.Item>
                     <List.Item>
-                    <input type="text" placeholder='请再次输入密码' className={register.input}   onChange={(e) => {this.inputOnChange('user.u_affirmpassword',e.target.value)}}/>
+                    <input type="text" placeholder='请输入昵称' className={register.input}   onChange={(e) => {this.inputOnChange('nickName',e.target.value)}}/>
                     </List.Item>
-                    <Button className={register.button}>登录</Button>
+                    <List.Item>
+                    <input type="text" placeholder='请输入用户名' className={register.input}   onChange={(e) => {this.inputOnChange('userName',e.target.value)}}/>
+                    </List.Item>
+                    <Button ref={this.buttonRef} className={register.button} disabled={this.state.buttonActive === '0'} onClick={() => {this.registerClick()}}>登录</Button>
                 </List>
                </div>
                <div className={register.footer}>
