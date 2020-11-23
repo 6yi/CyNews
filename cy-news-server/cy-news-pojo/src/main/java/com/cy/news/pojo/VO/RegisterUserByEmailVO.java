@@ -22,5 +22,4 @@ public class RegisterUserByEmailVO implements Serializable {
     private String email;
 
 
-
 }

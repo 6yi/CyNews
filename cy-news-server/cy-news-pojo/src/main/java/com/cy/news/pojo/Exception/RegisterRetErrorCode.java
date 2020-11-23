@@ -15,7 +15,4 @@ public class RegisterRetErrorCode {
 
     public static final Integer ISSPECIALCHAR_ERROR = 206;
 
-
-
-
 }
