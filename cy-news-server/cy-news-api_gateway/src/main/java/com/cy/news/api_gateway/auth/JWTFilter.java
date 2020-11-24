@@ -1,5 +1,12 @@
 package com.cy.news.api_gateway.auth;
 
+import com.cy.news.common.DTO.ResultDTO;
+import com.cy.news.common.Utils.JWTUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -41,11 +48,25 @@ public class JWTFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest httpRequest = exchange.getRequest();
+
         for (String url : filterUrl) {
-            if(httpRequest.getPath().pathWithinApplication().value().startsWith(url)){
-
-                return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap("erro".getBytes())));
-
+            if(httpRequest.getURI().getPath().equals(url)){
+                ResultDTO resultDTO=null;
+                try {
+                    List<String> authoritys = httpRequest.getHeaders().get("authority");
+                    if(authoritys==null){
+                        throw new Exception("not found token");
+                    }
+                    String authority = authoritys.get(0);
+                    Claims claims = JWTUtils.verifiedJwt(authority);
+                } catch (Exception e){
+                    resultDTO = ResultDTO.builder().code(403).data(e.getMessage()).build();
+                    try {
+                        return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap(new ObjectMapper().writeValueAsBytes(resultDTO))));
+                    } catch (JsonProcessingException jsonProcessingException) {
+                        return exchange.getResponse().writeWith(Flux.just(exchange.getResponse().bufferFactory().wrap("error".getBytes())));
+                    }
+                }
             }
         }
 
@@ -57,4 +78,5 @@ public class JWTFilter implements GlobalFilter, Ordered {
     public int getOrder() {
         return 0;
     }
+
 }

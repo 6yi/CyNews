@@ -34,6 +34,17 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>com.cy.news</groupId>
+            <artifactId>cy-news-common</artifactId>
+            <version>0.0.2-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>

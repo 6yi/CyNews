@@ -38,7 +38,7 @@ public class UserController {
     public ResultDTO login(@RequestBody UserNameLoginVO userNameLoginVO){
 
 
-        if(userNameLoginVO.getPassWord().length()<8||userNameLoginVO.getPassWord().length()>32){
+        if(userNameLoginVO.getPassWord().length()<3||userNameLoginVO.getPassWord().length()>32){
             return ResultDTO.builder().code(UserRetErrorCode.UNAME_OR_PWD_LEN_ERROR).data("用户名或密码长度不符").build();
         }
         
