@@ -1,6 +1,6 @@
 package com.cy.news.common.Utils;
 
-import com.cy.news.common.pojo.User;
+import com.cy.news.common.Pojo.User;
 import io.jsonwebtoken.*;
 import java.util.Date;
 

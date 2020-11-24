@@ -5,7 +5,7 @@ import com.cy.news.api.service.UserService;
 import com.cy.news.common.DTO.ResultDTO;
 import com.cy.news.common.Exception.UserRetErrorCode;
 import com.cy.news.common.MQ.EmailMQEntity;
-import com.cy.news.common.pojo.User;
+import com.cy.news.common.Pojo.User;
 import com.cy.news.common.Exception.UserStatusCode;
 import com.cy.news.common.Utils.JWTUtils;
 import com.cy.news.common.VO.LoginSuccessVO;
