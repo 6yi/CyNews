@@ -16,8 +16,6 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
 public class ResultDTO implements Serializable {
 
     Integer code;
