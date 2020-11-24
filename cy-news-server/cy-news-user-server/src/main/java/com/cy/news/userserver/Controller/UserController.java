@@ -74,8 +74,9 @@ public class UserController {
                 registerUserVO.getPassWord().length() > 12) {
             return ResultDTO.builder().code(RegisterRetErrorCode.PASSWORD_LENGTG_ERROR).data("密码长度为8-32").build();
         } else if (!Validator.isEmail(registerUserVO.getEmail())) {
-
             return ResultDTO.builder().code(RegisterRetErrorCode.EMAIL_ERROR).data("邮箱格式错误").build();
+        } else if (!registerUserVO.getPassWord().equals(registerUserVO.getConfirmPassword())) {
+            return ResultDTO.builder().code(RegisterRetErrorCode.PASSWORD_DIFFERENT).data("密码输入不一致").build();
         }
 
         if(RegisterUtils.isSpecialChar(registerUserVO.getUserName())||

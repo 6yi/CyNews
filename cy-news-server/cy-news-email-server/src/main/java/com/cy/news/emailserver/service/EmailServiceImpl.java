@@ -31,6 +31,7 @@ public class EmailServiceImpl implements EmailService {
     @Value("${spring.mail.content}")
     private String content;
 
+
     @Autowired
     EmailUtils emailUtils;
 
@@ -63,6 +64,12 @@ public class EmailServiceImpl implements EmailService {
             return  ResultDTO.builder().code(EmailRetErrorCode.ERROR).build();
         }
 
+    }
+
+
+    public void sendErrorLog(String email,String title,String content) {
+
+        emailUtils.send(sender,email,title,content);
     }
 
 

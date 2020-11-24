@@ -3,7 +3,7 @@ package com.cy.news.common.Exception;
 public class RegisterRetErrorCode {
     public static final Integer OK = 200;
 
-    public static final Integer EMAIL_EMPTY = 201;
+    public static final Integer PASSWORD_DIFFERENT = 201;
 
     public static final Integer USERNAME_LENGTG_ERROR = 202;
 
