@@ -1,10 +1,8 @@
 package com.cy.news.userprovider.dao;
 
-import com.cy.news.pojo.User;
+import com.cy.news.common.Pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Mapper
 @Repository

@@ -14,9 +14,11 @@ module.exports = override(
         javascriptEnabled: true,
         //使用modifyVars修改antd默认less颜色
         modifyVars:[
-                /* {'@brand-primary':'#1DA57A'},
+               /*  {'@brand-primary':'#1DA57A'},
                 {} */
             ]
         },
-    })
-);
+    }),
+
+)
+ 

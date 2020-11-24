@@ -7,8 +7,7 @@ package com.cy.news.api.service;
  * @Description:
  */
 
-import com.cy.news.pojo.DTO.ResultDTO;
-import org.springframework.web.bind.annotation.RestController;
+import com.cy.news.common.DTO.ResultDTO;
 
 
 public interface EmailService {

@@ -1,11 +1,10 @@
 package com.cy.news.emailserver.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 @Component
 public class EmailUtils{
@@ -15,8 +14,11 @@ public class EmailUtils{
 
 
     public Integer send(String sender,String receiver,String title,String text){
+
         SimpleMailMessage message = new SimpleMailMessage();
+
         message.setFrom(sender);
+
         message.setCc(sender);
 
         message.setTo(receiver);

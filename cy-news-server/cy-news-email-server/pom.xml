@@ -18,6 +18,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
             <version>4.7.1</version>
@@ -69,11 +75,6 @@
         <!--        dubbo  -->
 
 
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.5.1</version>
-        </dependency>
 
         <!--        redis-->
         <dependency>
@@ -85,23 +86,14 @@
 
 
      <!--            api-->
-        <dependency>
-            <groupId>com.cy.news</groupId>
-            <artifactId>cy-news-pojo</artifactId>
 
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
         <dependency>
             <groupId>com.cy.news</groupId>
             <artifactId>cy-news-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.cy.news</groupId>
-            <artifactId>cy-news-user-provider</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <!--            api-->
 
 
@@ -139,10 +131,6 @@
             <version>2.1.7.RELEASE</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>

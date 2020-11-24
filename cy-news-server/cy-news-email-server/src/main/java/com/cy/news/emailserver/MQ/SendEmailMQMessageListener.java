@@ -1,17 +1,16 @@
 package com.cy.news.emailserver.MQ;
 
-import com.cy.news.api.service.EmailService;
+
 import com.cy.news.emailserver.service.EmailServiceImpl;
-import com.cy.news.pojo.MQ.EmailMQEntity;
+import com.cy.news.common.MQ.EmailMQEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import java.io.UnsupportedEncodingException;
+
 
 /**
  * @ClassName SendEmailMQMessageListener
