@@ -7,10 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
-
-
 @SpringBootTest
 class EmailserverApplicationTests {
+
     @Autowired
     StringRedisTemplate redisTemplate;
 
@@ -21,7 +20,6 @@ class EmailserverApplicationTests {
     @Test
     void contextLoads() {
 
-        emailService.sendEmail(12344,"979399417@qq.com");
     }
 
 }

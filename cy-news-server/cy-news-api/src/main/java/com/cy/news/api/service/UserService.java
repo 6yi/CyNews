@@ -1,11 +1,8 @@
 package com.cy.news.api.service;
 
-import com.cy.news.pojo.DTO.ResultDTO;
-import com.cy.news.pojo.User;
-import com.cy.news.pojo.VO.RegisterUserByEmailVO;
-import com.cy.news.pojo.VO.UserNameLoginVO;
-
-import java.util.List;
+import com.cy.news.common.DTO.ResultDTO;
+import com.cy.news.common.VO.RegisterUserByEmailVO;
+import com.cy.news.common.VO.UserNameLoginVO;
 
 /**
  * @ClassName UserService

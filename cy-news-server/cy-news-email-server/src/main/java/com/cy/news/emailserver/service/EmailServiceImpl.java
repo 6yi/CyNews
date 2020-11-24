@@ -3,8 +3,8 @@ package com.cy.news.emailserver.service;
 import cn.hutool.core.util.RandomUtil;
 import com.cy.news.api.service.EmailService;
 import com.cy.news.emailserver.utils.EmailUtils;
-import com.cy.news.pojo.DTO.ResultDTO;
-import com.cy.news.pojo.Exception.EmailRetErrorCode;
+import com.cy.news.common.DTO.ResultDTO;
+import com.cy.news.common.Exception.EmailRetErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +63,14 @@ public class EmailServiceImpl implements EmailService {
             return  ResultDTO.builder().code(EmailRetErrorCode.ERROR).build();
         }
 
+    }
+
+
+    public ResultDTO sendEmailM(Integer id, String email) {
+
+
+
+        return null;
     }
 
 

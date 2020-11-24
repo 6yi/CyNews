@@ -1,0 +1,122 @@
+.background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: url('../../assets/img/时事_新闻_资讯.svg') no-repeat fixed 20% 15%,
+                url('../../assets/img/休闲娱乐.svg') no-repeat fixed 20% 25%,
+                url('../../assets/img/人.svg') no-repeat fixed 20% 35%,
+                url('../../assets/img/休闲娱乐.svg') no-repeat fixed 20% 45%,
+                url('../../assets/img/明星_star156.svg') no-repeat fixed 20% 55%,
+                url('../../assets/img/书.svg') no-repeat fixed 20% 65%,
+                url('../../assets/img/明星_star156.svg') no-repeat fixed 20% 75%,
+                url('../../assets/img/体育.svg') no-repeat fixed 20% 85%,
+                url('../../assets/img/休闲1.svg') no-repeat fixed 20% 95%,
+
+                url('../../assets/img/休闲2.svg') no-repeat fixed 40% 15%,
+                url('../../assets/img/休闲娱乐.svg') no-repeat fixed 40% 25%,
+                url('../../assets/img/游戏.svg') no-repeat fixed 40% 35%,
+                url('../../assets/img/时事_新闻_资讯.svg') no-repeat fixed 40% 45%,
+                url('../../assets/img/明星_star156.svg') no-repeat fixed 40% 55%,
+                url('../../assets/img/人.svg') no-repeat fixed 40% 65%,
+                url('../../assets/img/游戏.svg') no-repeat fixed 40% 75%,
+                url('../../assets/img/休闲2.svg') no-repeat fixed 40% 85%,
+                url('../../assets/img/休闲娱乐.svg') no-repeat fixed 40% 95%,
+
+                url('../../assets/img/书.svg') no-repeat fixed 60% 15%,
+                url('../../assets/img/休闲娱乐.svg') no-repeat fixed 60% 25%,
+                url('../../assets/img/明星_star156.svg') no-repeat fixed 60% 35%,
+                url('../../assets/img/时事_新闻_资讯.svg') no-repeat fixed 60% 45%,
+                url('../../assets/img/休闲2.svg') no-repeat fixed 60% 55%,
+                url('../../assets/img/书.svg') no-repeat fixed 60% 65%,
+                url('../../assets/img/明星_star156.svg') no-repeat fixed 60% 75%,
+                url('../../assets/img/书.svg') no-repeat fixed 60% 85%,
+                url('../../assets/img/时事_新闻_资讯.svg') no-repeat fixed 60% 95%,
+
+                url('../../assets/img/体育.svg') no-repeat fixed 80% 15%,
+                url('../../assets/img/休闲娱乐.svg') no-repeat fixed 80% 25%,
+                url('../../assets/img/游戏.svg') no-repeat fixed 80% 35%,
+                url('../../assets/img/时事_新闻_资讯.svg') no-repeat fixed 80% 45%,
+                url('../../assets/img/明星_star156.svg') no-repeat fixed 80% 55%,
+                url('../../assets/img/书.svg') no-repeat fixed 80% 65%,
+                url('../../assets/img/明星_star156.svg') no-repeat fixed 80% 75%,
+                url('../../assets/img/体育.svg') no-repeat fixed 80% 85%,
+                url('../../assets/img/休闲.svg') no-repeat fixed 80% 95%;
+
+                
+
+    background-color: #fcfcfc;
+    
+    background-size: 2rem;
+}
+
+.cancleicon {
+    position: absolute;
+    left: 3%;
+    top: 3%;
+}
+
+.Formdata {
+    margin-top: 20%;
+}
+
+.logintitle {
+    font-weight: 400;
+    font-size: 25px;
+    margin-left: 7%;
+    
+}
+
+
+.list {
+    
+    margin-left: 3%;
+    margin-top: 8%;
+    
+}
+.listItem {
+    text-align: center;
+}
+.input {
+    line-height: 25px;
+    border: none;
+    background-color: transparent;
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #cccccc;
+    width: 90%;
+    margin-top: 5%;
+    height: 40px;
+}
+input::placeholder {
+    color: rgb(206, 205, 205);
+    font-size: 23px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.button {
+    
+    margin-left:6%;
+    margin-top: 10%;
+    width: 80%;
+}
+.footer {
+    margin-top: 20%;
+
+    text-align: center;
+    margin-right: 4%;
+}
+
+img {
+    width: 13%;
+    
+}
+p {
+    color: black;   
+    font-weight: 600;
+    font-size: large;
+    font-family: 宋体;
+}
+.form {
+    font-size: small;
+    color: #cccccc;
+}

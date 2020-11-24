@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {Icon,SearchBar} from 'antd-mobile';
+
 import '../NavBar/Nav.less'
 export default function Nav() {
     const [search,setSearch] = useState()
@@ -14,9 +15,7 @@ export default function Nav() {
                
             <span className='right'></span>
             </div>
-                
-            <div className='bottom-nav'>
-            </div>
+
         </div>
     )
 }
