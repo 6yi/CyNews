@@ -2,7 +2,7 @@ package com.cy.news.emailserver.MQ;
 
 
 import com.cy.news.emailserver.service.EmailServiceImpl;
-import com.cy.news.pojo.MQ.EmailMQEntity;
+import com.cy.news.common.MQ.EmailMQEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.message.MessageExt;

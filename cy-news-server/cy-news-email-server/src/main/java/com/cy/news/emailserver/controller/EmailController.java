@@ -1,10 +1,9 @@
 package com.cy.news.emailserver.controller;
 
 import cn.hutool.core.convert.Convert;
-import cn.hutool.http.HtmlUtil;
 import com.cy.news.api.service.UserService;
-import com.cy.news.pojo.DTO.ResultDTO;
-import com.cy.news.pojo.Exception.EmailRetErrorCode;
+import com.cy.news.common.DTO.ResultDTO;
+import com.cy.news.common.Exception.EmailRetErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;

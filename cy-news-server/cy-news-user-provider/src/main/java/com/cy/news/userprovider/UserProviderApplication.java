@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-@SpringBootApplication(scanBasePackages = "com.cy.news.pojo")
+@SpringBootApplication(scanBasePackages = "com.cy.news")
 @MapperScan("com.cy.news.userprovider.dao")
 @EnableDubbo(scanBasePackages = "com.cy.news.userprovider.service")
 public class UserProviderApplication {

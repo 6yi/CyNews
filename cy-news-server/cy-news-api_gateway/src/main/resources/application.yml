@@ -20,7 +20,6 @@ spring:
           enabled: true
       # 配置路由规则
       routes:
-        # 采用自定义路由 ID（有固定用法，不同的 id 有不同的功能，详见：https://cloud.spring.io/spring-cloud-gateway/2.0.x/single/spring-cloud-gateway.html#gateway-route-filters）
         - id: NACOS-CONSUMER
           # 采用 LoadBalanceClient 方式请求，以 lb:// 开头，后面的是注册在 Nacos 上的服务名
           uri: lb://nacos-consumer
@@ -32,9 +31,21 @@ spring:
           uri: lb://nacos-consumer
           predicates:
             - Method=GET,POST
-
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowCredentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
 server:
   port: 8080
+
+jwtfilter:
+  filterUrl:
+    - /cy.news.user-server/test
+    - /cy.news.user-server/haha
+
 
 # 目前无效
 management:
@@ -45,5 +56,9 @@ management:
 
 # 配置日志级别，方别调试
 logging:
+  file:
+    path: G:/test/
+
+    max-size: 10MB
   level:
-    org.springframework.cloud.gateway: debug
+    root: info

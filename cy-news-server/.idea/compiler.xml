@@ -7,28 +7,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cy-news-email-server" />
+        <module name="test" />
         <module name="api_gateway" />
-        <module name="user-provider" />
-        <module name="cy-news-test" />
+        <module name="cy-news-email-server" />
         <module name="cy-news-api" />
-        <module name="cy-news-dependencies" />
-        <module name="cy-news-api_gateway" />
         <module name="cy-news-user-provider" />
         <module name="cy-news-user-server" />
-        <module name="test" />
-        <module name="user-server" />
-        <module name="cy-news-pojo" />
+        <module name="cy-news-dependencies" />
+        <module name="cy-news-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="api_gateway" target="1.8" />
       <module name="cy-news-api" target="1.8" />
       <module name="cy-news-api_gateway" target="1.8" />
+      <module name="cy-news-common" target="1.8" />
       <module name="cy-news-dependencies" target="1.8" />
       <module name="cy-news-email-server" target="1.8" />
       <module name="cy-news-emailserver" target="1.8" />
-      <module name="cy-news-pojo" target="1.8" />
       <module name="cy-news-test" target="1.8" />
       <module name="cy-news-user-provider" target="1.8" />
       <module name="cy-news-user-server" target="1.8" />

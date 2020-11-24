@@ -69,6 +69,16 @@
             <groupId>com.cy.news</groupId>
             <artifactId>cy-news-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.cy.news</groupId>
+                    <artifactId>cy-news-common</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.cy.news</groupId>
+            <artifactId>cy-news-common</artifactId>
         </dependency>
         <!--        api-->
 

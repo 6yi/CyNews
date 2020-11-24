@@ -2,15 +2,15 @@ package com.cy.news.userprovider.service;
 
 import com.cy.news.api.service.EmailService;
 import com.cy.news.api.service.UserService;
-import com.cy.news.pojo.DTO.ResultDTO;
-import com.cy.news.pojo.Exception.UserRetErrorCode;
-import com.cy.news.pojo.MQ.EmailMQEntity;
-import com.cy.news.pojo.User;
-import com.cy.news.pojo.Exception.UserStatusCode;
-import com.cy.news.pojo.Utils.JWTUtils;
-import com.cy.news.pojo.VO.LoginSuccessVO;
-import com.cy.news.pojo.VO.RegisterUserByEmailVO;
-import com.cy.news.pojo.VO.UserNameLoginVO;
+import com.cy.news.common.DTO.ResultDTO;
+import com.cy.news.common.Exception.UserRetErrorCode;
+import com.cy.news.common.MQ.EmailMQEntity;
+import com.cy.news.common.pojo.User;
+import com.cy.news.common.Exception.UserStatusCode;
+import com.cy.news.common.Utils.JWTUtils;
+import com.cy.news.common.VO.LoginSuccessVO;
+import com.cy.news.common.VO.RegisterUserByEmailVO;
+import com.cy.news.common.VO.UserNameLoginVO;
 import com.cy.news.userprovider.dao.UserDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -26,7 +26,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @ClassName UserServiceImpl
