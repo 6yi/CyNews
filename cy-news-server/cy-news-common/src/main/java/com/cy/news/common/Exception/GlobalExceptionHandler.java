@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Date;
+
 /**
  * @ClassName GlobalExceptionHandler
  * @Author 6yi
@@ -41,7 +43,8 @@ public class GlobalExceptionHandler {
 
     private void sendExceptionEmail(Exception e) throws MQClientException, RemotingException, InterruptedException {
 
-        Message message = new Message("errorTopic", "EXCEPTION", "global_error",e.getMessage().getBytes());
+
+        Message message = new Message("errorTopic", "EXCEPTION", "global_error", e.toString().getBytes());
 
         rocketMQTemplate.getProducer().send(message, new SendCallback() {
             @Override
