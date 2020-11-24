@@ -1,4 +1,4 @@
-package com.cy.news.common.pojo;
+package com.cy.news.common.Pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
