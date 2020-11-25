@@ -1,8 +1,7 @@
 package com.cy.news.common.Exception;
 
 import com.cy.news.common.DTO.ResultDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.tools.javac.util.Convert;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Date;
 
 /**
  * @ClassName GlobalExceptionHandler
@@ -24,6 +22,7 @@ import java.util.Date;
  */
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
     @Autowired
@@ -49,7 +48,7 @@ public class GlobalExceptionHandler {
         rocketMQTemplate.getProducer().send(message, new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
-            //    logger.info("消息写入成功");
+                log.info("消息写入成功");
             }
 
             @Override

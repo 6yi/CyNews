@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface AdminDao extends BaseMapper<Admin> {
 
-    @Select("select *  from admin left join role on admin.rid = role.rid")
+    @Select("select *  from admin left join role on admin.r_id = role.r_id and role.role_name='dev'")
     public List<Admin> selectAllDev();
 
 }

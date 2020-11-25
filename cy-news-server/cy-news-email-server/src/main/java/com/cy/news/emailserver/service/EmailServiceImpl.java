@@ -68,7 +68,7 @@ public class EmailServiceImpl implements EmailService {
 
 
     public void sendErrorLog(String email,String title,String content) {
-
+        log.info(email);
         emailUtils.send(sender,email,title,content);
     }
 
