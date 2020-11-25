@@ -23,7 +23,7 @@ public class UserServerApplication {
     }
 
     //对异常结果进行邮件发送
-    @Bean
+    @Bean()
     public GlobalExceptionHandlerAop exceptionHandlerAop(){
         return new GlobalExceptionHandlerAop();
     }

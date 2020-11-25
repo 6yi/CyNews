@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.util.List;
 
 /**
@@ -32,7 +31,7 @@ import java.util.List;
 public class JWTFilter implements GlobalFilter, Ordered {
 
 
-    private   List<String> filterUrl;
+    private  List<String> filterUrl;
 
     public  List<String> getFilterUrl() {
         return filterUrl;
