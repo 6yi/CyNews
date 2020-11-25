@@ -1,8 +1,10 @@
 package com.cy.news.emailserver.MQ;
 
 
+import com.cy.news.common.MQ.ErrorMsgMQEntity;
 import com.cy.news.emailserver.dao.AdminDao;
 import com.cy.news.emailserver.service.EmailServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
@@ -29,21 +31,20 @@ public class GlobalExceptionMessageLister implements RocketMQListener<MessageExt
 
     @Override
     public void onMessage(MessageExt messageExt) {
-
         try {
-            String content = errorLogContent.replace("{CONTENT}", new String(messageExt.getBody(), "UTF-8"));
+            String s = new String(messageExt.getBody(), "UTF-8");
+            ErrorMsgMQEntity errorMsgMQEntity = new ObjectMapper().readValue(s, ErrorMsgMQEntity.class);
+            String content = errorLogContent.replace("{CONTENT}", errorMsgMQEntity.getErrorMsg())
+                    .replace("{TIME}",errorMsgMQEntity.getTime());
+            String title="错误日志: "+errorMsgMQEntity.getTime();
             adminDao.selectAllDev().stream().forEach(admin->{
-
                 new Thread(()->{
-                    emailService.sendErrorLog(admin.getEMail(),"错误日志;",content);
+                    emailService.sendErrorLog(admin.getEMail(),title,content);
                 }).start();
-
             });
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
 

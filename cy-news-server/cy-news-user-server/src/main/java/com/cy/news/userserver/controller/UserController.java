@@ -1,4 +1,4 @@
-package com.cy.news.userserver.Controller;
+package com.cy.news.userserver.controller;
 
 import cn.hutool.core.lang.Validator;
 import cn.hutool.crypto.SecureUtil;
@@ -12,7 +12,6 @@ import com.cy.news.common.VO.UserNameLoginVO;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

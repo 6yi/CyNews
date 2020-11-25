@@ -1,6 +1,7 @@
 package com.cy.news.common.Exception;
 
 import com.cy.news.common.DTO.ResultDTO;
+import com.cy.news.common.Utils.ErrorMsgUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendCallback;
@@ -25,36 +26,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    @Autowired
-    RocketMQTemplate rocketMQTemplate;
+
     @ExceptionHandler(value =RuntimeException.class)
     public ResultDTO exceptionHandler(Exception e){
-
-
-        try {
-            sendExceptionEmail(e);
-        } catch (Exception mqClientException) {
-            mqClientException.printStackTrace();
-        }
-
+        log.warn(ErrorMsgUtils.getExceptionAllInfo(e));
         return ResultDTO.builder().code(500).data("请检查网络").build();
     }
 
-    private void sendExceptionEmail(Exception e) throws MQClientException, RemotingException, InterruptedException {
-
-
-        Message message = new Message("errorTopic", "EXCEPTION", "global_error", e.toString().getBytes());
-
-        rocketMQTemplate.getProducer().send(message, new SendCallback() {
-            @Override
-            public void onSuccess(SendResult sendResult) {
-                log.info("消息写入成功");
-            }
-
-            @Override
-            public void onException(Throwable throwable) {
-             //   logger.info("消息写入失败");
-            }
-        });
-    }
 }
