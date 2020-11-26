@@ -31,7 +31,6 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class GlobalExceptionHandlerAop {
 
-
     @Autowired
     RocketMQTemplate rocketMQTemplate;
 
@@ -46,6 +45,7 @@ public class GlobalExceptionHandlerAop {
         String time = DateTimeFormatter.ofPattern("yyyy/MM/dd H:m:s").format( ZonedDateTime.now());
         ErrorMsgMQEntity build = ErrorMsgMQEntity.builder().time(time).errorMsg(exceptionAllInfo).build();
         sendExceptionEmail(build);
+
     }
 
 
@@ -59,7 +59,6 @@ public class GlobalExceptionHandlerAop {
                 public void onSuccess(SendResult sendResult) {
                     log.info("消息写入成功");
                 }
-
                 @Override
                 public void onException(Throwable throwable) {
                     //   logger.info("消息写入失败");

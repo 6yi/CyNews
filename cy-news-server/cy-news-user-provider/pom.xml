@@ -55,7 +55,7 @@
             <artifactId>spring-cloud-starter</artifactId>
         </dependency>
 
-<!--  naco      -->
+<!--  nacos      -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
