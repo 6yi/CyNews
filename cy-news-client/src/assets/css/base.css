@@ -11,3 +11,19 @@
 .am-list-item {
     background-color: #fcfcfc !important;
 }
+.am-tabs-default-bar-content {
+    position: fixed;
+    height: 2.5rem;
+}
+
+.am-tabs-default-bar-content div{
+    background-color: #fff;
+} 
+
+.slider-decorator-0 {
+    bottom: 5px !important;
+} 
+html:not([data-scale]) .am-card:not(.am-card-full) {
+    position: unset;
+    border-bottom: 1px solid #dfdbdb;
+}

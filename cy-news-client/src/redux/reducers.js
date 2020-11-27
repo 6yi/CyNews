@@ -1,21 +1,19 @@
-import {AUTH_SUCCESS,ERROR_MSG} from './action-types'
+import {SAVE_USER,ERROR_MSG} from './action-types'
 
 var initUser = {
-    u_userid: '',
-    u_username: '',
-    header: ''
-}
+    userName: '',
+    headerIcon: '',
+    }
 
 function user(state=initUser,action) {
+    console.log(action);
     switch (action.type) {
-        case AUTH_SUCCESS:
-            cosnt {} = 
-            break;
-        case ERROR_MSG:
-            
-            break;
-    
+        case SAVE_USER:
+            return action.data
         default:
-            break;
+            return state
     }
+    
 }
+
+export default user
