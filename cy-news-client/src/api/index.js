@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {Toast} from 'antd-mobile'
 const instance = axios.create({
-  baseURL:'http://59.110.173.180:8089/',
+  // baseURL:'http://59.110.173.180:8089/',
   timeout: 3000.
 })
 
