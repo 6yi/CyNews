@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -30,6 +29,12 @@ public class News implements Serializable {
     private Integer nStatus;
 
     private String nImg;
+
+    private String[] imgSrc;
+
+    private NewsMessage newsMessage;
+
+    private Long hotKey;
 
     private static final long serialVersionUID = 1L;
 

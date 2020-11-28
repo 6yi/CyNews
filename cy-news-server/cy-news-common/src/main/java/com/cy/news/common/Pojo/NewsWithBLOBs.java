@@ -1,11 +1,10 @@
 package com.cy.news.common.Pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.ExtensionMethod;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * news
@@ -14,12 +13,14 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@ToString
 public class NewsWithBLOBs extends News implements Serializable {
-    private Integer nId;
+
 
     private String nContent;
 
     private static final long serialVersionUID = 1L;
+
+
 
 }

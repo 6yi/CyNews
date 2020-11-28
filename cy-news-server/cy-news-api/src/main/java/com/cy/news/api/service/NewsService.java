@@ -13,7 +13,6 @@ import com.cy.news.common.DTO.ResultDTO;
 public interface NewsService {
 
 
-    ResultDTO getIndexNews();
-
+    ResultDTO getNews(String type,Long start,Long end);
 
 }
