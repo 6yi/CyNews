@@ -1,6 +1,8 @@
 package com.cy.news.newsprovider.service;
 
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.cy.news.api.service.NewsService;
 import com.cy.news.common.DTO.ResultDTO;
 import com.cy.news.common.Pojo.Comments;
@@ -8,7 +10,6 @@ import com.cy.news.newsprovider.dao.CommentsDao;
 import com.cy.news.newsprovider.dao.NewsDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +101,7 @@ public class NewsServiceImpl implements NewsService {
             try{
                 commentsReentrantLock.lock();
                 if((commentsJson=redisTemplate.opsForValue().get(key))==null){
-                    PageHelper.offsetPage(page,number);
+
                     List<Comments> comments = commentsDao.selectCommentsByNid(nId);
                     try {
                         commentsJson = new ObjectMapper().writeValueAsString(comments);

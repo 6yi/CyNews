@@ -20,7 +20,7 @@ import java.util.List;
 public interface CommentsDao extends BaseMapper<Comments> {
 
 
-    @Select("select * from comments where n_id=#{nId} and c_status<>-1 order by c_id")
+    @Select("select * from comments where n_id=#{nId} and c_status<>-1 order by id")
     List<Comments> selectCommentsByNid(Integer nId);
 
 

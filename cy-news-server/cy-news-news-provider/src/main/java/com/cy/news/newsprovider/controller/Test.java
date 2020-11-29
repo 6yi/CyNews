@@ -15,12 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@Primary
 public class Test {
 
 
-    @Autowired
-    NewsServiceImpl newsService;
 
 
 

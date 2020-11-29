@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class CommentsMessage implements Serializable {
     private Integer mId;
 
-    private Integer cId;
+    private Long cId;
 
     private Integer mLike;
 

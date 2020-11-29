@@ -16,7 +16,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class News implements Serializable {
-    private Integer nId;
+
+    private Long nId;
 
     private String nTitle;
 

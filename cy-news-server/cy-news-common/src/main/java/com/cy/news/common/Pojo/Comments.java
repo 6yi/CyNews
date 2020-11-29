@@ -17,9 +17,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class Comments implements Serializable {
-    private Integer cId;
+    private Long cId;
 
-    private Integer nId;
+    private Long nId;
 
     private Integer uId;
 

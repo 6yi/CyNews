@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class NewsMessage implements Serializable {
     private Integer mId;
 
-    private Integer nId;
+    private Long nId;
 
     private Integer mLike;
 
