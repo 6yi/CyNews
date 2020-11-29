@@ -14,3 +14,7 @@ Mock.mock('/login',{
 Mock.mock('/content',{
       "img": Mock.Random.image("200x100")
 })
+
+Mock.mock('/news', {
+      
+})

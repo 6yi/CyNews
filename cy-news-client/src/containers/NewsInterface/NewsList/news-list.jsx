@@ -8,17 +8,23 @@ export default class NewsList extends Component {
     constructor() {
         super()
         this.state= {
-            img:''
+            img:'',
+            type:''
         }
     }
 
     componentDidMount() {
-        
+        console.log(this.props.tab);
     }
+    componentDidUpdate() {
+        console.log('111111111');
+    }
+        
+
     
     render() {
         return (
-            <div  style={{height: '800px', backgroundColor: '#fff' }}>
+            <div  style={{height: 'auto', backgroundColor: '#fff' }}>
                 <div className={newslist.swiper+ ' swiperbox'}>
                 <Swiper></Swiper>
                 </div>
