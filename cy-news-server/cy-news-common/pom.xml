@@ -9,7 +9,16 @@
     <version>0.0.2-SNAPSHOT</version>
 
     <dependencies>
-
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
+        </dependency>
         <dependency>
             <groupId>aspectj</groupId>
             <artifactId>aspectjrt</artifactId>

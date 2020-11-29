@@ -1,9 +1,9 @@
 package com.cy.news.newsprovider.controller;
 
-import com.cy.news.common.DTO.ResultDTO;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.cy.news.newsprovider.service.NewsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
+@Primary
 public class Test {
+
 
     @Autowired
     NewsServiceImpl newsService;
 
-//    @GetMapping("/test")
-//    public ResultDTO test(){
-//        return newsService.getNews(0L,15L);
-//    }
+
 
 }

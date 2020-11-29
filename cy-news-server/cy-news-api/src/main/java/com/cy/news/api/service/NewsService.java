@@ -15,4 +15,8 @@ public interface NewsService {
 
     ResultDTO getNews(String type,Long start,Long end);
 
+    ResultDTO getNewsContent(Integer nId);
+
+    ResultDTO getNewsComments(Integer nId,Integer page,Integer number);
+
 }
