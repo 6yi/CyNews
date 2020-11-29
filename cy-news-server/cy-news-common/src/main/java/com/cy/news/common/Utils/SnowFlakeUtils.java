@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
 
 public class SnowFlakeUtils {
 
-    private static Long getWorkId(){
+    public static Long getWorkId(){
         try {
             String hostAddress = Inet4Address.getLocalHost().getHostAddress();
 
@@ -33,7 +33,7 @@ public class SnowFlakeUtils {
         }
     }
 
-    private static Long getDataCenterId(){
+    public static Long getDataCenterId(){
         int[] ints = StringUtils.toCodePoints(SystemUtils.getHostName());
         int sums = 0;
         for (int i: ints) {
