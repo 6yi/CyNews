@@ -13,16 +13,16 @@ import com.cy.news.common.VO.RegisterUserByEmailVO;
 import com.cy.news.common.VO.UserNameLoginVO;
 import com.cy.news.userprovider.dao.UserDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -37,11 +37,16 @@ import java.util.Date;
 
 @DubboService(version = "1.0.0")
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
-    private final static Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
+
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
 
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
@@ -71,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultDTO login(UserNameLoginVO userVO) {
-        logger.info(userVO.toString());
+        log.info(userVO.toString());
         User user = userDao.selectByUserName(userVO.getUserName());
 
         if(user!=null&&userVO.getPassWord().equals(user.getuPassword())){
@@ -137,7 +142,7 @@ public class UserServiceImpl implements UserService {
              userDao.insert(user);
 
         } catch (Exception e) {
-            logger.info(e.getMessage());
+            log.info(e.getMessage());
             return ResultDTO.builder().code(UserRetErrorCode.REGISTER_ERROR).data("未知错误,请联系管理员").build();
 
         }
@@ -155,20 +160,20 @@ public class UserServiceImpl implements UserService {
     private void sendEmailMQ(Integer id, EmailMQEntity entity){
         try {
             Message message = new Message(topic, tag, id.toString(), new ObjectMapper().writeValueAsString(entity).getBytes());
-            logger.info("消息正在写入");
+            log.info("消息正在写入");
             rocketMQTemplate.getProducer().send(message, new SendCallback() {
                 @Override
                 public void onSuccess(SendResult sendResult) {
-                    logger.info("消息写入成功");
+                    log.info("消息写入成功");
                 }
 
                 @Override
                 public void onException(Throwable throwable) {
-                    logger.info("消息写入失败");
+                    log.info("消息写入失败");
                 }
             });
         } catch (Exception e) {
-            logger.info("消息写入失败");
+            log.info("消息写入失败");
             e.printStackTrace();
         }
     }
@@ -185,10 +190,21 @@ public class UserServiceImpl implements UserService {
         }catch (Exception e){
             return ResultDTO.builder().code(UserRetErrorCode.ERROR).build();
         }
-
     }
 
+    @Override
+    public ResultDTO addUserLikeNews(Long nId, Integer uId) {
+        String key="userLike:"+uId+":"+nId;
+        redisTemplate.opsForValue().set(key,"1");
+        return ResultDTO.builder().code(200).build();
+    }
 
+    @Override
+    public ResultDTO delUserLikeNews(Long nId,Integer uId){
+        String key="userLike:"+uId+":"+nId;
+        redisTemplate.delete(key);
+        return ResultDTO.builder().code(200).build();
+    }
 
 
 }
