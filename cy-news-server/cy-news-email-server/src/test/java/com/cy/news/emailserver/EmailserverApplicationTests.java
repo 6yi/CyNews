@@ -19,7 +19,7 @@ class EmailserverApplicationTests {
 
     @Test
     void contextLoads() {
-
+            redisTemplate.opsForValue().set("as","d");
     }
 
 }

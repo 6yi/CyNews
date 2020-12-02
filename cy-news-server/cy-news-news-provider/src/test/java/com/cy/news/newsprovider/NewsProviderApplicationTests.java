@@ -3,30 +3,38 @@ package com.cy.news.newsprovider;
 import cn.hutool.core.lang.Snowflake;
 import com.cy.news.api.service.NewsService;
 import com.cy.news.newsprovider.dao.NewsDao;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 
+import java.io.IOException;
 
 @SpringBootTest
 class NewsProviderApplicationTests {
 
-    @Autowired
-    private NewsDao newsDao;
+//    @Autowired
+//    private NewsDao newsDao;
+//
+//    @Autowired
+//    NewsService newsService;
+
+
+//    @Autowired
+//    Snowflake snowflake;
 
     @Autowired
-    NewsService newsService;
-
-
-    @Autowired
-    Snowflake snowflake;
+    RedisTemplate<String, String> redisTemplate;
 
     @Test
-    void contextLoads() throws JsonProcessingException {
-        System.out.println(snowflake.nextId());
-//        System.out.println(newsDao.selectHotNews(new Date(), null));
-//        System.out.println(new ObjectMapper().writeValueAsString(newsDao.selectContentById(100000).get(0)));
+    void contextLoads() throws IOException {
+
+
+        redisTemplate.opsForHash().put("z","y","1");
+
+        redisTemplate.opsForHash().increment("z","y",1);
 
     }
 

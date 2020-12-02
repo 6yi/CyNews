@@ -56,9 +56,13 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
+
+
     private static final Lock hotNewsReentrantLock=new ReentrantLock();
     private static final Lock commentsReentrantLock=new ReentrantLock();
     private static final Lock contentReentrantLock=new ReentrantLock();
+    private static final Lock likeReentrantLock=new ReentrantLock();
+    private static final Lock watchReentrantLock=new ReentrantLock();
 
     /**
      * @author 6yi
@@ -123,6 +127,7 @@ public class NewsServiceImpl implements NewsService {
             }
         }
         return ResultDTO.builder().code(200).data(commentsJson).build();
+
     }
 
     //todo 正文获取
@@ -144,33 +149,61 @@ public class NewsServiceImpl implements NewsService {
                 contentReentrantLock.unlock();
             }
         }
+
         return ResultDTO.builder().code(200).data(content).build();
+
     }
 
 
     //todo 点赞
     @Override
     public ResultDTO incrLike(Long nId,Integer uId) {
-        NewsMessage newsMessage = (NewsMessage)redisTemplate.opsForHash().get("newsMessage", nId);
-        if(newsMessage==null){
-            newsMessage=newsMessageDao.findOneByNId(nId);
+        long number=0;
+        if((redisTemplate.opsForHash().get("newsMessage:"+nId, "like"))==null){
+            try{
+                likeReentrantLock.lock();
+                if((redisTemplate.opsForHash().get("newsMessage:"+nId, "like"))==null){
+                   redisTemplate.opsForHash().put("newsMessage:"+nId, "like","1");
+                }else{
+                    redisTemplate.opsForHash().increment("newsMessage:"+nId, "like",1);
+                }
+            }finally {
+                likeReentrantLock.unlock();
+            }
+        }else{
+           number = redisTemplate.opsForHash().increment("newsMessage:"+nId, "like",1);
         }
-        Integer mLike=0;
-        try {
-            mLike=newsMessage.getMLike();
-            newsMessage.setMLike(++mLike);
-        }finally {
-
-        }
-        redisTemplate.opsForHash().put("newsMessage",nId,newsMessage);
         userService.addUserLikeNews(nId,uId);
-
-        return ResultDTO.builder().code(mLike).build();
+        return ResultDTO.builder().code(200).data(number).build();
     }
+
+
+    //todo 增加浏览数量
+    @Override
+    public ResultDTO incrWatch(Long nId) {
+        long number=0;
+        if((redisTemplate.opsForHash().get("newsMessage:"+nId, "watch"))==null){
+            try{
+                watchReentrantLock.lock();
+                if((redisTemplate.opsForHash().get("newsMessage:"+nId, "watch"))==null){
+                    redisTemplate.opsForHash().put("newsMessage:"+nId, "watch","1");
+                }else{
+                    redisTemplate.opsForHash().increment("newsMessage:"+nId, "watch",1);
+                }
+            }finally {
+                watchReentrantLock.unlock();
+            }
+        }else {
+            number=redisTemplate.opsForHash().increment("newsMessage:watch:"+nId,"number",1);
+        }
+        return ResultDTO.builder().code(200).data(number).build();
+    }
+
 
     //todo 取消点赞
     @Override
     public ResultDTO decLike(Long id,Integer uId) {
+
         return null;
     }
 
@@ -183,8 +216,8 @@ public class NewsServiceImpl implements NewsService {
             newsDao.selectHotNews(date, DateUtil.offsetMonth(date,-1),type)
                     .stream()
                     .map(hotNews -> {
-                        NewsMessage newsMessage = newsMessageDao.findOneByNId(hotNews.getNId());
-                        hotNews.setNewsMessage(newsMessage);
+//                        NewsMessage newsMessage = objectRedisTemplate.opsForHash().
+//                        hotNews.setNewsMessage(newsMessage);
                         log.info(hotNews.toString());
                         if (hotNews.getNImg() != null) {
                             hotNews.setImgSrc(hotNews.getNImg().split("\\|"));

@@ -7,6 +7,8 @@ import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 
 @SpringBootApplication
 @EnableDubbo(scanBasePackages = "com.cy.news.newsprovider.service")
@@ -19,11 +21,12 @@ public class NewsProviderApplication {
     }
 
 
-
     @Bean
     public Snowflake snowflake(){
         return IdUtil.createSnowflake(SnowFlakeUtils.getWorkId(),SnowFlakeUtils.getDataCenterId());
     }
+
+
 
 }
 

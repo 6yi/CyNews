@@ -13,9 +13,9 @@ import com.qcloud.cos.region.Region;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
+import redis.clients.jedis.Jedis;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -23,12 +23,21 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 class TestApplicationTests {
 
-    @DubboReference(version = "1.0.0")
-    private UserService userService;
+//    @DubboReference(version = "1.0.0")
+//    private UserService userService;
 
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+    @Test
+    void contextLoads2() {
+        Jedis jedis = new Jedis();
+        jedis.hset("hash","field", "1");
+        jedis.hincrBy("hash","field",1);
+    }
+
+
+
+//    @Autowired
+//    private StringRedisTemplate redisTemplate;
 
     @Test
     void contextLoads() {

@@ -23,5 +23,7 @@ public interface NewsService {
 
     ResultDTO decLike(Long id,Integer uId);
 
+    ResultDTO incrWatch(Long nId);
+
 
 }

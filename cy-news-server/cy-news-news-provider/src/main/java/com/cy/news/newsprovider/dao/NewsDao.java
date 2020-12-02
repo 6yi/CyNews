@@ -24,12 +24,12 @@ import java.util.List;
 public interface NewsDao extends BaseMapper<NewsWithBLOBs> {
 
     @SelectProvider(type = NewsDaoSqlProvider.class,method = "selectHotNews")
-    @Results({
-            @Result(column = "n_id",property = "nId",javaType = Integer.class),
-            @Result(column = "n_id"
-            ,property = "newsMessage"
-            ,javaType = NewsMessage.class
-            ,one = @One(select = "com.cy.news.newsprovider.dao.NewsMessageDao.findOneByNId"))})
+//    @Results({
+//            @Result(column = "n_id",property = "nId",javaType = Integer.class),
+//            @Result(column = "n_id"
+//            ,property = "newsMessage"
+//            ,javaType = NewsMessage.class
+//            ,one = @One(select = "com.cy.news.newsprovider.dao.NewsMessageDao.findOneByNId"))})
     List<News> selectHotNews(@Param("nowDate") Date nowDate, @Param("lastDate") Date lastDate,@Param("type")String type);
 
     @SelectProvider(type = NewsDaoSqlProvider.class,method = "selectContentById")
