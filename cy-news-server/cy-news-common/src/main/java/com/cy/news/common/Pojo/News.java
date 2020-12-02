@@ -17,6 +17,8 @@ import java.util.Date;
 @Builder
 public class News implements Serializable {
 
+
+
     private Long nId;
 
     private String nTitle;
