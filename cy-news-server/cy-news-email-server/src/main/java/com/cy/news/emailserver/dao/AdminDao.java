@@ -13,6 +13,6 @@ import java.util.List;
 public interface AdminDao extends BaseMapper<Admin> {
 
     @Select("select *  from admin left join role on admin.r_id = role.r_id and role.role_name='dev'")
-    public List<Admin> selectAllDev();
+    List<Admin> selectAllDev();
 
 }

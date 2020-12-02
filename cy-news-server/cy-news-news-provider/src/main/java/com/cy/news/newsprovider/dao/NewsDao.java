@@ -33,7 +33,10 @@ public interface NewsDao extends BaseMapper<NewsWithBLOBs> {
     List<News> selectHotNews(@Param("nowDate") Date nowDate, @Param("lastDate") Date lastDate,@Param("type")String type);
 
     @SelectProvider(type = NewsDaoSqlProvider.class,method = "selectContentById")
-    List<NewsWithBLOBs> selectContentById(@Param("id") Integer id);
+    NewsWithBLOBs selectContentById(@Param("id") Long id);
+
+
+
 
     class NewsDaoSqlProvider{
         final String[] baseResult={"n_id","n_title","n_img","n_date","n_author","t_name","n_status"};
@@ -42,9 +45,9 @@ public interface NewsDao extends BaseMapper<NewsWithBLOBs> {
             SQL sql = new SQL();
             sql.SELECT(baseResult).FROM("news");
             if(lastDate!=null){
-                sql.WHERE("n_date<#{nowDate}").WHERE("n_date>#{lastDate}").WHERE("n_status<>0");
+                sql.WHERE("n_date<#{nowDate}").WHERE("n_date>#{lastDate}").WHERE("n_status=1");
             }else {
-                sql.WHERE("n_date<#{nowDate}").WHERE("n_status<>0");
+                sql.WHERE("n_date<#{nowDate}").WHERE("n_status=1");
             }
             if (type!=null){
                 sql.WHERE("t_name=#{type}");
@@ -52,8 +55,8 @@ public interface NewsDao extends BaseMapper<NewsWithBLOBs> {
             return sql.toString();
         }
 
-        public String selectContentById(Integer id){
-            return new SQL().SELECT(contentResult).FROM("news").WHERE("n_id = #{id}").toString();
+        public String selectContentById(Long id){
+            return new SQL().SELECT(contentResult).FROM("news").WHERE("n_id = #{id}").WHERE("status=1").toString();
         }
     }
 }

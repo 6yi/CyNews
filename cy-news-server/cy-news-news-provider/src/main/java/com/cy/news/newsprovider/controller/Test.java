@@ -1,9 +1,12 @@
 package com.cy.news.newsprovider.controller;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.cy.news.common.DTO.ResultDTO;
 import com.cy.news.newsprovider.service.NewsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -17,7 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Test {
 
-
+    @Autowired
+    NewsServiceImpl newsService;
+    @GetMapping("/getComment/{page}/{number}")
+    public ResultDTO getComment(@PathVariable("page") Integer page,@PathVariable("number") Integer number){
+        return newsService.getNewsComments(1332944364046413824L,page,number);
+    }
 
 
 

@@ -19,7 +19,7 @@ public interface NewsMessageDao extends BaseMapper<NewsMessage> {
 
 
     @Select("select * from news_message where n_id=#{nId}")
-    NewsMessage findOneByNId(Integer nId);
+    NewsMessage findOneByNId(Long nId);
 
 
 }

@@ -21,7 +21,7 @@ public interface CommentsDao extends BaseMapper<Comments> {
 
 
     @Select("select * from comments where n_id=#{nId} and c_status<>-1 order by id")
-    List<Comments> selectCommentsByNid(Integer nId);
+    List<Comments> selectCommentsByNid(Long nId);
 
 
 
