@@ -20,13 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Test {
 
-//    @Autowired
-//    NewsServiceImpl newsService;
-//
-//    @GetMapping("/getComment/{page}/{number}")
-//    public ResultDTO getComment(@PathVariable("page") Integer page,@PathVariable("number") Integer number){
-//        return newsService.getNewsComments(1332944364046413824L,page,number);
-//    }
+    @Autowired
+    NewsServiceImpl newsService;
+
+
+
+
+    @GetMapping("/getComment/{page}/{number}")
+    public ResultDTO getComment(@PathVariable("page") Integer page,@PathVariable("number") Integer number){
+        return newsService.getNewsComments(1332944364046413824L,page,number);
+    }
 
 
 

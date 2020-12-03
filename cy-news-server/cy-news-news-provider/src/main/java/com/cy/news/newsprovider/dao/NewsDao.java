@@ -56,7 +56,7 @@ public interface NewsDao extends BaseMapper<NewsWithBLOBs> {
         }
 
         public String selectContentById(Long id){
-            return new SQL().SELECT(contentResult).FROM("news").WHERE("n_id = #{id}").WHERE("status=1").toString();
+            return new SQL().SELECT(contentResult).FROM("news").WHERE("n_id = #{id}").WHERE("n_status=1").toString();
         }
     }
 }

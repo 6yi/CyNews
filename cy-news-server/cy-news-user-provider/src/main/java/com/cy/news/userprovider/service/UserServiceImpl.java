@@ -194,15 +194,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultDTO addUserLikeNews(Long nId, Integer uId) {
-        String key="userLike:"+uId+":"+nId;
-        redisTemplate.opsForValue().set(key,"1");
+        String key="userLike:"+uId;
+        redisTemplate.opsForHash().put(key,nId.toString(),"1");
         return ResultDTO.builder().code(200).build();
     }
 
     @Override
     public ResultDTO delUserLikeNews(Long nId,Integer uId){
-        String key="userLike:"+uId+":"+nId;
-        redisTemplate.delete(key);
+        String key="userLike:"+uId;
+        redisTemplate.opsForHash().delete(key,nId.toString());
         return ResultDTO.builder().code(200).build();
     }
 

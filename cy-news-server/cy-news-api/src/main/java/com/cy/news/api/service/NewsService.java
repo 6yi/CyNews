@@ -19,11 +19,8 @@ public interface NewsService {
 
     ResultDTO getNewsComments(Long nId,Integer page,Integer number);
 
-    ResultDTO incrLike(Long nId,Integer uId);
 
-    ResultDTO decLike(Long id,Integer uId);
 
-    ResultDTO incrWatch(Long nId);
 
 
 }

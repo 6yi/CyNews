@@ -30,6 +30,12 @@ public class NewsController {
         return newsService.getNews(type,start,end);
     }
 
+    @GetMapping("/News/content/{nId}")
+    public ResultDTO getContent(@PathVariable("nId")Long nId){
+        return newsService.getNewsContent(nId);
+    }
+
+
 
 
 
