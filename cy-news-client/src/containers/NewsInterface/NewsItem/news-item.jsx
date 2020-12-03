@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import {withRouter} from 'react-router-dom'
 import { Card, WhiteSpace ,WingBlank,Flex} from 'antd-mobile'
 import newsitem from './news-item.module.css'
-export default class NewsItem extends Component {
+class NewsItem extends Component {
     constructor() {
         super()
         this.state = {
@@ -11,7 +12,7 @@ export default class NewsItem extends Component {
 
     render() {
         return (
-            <div>
+            <div onClick={() => {this.props.history.push('/content/ssss')}}>
     
     <Card>
       <Card.Header
@@ -40,3 +41,5 @@ export default class NewsItem extends Component {
         )
     }
 }
+
+export default withRouter(NewsItem)   //高阶组件，自动传入history

@@ -1,7 +1,10 @@
 import React,{Component} from 'react'
-import Nav from '../NavBar/Nav'
+import Nav from '../NavBar/nabvar'
 import Tabs from './Tabs/tab'
 import MyDrawer from '../Drawer/drawer'
+import NewsContent from '../NewsContent/news-content'
+import {HashRouter,Switch,Route} from 'react-router-dom'
+
 export default class NewInterface extends Component {
     
     state= {

@@ -28,7 +28,7 @@ render() {
     return (
       <div className={TabCss.content + ' tabcontent'}>
         
-        <Tabs tabs={tabs}  swipeable={false}  renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4} />} >
+        <Tabs tabs={tabs} prerenderingSiblingsNumber={false}  swipeable={false}  renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4} />} >
          {(e) => <NavList  tab={e}></NavList>}
         </Tabs>
         

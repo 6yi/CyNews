@@ -42,14 +42,11 @@ html:not([data-scale]) .am-card-body::before {   /* 卡片头分割线 */
 .am-drawer-overlay {
     position: fixed !important; 
 }
-.am-drawer-sidebar {
+.am-drawer-sidebar {    /* 侧边栏铺满 */
     position: fixed;
     top: 0;
     left: 0;
     right: 30%;
     bottom: 0;
-}
-.am-list {          /* 修改侧边栏铺满高度 */
-    height: 100%;
     background-color: rgb(252, 252, 252);
 }
