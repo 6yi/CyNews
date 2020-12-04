@@ -4,11 +4,7 @@ import TabCss from './Tab.module.css'
 import NavList from '../NewsList/news-list'
 export default class Demo extends Component {
     
-    state = {
-      activeTab:'0',
-      activeIndex: '0',
-      
-    }
+    
 
     componentDidMount() {
       
@@ -17,7 +13,7 @@ export default class Demo extends Component {
 render() {
     
     const tabs = [
-      { title: '时事' },
+      { title: '推荐' },
       { title: '政治' },
       { title: '体育' },
       { title: '娱乐' },
@@ -30,9 +26,9 @@ render() {
     
 
     return (
-      <div className={TabCss.content}>
+      <div className={TabCss.content + ' tabcontent'}>
         
-        <Tabs tabs={tabs}  swipeable={false}  renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4} />} >
+        <Tabs tabs={tabs} prerenderingSiblingsNumber={false}  swipeable={false}  renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4} />} >
          {(e) => <NavList  tab={e}></NavList>}
         </Tabs>
         

@@ -11,8 +11,9 @@
 .am-list-item {
     background-color: #fcfcfc !important;
 }
-.am-tabs-default-bar-content {
+.am-tabs-default-bar-content {        /* tab标签距顶部的高 */
     position: fixed;
+    top: 2.8rem;
     height: 2.5rem;
 }
 
@@ -23,7 +24,30 @@
 .slider-decorator-0 {
     bottom: 5px !important;
 } 
-html:not([data-scale]) .am-card:not(.am-card-full) {
+html:not([data-scale]) .am-card:not(.am-card-full) {   /* 卡片扁平化 */
     position: unset;
     border-bottom: 1px solid #dfdbdb;
 }
+html:not([data-scale]) .am-card-body::before {   /* 卡片头分割线 */
+    width: auto;
+}
+.am-card-body {
+    padding: 1px 15px 20px !important;
+    font-size: 20px;
+    font-weight: 400;
+}
+.am-drawer-draghandle {         /* 抵消侧边栏宽度 */
+    width: 0px !important; 
+}
+.am-drawer-overlay {
+    position: fixed !important; 
+}
+.am-drawer-sidebar {    /* 侧边栏铺满 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 30%;
+    bottom: 0;
+    background-color: rgb(252, 252, 252);
+}
+
