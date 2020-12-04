@@ -1,10 +1,10 @@
-package cy.news.admin.controller;
+package com.cy.news.admin.controller;
 
 import com.cy.news.common.DTO.ResultDTO;
 import com.cy.news.common.Pojo.Admin;
-import cy.news.admin.exception.AdminLoginError;
-import cy.news.admin.service.AdminService;
-import cy.news.admin.vo.AdminLoginVo;
+import com.cy.news.admin.exception.AdminLoginError;
+import com.cy.news.admin.service.AdminService;
+import com.cy.news.admin.vo.AdminLoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package cy.news.admin.dao;
+package com.cy.news.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cy.news.common.Pojo.Admin;

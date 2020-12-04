@@ -1,4 +1,4 @@
-package cy.news.admin.vo;
+package com.cy.news.admin.vo;
 
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;

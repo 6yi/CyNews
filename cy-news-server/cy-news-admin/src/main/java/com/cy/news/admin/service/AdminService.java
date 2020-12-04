@@ -1,7 +1,7 @@
-package cy.news.admin.service;
+package com.cy.news.admin.service;
 
 import com.cy.news.common.Pojo.Admin;
-import cy.news.admin.dao.AdminDao;
+import com.cy.news.admin.dao.AdminDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

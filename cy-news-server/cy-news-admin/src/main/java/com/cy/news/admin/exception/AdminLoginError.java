@@ -1,4 +1,4 @@
-package cy.news.admin.exception;
+package com.cy.news.admin.exception;
 
 /**
  * @author yj

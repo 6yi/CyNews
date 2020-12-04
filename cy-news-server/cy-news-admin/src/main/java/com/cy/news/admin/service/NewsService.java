@@ -1,8 +1,8 @@
-package cy.news.admin.service;
+package com.cy.news.admin.service;
 
 import com.cy.news.common.Pojo.News;
 import com.cy.news.common.Pojo.NewsWithBLOBs;
-import cy.news.admin.dao.NewsDao;
+import com.cy.news.admin.dao.NewsDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

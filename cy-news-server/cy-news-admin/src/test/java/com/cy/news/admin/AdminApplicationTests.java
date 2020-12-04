@@ -1,4 +1,4 @@
-package cy.news.admin;
+package com.cy.news.admin;
 
 import cn.hutool.core.convert.Convert;
 import com.cy.news.common.Pojo.NewsWithBLOBs;

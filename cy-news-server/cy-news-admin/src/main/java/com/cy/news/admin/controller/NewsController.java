@@ -1,4 +1,4 @@
-package cy.news.admin.controller;
+package com.cy.news.admin.controller;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.convert.ConverterRegistry;
@@ -6,7 +6,6 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Snowflake;
 import com.cy.news.common.DTO.ResultDTO;
 import com.cy.news.common.Pojo.News;
-
 import com.cy.news.common.Pojo.NewsMessage;
 import com.cy.news.common.Pojo.NewsWithBLOBs;
 import com.qcloud.cos.COSClient;
@@ -16,18 +15,13 @@ import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
-import cy.news.admin.dao.NewsDao;
-import cy.news.admin.exception.NewsRetError;
-import cy.news.admin.service.NewsService;
-import cy.news.admin.vo.NewsReleaseVO;
+import com.cy.news.admin.dao.NewsDao;
+import com.cy.news.admin.exception.NewsRetError;
+import com.cy.news.admin.vo.NewsReleaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.Date;
 
 /**
  * @author yj

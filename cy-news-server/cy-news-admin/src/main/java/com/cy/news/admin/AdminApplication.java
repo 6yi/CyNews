@@ -1,4 +1,4 @@
-package cy.news.admin;
+package com.cy.news.admin;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
