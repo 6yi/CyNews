@@ -50,3 +50,4 @@ html:not([data-scale]) .am-card-body::before {   /* 卡片头分割线 */
     bottom: 0;
     background-color: rgb(252, 252, 252);
 }
+
