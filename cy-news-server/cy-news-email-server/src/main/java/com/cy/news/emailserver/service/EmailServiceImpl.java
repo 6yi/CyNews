@@ -20,7 +20,7 @@ public class EmailServiceImpl implements EmailService {
 
     //发件人
     @Value("${spring.mail.username}")
-    private   String sender;
+    private String sender;
 
     @Value("${spring.mail.title}")
     private String title;

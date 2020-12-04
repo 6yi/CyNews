@@ -38,6 +38,11 @@ public class NewsMessageServiceImpl implements NewsMessageService {
     //todo 点赞
     @Override
     public ResultDTO incrLike(Long nId,Integer uId) {
+        if(numberRedisTemplate.opsForHash().hasKey("userLike:" + uId, nId.toString())){
+            log.info("已经点赞");
+            return ResultDTO.builder().code(200).data(-1).build();
+        }
+        log.info("还没点赞");
         long number=1;
         if((numberRedisTemplate.opsForHash().get("newsMessage:"+nId, "like"))==null){
             try{
@@ -59,8 +64,12 @@ public class NewsMessageServiceImpl implements NewsMessageService {
 
     @Override
     public ResultDTO decLike(Long nId, Integer uId) {
-        long number=numberRedisTemplate.opsForHash().increment("newsMessage:"+nId, "like",-1);
-        userService.delUserLikeNews(nId,uId);
+        Long number=-1L;
+        if (numberRedisTemplate.opsForHash().hasKey("userLike:"+uId, nId.toString())){
+            number=numberRedisTemplate.opsForHash().increment("newsMessage:"+nId, "like",-1);
+            userService.delUserLikeNews(nId,uId);
+        }
         return ResultDTO.builder().code(200).data(number).build();
     }
+
 }

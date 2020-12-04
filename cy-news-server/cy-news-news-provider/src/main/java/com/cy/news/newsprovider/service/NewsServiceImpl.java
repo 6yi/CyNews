@@ -2,7 +2,6 @@ package com.cy.news.newsprovider.service;
 
 import cn.hutool.core.date.DateUtil;
 import com.cy.news.api.service.NewsService;
-import com.cy.news.api.service.UserService;
 import com.cy.news.common.DTO.ResultDTO;
 import com.cy.news.common.Pojo.Comments;
 import com.cy.news.common.Pojo.NewsMessage;
@@ -15,7 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.youbenzi.mdtool.tool.MDTool;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
