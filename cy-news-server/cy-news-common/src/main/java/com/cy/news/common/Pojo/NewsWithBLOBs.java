@@ -14,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+
 public class NewsWithBLOBs extends News implements Serializable {
 
 
