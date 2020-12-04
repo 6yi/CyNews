@@ -1,6 +1,6 @@
 package com.cy.news.common.Utils;
 
-import com.cy.news.common.pojo.User;
+import com.cy.news.common.Pojo.User;
 import io.jsonwebtoken.*;
 import java.util.Date;
 
@@ -29,8 +29,17 @@ public class JWTUtils {
     }
 
 
-    public  static Claims verifiedJwt(String jwt) throws ExpiredJwtException,SignatureException{
-        return Jwts.parser().setSigningKey(HASH_KEY).parseClaimsJws(jwt).getBody();
+    public  static Claims verifiedJwt(String jwt) throws Exception{
+        Claims claims=null;
+        try{
+            claims = Jwts.parser().setSigningKey(HASH_KEY).parseClaimsJws(jwt).getBody();
+        }catch (Exception e){
+            throw new Exception("授权错误");
+        }
+        if (claims.getExpiration().getTime()<System.currentTimeMillis()){
+            throw new Exception("授权过期");
+        }
+        return claims;
     }
 
 //    public static void main(String[] args) {

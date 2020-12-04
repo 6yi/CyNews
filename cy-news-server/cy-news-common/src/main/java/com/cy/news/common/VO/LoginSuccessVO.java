@@ -1,6 +1,6 @@
 package com.cy.news.common.VO;
 
-import com.cy.news.common.pojo.User;
+import com.cy.news.common.Pojo.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cy.news.userprovider.dao.UserDao">
-  <resultMap id="BaseResultMap" type="com.cy.news.common.pojo.User">
+  <resultMap id="BaseResultMap" type="com.cy.news.common.Pojo.User">
     <id column="u_id" jdbcType="INTEGER" property="uId" />
     <result column="u_username" jdbcType="VARCHAR" property="uUsername" />
     <result column="u_password" jdbcType="CHAR" property="uPassword" />
@@ -46,7 +46,7 @@
     delete from user
     where u_id = #{uId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="u_id" keyProperty="uId" parameterType="com.cy.news.common.pojo.User" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="u_id" keyProperty="uId" parameterType="com.cy.news.common.Pojo.User" useGeneratedKeys="true">
     insert into user (u_username, u_password, u_nickname, 
       u_avatar, u_email, u_phone, 
       u_points, u_date, u_status
@@ -56,7 +56,7 @@
       #{uPoints,jdbcType=INTEGER}, #{uDate,jdbcType=TIMESTAMP}, #{uStatus,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="u_id" keyProperty="uId" parameterType="com.cy.news.common.pojo.User" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="u_id" keyProperty="uId" parameterType="com.cy.news.common.Pojo.User" useGeneratedKeys="true">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uUsername != null">
@@ -117,7 +117,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cy.news.common.pojo.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cy.news.common.Pojo.User">
     update user
     <set>
       <if test="uUsername != null">
@@ -150,7 +150,7 @@
     </set>
     where u_id = #{uId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cy.news.common.pojo.User">
+  <update id="updateByPrimaryKey" parameterType="com.cy.news.common.Pojo.User">
     update user
     set u_username = #{uUsername,jdbcType=VARCHAR},
       u_password = #{uPassword,jdbcType=CHAR},

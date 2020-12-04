@@ -20,7 +20,7 @@ public class EmailServiceImpl implements EmailService {
 
     //发件人
     @Value("${spring.mail.username}")
-    private   String sender;
+    private String sender;
 
     @Value("${spring.mail.title}")
     private String title;
@@ -30,6 +30,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Value("${spring.mail.content}")
     private String content;
+
 
     @Autowired
     EmailUtils emailUtils;
@@ -63,6 +64,12 @@ public class EmailServiceImpl implements EmailService {
             return  ResultDTO.builder().code(EmailRetErrorCode.ERROR).build();
         }
 
+    }
+
+
+    public void sendErrorLog(String email,String title,String content) {
+        log.info(email);
+        emailUtils.send(sender,email,title,content);
     }
 
 

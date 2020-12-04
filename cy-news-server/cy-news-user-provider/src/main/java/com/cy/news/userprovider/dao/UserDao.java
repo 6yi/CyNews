@@ -1,12 +1,13 @@
 package com.cy.news.userprovider.dao;
 
-import com.cy.news.common.pojo.User;
+import com.cy.news.common.Pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
 public interface UserDao {
+
     int deleteByPrimaryKey(Integer uId);
 
     int insert(User record);
@@ -25,8 +26,6 @@ public interface UserDao {
 
 
     User findUserByMail(String mail);
-
-
 
 
 }

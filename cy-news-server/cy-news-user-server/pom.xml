@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.cy.news</groupId>
             <artifactId>cy-news-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.cy.news</groupId>
@@ -99,6 +99,16 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>

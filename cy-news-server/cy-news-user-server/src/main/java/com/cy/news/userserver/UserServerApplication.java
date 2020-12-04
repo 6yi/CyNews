@@ -1,6 +1,7 @@
 package com.cy.news.userserver;
 
 import com.cy.news.common.Exception.GlobalExceptionHandler;
+import com.cy.news.common.Exception.aop.GlobalExceptionHandlerAop;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -19,6 +20,12 @@ public class UserServerApplication {
     @Bean
     public GlobalExceptionHandler exceptionHandler(){
         return new GlobalExceptionHandler();
+    }
+
+    //对异常结果进行邮件发送
+    @Bean()
+    public GlobalExceptionHandlerAop exceptionHandlerAop(){
+        return new GlobalExceptionHandlerAop();
     }
 
 }

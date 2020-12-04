@@ -18,6 +18,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
             <version>4.7.1</version>
@@ -85,7 +91,7 @@
         <dependency>
             <groupId>com.cy.news</groupId>
             <artifactId>cy-news-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
 
         <!--            api-->

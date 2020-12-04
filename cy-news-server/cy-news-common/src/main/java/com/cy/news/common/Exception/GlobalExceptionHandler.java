@@ -1,8 +1,11 @@
 package com.cy.news.common.Exception;
 
 import com.cy.news.common.DTO.ResultDTO;
+import com.cy.news.common.Utils.ErrorMsgUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 /**
  * @ClassName GlobalExceptionHandler
@@ -13,13 +16,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
 
-    @ExceptionHandler(value =RuntimeException.class)
+    @ExceptionHandler(value = RuntimeException.class)
     public ResultDTO exceptionHandler(Exception e){
-        return ResultDTO.builder().code(500).data(e.getMessage()).build();
+        log.warn(ErrorMsgUtils.getExceptionAllInfo(e));
+        return ResultDTO.builder().code(500).data("请检查网络").build();
     }
-
 
 }

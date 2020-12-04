@@ -17,10 +17,13 @@ public interface UserService {
 
 
     ResultDTO login(UserNameLoginVO userVO);
+
     ResultDTO register(RegisterUserByEmailVO registerUserVO);
 
     ResultDTO updateUserStatus(Integer userStatusCode,Integer userId);
 
+    ResultDTO addUserLikeNews(Long nId,Integer uId);
 
+    ResultDTO delUserLikeNews(Long nId,Integer uId);
 
 }
