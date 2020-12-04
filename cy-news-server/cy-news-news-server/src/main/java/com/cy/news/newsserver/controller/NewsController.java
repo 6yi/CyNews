@@ -42,7 +42,7 @@ public class NewsController {
         return newsMessageService.incrLike(nId,Integer.parseInt(uId));
     }
 
-    @DeleteMapping("/declike/{nId}/{uId}")
+    @DeleteMapping("/declike/{nId}")
     public ResultDTO decLike(@PathVariable("nId")Long nId,
                              HttpServletRequest request){
         String uId = request.getHeader("authority");
