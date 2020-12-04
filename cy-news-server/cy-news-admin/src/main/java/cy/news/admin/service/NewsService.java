@@ -17,6 +17,6 @@ public class NewsService {
     NewsDao newsDao;
 
     public void insertNews(News news){
-        newsDao.insert();
+//        newsDao.insertNews(news);
     }
 }

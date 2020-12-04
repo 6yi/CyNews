@@ -1,7 +1,10 @@
 package cy.news.admin.vo;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Text;
+
+import java.io.Serializable;
 
 /**
  * @author yj
@@ -16,16 +19,18 @@ import org.w3c.dom.Text;
 @Builder
 @Setter
 @Getter
-public class NewsReleaseVO {
+public class NewsReleaseVO implements Serializable {
 
-    private String nTitle;
+    private MultipartFile[] files;
+
+    private String title;
 
   //  private String nImg;
 
-    private String nAuthor;
+    private String author;
 
-    private String nContent;
+    private String content;
 
-    private String tName;
+    private String name;
 
 }

@@ -6,8 +6,7 @@ import cy.news.admin.exception.AdminLoginError;
 import cy.news.admin.service.AdminService;
 import cy.news.admin.vo.AdminLoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author yj
@@ -17,10 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description: TODO
  */
 @RestController
+@CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class AdminController {
     @Autowired
     AdminService adminService;
 
+
+    @GetMapping("/login")
     public ResultDTO login(@RequestBody AdminLoginVo adminLoginVo){
         Admin admin =adminService.findAdminByAdminName(adminLoginVo.getAdminName());
 

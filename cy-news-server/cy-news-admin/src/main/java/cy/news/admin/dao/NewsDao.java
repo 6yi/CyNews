@@ -21,8 +21,9 @@ import java.util.List;
 @Mapper
 @Repository
 public interface NewsDao extends BaseMapper<NewsWithBLOBs> {
-    @Insert("insert into news values(#{})")
-    public void insertNews(News news);
+    @Insert("insert into news(n_id,n_title,n_img,n_date,n_author,n_content,t_name,n_status) " +
+                        "values(#{nId},#{nTitle},#{nImg},#{nDate},#{nAuthor},#{nContent},#{tName},#{nStatus})")
+    public void insertNews(NewsWithBLOBs news);
 
 
 }
