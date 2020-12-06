@@ -49,6 +49,7 @@ jwtfilter:
     - /cy.news.user-server/test
     - /cy.news.user-server/haha
     - /cy.news.news-server/like
+    - /cy.news.news-server/addComments
 
 
 # 目前无效

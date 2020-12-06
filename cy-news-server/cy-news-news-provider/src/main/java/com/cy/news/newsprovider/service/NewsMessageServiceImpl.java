@@ -3,14 +3,14 @@ package com.cy.news.newsprovider.service;
 import com.cy.news.api.service.NewsMessageService;
 import com.cy.news.api.service.UserService;
 import com.cy.news.common.DTO.ResultDTO;
+import com.cy.news.newsprovider.Utils.RedisLockUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 /**
  * @ClassName NewsMessageServiceImpl
@@ -28,7 +28,8 @@ public class NewsMessageServiceImpl implements NewsMessageService {
     @DubboReference(version = "1.0.0")
     private UserService userService;
 
-    private static final Lock likeReentrantLock=new ReentrantLock();
+    @Autowired
+    private RedisLockUtil redisLockUtil;
 
 
     @Autowired
@@ -46,14 +47,15 @@ public class NewsMessageServiceImpl implements NewsMessageService {
         long number=1;
         if((numberRedisTemplate.opsForHash().get("newsMessage:"+nId, "like"))==null){
             try{
-                likeReentrantLock.lock();
+                redisLockUtil.lock("like:lock",String.valueOf(Thread.currentThread().getId()));
+
                 if((numberRedisTemplate.opsForHash().get("newsMessage:"+nId, "like"))==null){
                     numberRedisTemplate.opsForHash().put("newsMessage:"+nId, "like","1");
                 }else{
                     number=numberRedisTemplate.opsForHash().increment("newsMessage:"+nId, "like",1);
                 }
             }finally {
-                likeReentrantLock.unlock();
+                redisLockUtil.unLock("like:lock",String.valueOf(Thread.currentThread().getId()));
             }
         }else{
             number = numberRedisTemplate.opsForHash().increment("newsMessage:"+nId, "like",1);

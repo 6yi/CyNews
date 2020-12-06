@@ -24,9 +24,7 @@ public class NewsController {
     @DubboReference(version = "1.0.0")
     NewsService newsService;
 
-    @DubboReference(version = "1.0.0")
-    NewsMessageService newsMessageService;
-    
+
     @GetMapping("/news/{type}/{start}/{end}")
     public ResultDTO getNews(@PathVariable("type")String type,
                              @PathVariable(name = "start")Long start,
@@ -34,20 +32,6 @@ public class NewsController {
         return newsService.getNews(type,start,end);
     }
 
-    @PutMapping("/like/{nId}/")
-    public ResultDTO incrLike(@PathVariable("nId")Long nId,
-                              HttpServletRequest request){
-        String uId = request.getHeader("uId");
-        log.info("点赞："+uId);
-        return newsMessageService.incrLike(nId,Integer.parseInt(uId));
-    }
-
-    @DeleteMapping("/declike/{nId}")
-    public ResultDTO decLike(@PathVariable("nId")Long nId,
-                             HttpServletRequest request){
-        String uId = request.getHeader("authority");
-        return newsMessageService.decLike(nId,Integer.parseInt(uId));
-    }
 
 
     @GetMapping("/content/{nId}")

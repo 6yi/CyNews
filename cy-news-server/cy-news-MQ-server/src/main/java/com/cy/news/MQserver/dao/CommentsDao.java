@@ -1,21 +1,11 @@
-package com.cy.news.newsprovider.dao;
+package com.cy.news.MQserver.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cy.news.common.Pojo.Comments;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
-/**
- * @ClassName CommentsDao
- * @Author 6yi
- * @Date 2020/11/28 15:35
- * @Version 1.0
- * @Description:
- */
 @Mapper
 @Repository
 public interface CommentsDao extends BaseMapper<Comments> {
@@ -28,10 +18,11 @@ public interface CommentsDao extends BaseMapper<Comments> {
             "(c_id,n_id,u_id,u_nickname,c_content,c_date,c_status) " +
             "values(#{comment.cId}," +
             "#{comment.nId}," +
+            "#{comment.uId},"+
             "#{comment.uNickname}," +
             "#{comment.cContent}," +
             "#{comment.cDate}," +
             "#{comment.cStatus})")
-    int insertOneComments(Comments comment);
+    int insertOneComments(@Param("comment") Comments comment);
 
 }

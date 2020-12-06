@@ -3,15 +3,12 @@ package com.cy.news.newsprovider.service;
 import cn.hutool.core.date.DateUtil;
 import com.cy.news.api.service.NewsService;
 import com.cy.news.common.DTO.ResultDTO;
-import com.cy.news.common.Pojo.Comments;
 import com.cy.news.common.Pojo.NewsMessage;
 import com.cy.news.common.Pojo.NewsWithBLOBs;
 import com.cy.news.common.VO.ContentAndMsgVo;
-import com.cy.news.newsprovider.dao.CommentsDao;
+import com.cy.news.newsprovider.Utils.RedisLockUtil;
 import com.cy.news.newsprovider.dao.NewsDao;
 import com.cy.news.newsprovider.dao.NewsMessageDao;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageHelper;
 import com.youbenzi.mdtool.tool.MDTool;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -19,12 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 
 /**
@@ -46,10 +41,6 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsMessageDao newsMessageDao;
 
-    @Autowired
-    private CommentsDao commentsDao;
-
-
 
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
@@ -58,11 +49,10 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private RedisTemplate<String, String> numberRedisTemplate;
 
+    @Autowired
+    private RedisLockUtil redisLockUtil;
 
-    private static final Lock hotNewsReentrantLock=new ReentrantLock();
-    private static final Lock commentsReentrantLock=new ReentrantLock();
-    private static final Lock contentReentrantLock=new ReentrantLock();
-    private static final Lock watchReentrantLock=new ReentrantLock();
+
 
 
     /**
@@ -81,7 +71,7 @@ public class NewsServiceImpl implements NewsService {
             try{
                 //缓存失效并且大量用户访问时,先加锁
                 // 只有一个用户能读取数据库,然后再释放锁,其它用户拿到锁后先判断现在是否能获取到数据
-                hotNewsReentrantLock.lock();
+                redisLockUtil.lock("hotNews:lock",String.valueOf(Thread.currentThread().getId()));
                 hotNews=redisTemplate.opsForZSet().reverseRange(key, start, end);
                 if(hotNews==null||hotNews.isEmpty()){
                     if ("index".equals(type)){
@@ -91,7 +81,7 @@ public class NewsServiceImpl implements NewsService {
                     }
                 }
             }finally {
-                hotNewsReentrantLock.unlock();
+                redisLockUtil.unLock("hotNews:lock",String.valueOf(Thread.currentThread().getId()));
             }
         }
         return ResultDTO.builder().code(200).data(hotNews).build();
@@ -100,36 +90,7 @@ public class NewsServiceImpl implements NewsService {
 
 
 
-    /**
-     * @author 6yi
-     * @date 2020/11/28
-     * @return
-     * @Description 分页查询评论
-     **/
-    @Override
-    public ResultDTO getNewsComments(Long nId, Integer page,Integer number) {
 
-        String key = "comments:"+nId+":"+page;
-        String commentsJson = (String) redisTemplate.opsForValue().get(key);
-        if(commentsJson==null){
-            log.info("走数据库");
-            try{
-                commentsReentrantLock.lock();
-                if((commentsJson=(String) redisTemplate.opsForValue().get(key))==null){
-                    PageHelper.offsetPage(page,number);
-                    List<Comments> comments = commentsDao.selectCommentsByNid(nId);
-                    commentsJson = new ObjectMapper().writeValueAsString(comments);
-                    redisTemplate.opsForValue().set(key,commentsJson,2,TimeUnit.HOURS);
-                }
-            }catch (Exception e) {
-                throw new RuntimeException("json错误");
-            }finally{
-                commentsReentrantLock.unlock();
-            }
-        }
-        return ResultDTO.builder().code(200).data(commentsJson).build();
-
-    }
 
 
     //todo 正文获取
@@ -140,10 +101,12 @@ public class NewsServiceImpl implements NewsService {
         ContentAndMsgVo data=null;
         if(content==null){
             try {
-                contentReentrantLock.lock();
+                redisLockUtil.lock("content:lock",String.valueOf(Thread.currentThread().getId()));
+
                 if((content = (String)redisTemplate.opsForValue().get(key))==null){
                     NewsWithBLOBs newsWithBLOBs = newsDao.selectContentById(nId);
                     if(newsWithBLOBs==null){
+
                         redisTemplate.opsForValue().set(key,"",1,TimeUnit.SECONDS);
                         return ResultDTO.builder().code(200).data(null).build();
                     }else{
@@ -154,11 +117,12 @@ public class NewsServiceImpl implements NewsService {
                 }else{
                     data=getContentAndMsgVo(nId,content);
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new RuntimeException("jsonException");
+                throw new RuntimeException(e.getMessage());
             } finally {
-                contentReentrantLock.unlock();
+                redisLockUtil.unLock("content:lock",String.valueOf(Thread.currentThread().getId()));
             }
         }else{
             data = getContentAndMsgVo(nId, content);
@@ -168,6 +132,15 @@ public class NewsServiceImpl implements NewsService {
 
         return ResultDTO.builder().code(200).data(data).build();
     }
+
+
+
+
+
+
+
+
+
 
     //封装成Vo
     private ContentAndMsgVo getContentAndMsgVo(Long nId, String content) {
@@ -181,7 +154,6 @@ public class NewsServiceImpl implements NewsService {
             message=NewsMessage.builder().mWatch(0).mLike(0).build();
         }
         content= MDTool.markdown2Html(content);
-        log.info(content);
         data = ContentAndMsgVo.builder().content(content).newsMessage(message).build();
         return data;
     }
@@ -193,14 +165,14 @@ public class NewsServiceImpl implements NewsService {
     public void incrWatch(Long nId) {
         if((numberRedisTemplate.opsForHash().get("newsMessage:"+nId, "watch"))==null){
             try{
-                watchReentrantLock.lock();
+                redisLockUtil.lock("watch:lock",String.valueOf(Thread.currentThread().getId()));
                 if((numberRedisTemplate.opsForHash().get("newsMessage:"+nId, "watch"))==null){
                     numberRedisTemplate.opsForHash().put("newsMessage:"+nId, "watch","1");
                 }else{
                     numberRedisTemplate.opsForHash().increment("newsMessage:"+nId, "watch",1);
                 }
             }finally {
-                watchReentrantLock.unlock();
+                redisLockUtil.unLock("watch:lock",String.valueOf(Thread.currentThread().getId()));
             }
         }else {
             numberRedisTemplate.opsForHash().increment("newsMessage:"+nId,"watch",1);
@@ -222,6 +194,7 @@ public class NewsServiceImpl implements NewsService {
 
                         Integer like=0;
                         Integer watch=0;
+
                         if(numberRedisTemplate.opsForHash().get("newsMessage:" + hotNews.getNId(), "like")==null){
                             numberRedisTemplate.opsForHash().put("newsMessage:" + hotNews.getNId(), "like","0");
                         }else{
@@ -234,15 +207,12 @@ public class NewsServiceImpl implements NewsService {
                         }else{
                             watch=Integer.parseInt((String) Objects.requireNonNull(numberRedisTemplate.opsForHash().get("newsMessage:" + hotNews.getNId(), "watch")));
                         }
-
-                        log.info(hotNews.toString());
                         if (hotNews.getNImg() != null) {
                             hotNews.setImgSrc(hotNews.getNImg().split("\\|"));
                             hotNews.setNImg(null);
                         }
 
                         NewsMessage msg = NewsMessage.builder().mLike(like).mWatch(watch).build();
-
                         hotNews.setNewsMessage(msg);
 
                         //热度值算法
@@ -258,7 +228,7 @@ public class NewsServiceImpl implements NewsService {
                         redisTemplate.opsForZSet().add(key,h,h.getHotKey());
             });
 
-            redisTemplate.expire(key,3, TimeUnit.HOURS);
+            redisTemplate.expire(key,1, TimeUnit.HOURS);
             return redisTemplate.opsForZSet().reverseRange(key, start, end);
     }
 

@@ -43,7 +43,6 @@ public class JWTFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-
         ServerHttpRequest httpRequest = exchange.getRequest();
         ServerWebExchange mutatedExchange=exchange;
         for (String url : filterUrl) {
@@ -55,7 +54,11 @@ public class JWTFilter implements GlobalFilter, Ordered {
                     }
                     Claims claims = JWTUtils.verifiedJwt(authority);
                     log.info(claims.getId());
-                    ServerHttpRequest mutatedRequest = exchange.getRequest().mutate().header("uId" ,claims.getId()).build();
+                    ServerHttpRequest mutatedRequest = exchange.getRequest()
+                            .mutate()
+                            .header("uId" ,claims.getId())
+                            .header("nickName",(String)claims.get("nickName"))
+                            .build();
                     mutatedExchange= exchange.mutate().request(mutatedRequest).build();
                 } catch (Exception e){
                     e.printStackTrace();
