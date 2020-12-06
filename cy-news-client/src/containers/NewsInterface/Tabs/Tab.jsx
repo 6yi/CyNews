@@ -1,14 +1,19 @@
 import React,{Component} from 'react'
 import { Tabs, WhiteSpace } from 'antd-mobile';
 import TabCss from './Tab.module.css'
+
 import NavList from '../NewsList/news-list'
 export default class Demo extends Component {
     
-    
+ constructor() {
+   super()
+   this.state = {
+     ActTab:''
+   }
+ }
+  
+  
 
-    componentDidMount() {
-      
-    }
 
 render() {
     
@@ -28,8 +33,8 @@ render() {
     return (
       <div className={TabCss.content + ' tabcontent'}>
         
-        <Tabs tabs={tabs} prerenderingSiblingsNumber={false}  swipeable={false}  renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4} />} >
-         {(e) => <NavList  tab={e}></NavList>}
+        <Tabs tabs={tabs} destroyInactiveTab={true}  prerenderingSiblingsNumber={false}  swipeable={false}  renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4} />} >
+         {e => <NavList tabs={e}></NavList>}
         </Tabs>
         
       </div>

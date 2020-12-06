@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import Nav from '../NavBar/nabvar'
-import Tabs from './Tabs/tab'
+import Tabs from './Tabs/Tab'
 import MyDrawer from '../Drawer/drawer'
 import NewsContent from '../NewsContent/news-content'
 import {HashRouter,Switch,Route} from 'react-router-dom'

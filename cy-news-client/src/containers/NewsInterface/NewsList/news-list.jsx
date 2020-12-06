@@ -1,41 +1,60 @@
 import React, { Component } from 'react'
-import instance from '../../../api/index'
+import {connect} from 'react-redux'
+import BScroll from 'better-scroll'
+import {getNewsList} from '../../../api/News/news'
 import Swiper from '../../../components/Swiper/swiper'
+import MyScroll from '../../../components/BScroll/better-scroll'
 import NewsItem from '../NewsItem/news-item'
-
 import newslist from './news-list.module.css'
-export default class NewsList extends Component {
+import './news-list.less'
+class NewsList extends Component {
     constructor() {
         super()
         this.state= {
             img:'',
-            type:''
+            type:'',
+            
         }
     }
 
     componentDidMount() {
-        console.log(this.props.tab);
-    }
-    componentDidUpdate() {
-        console.log('111111111');
-    }
         
-
+        getNewsList('https://yapi.baidu.com/mock/14577/cy.news.news-server/news/sb/0/10').then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+   
+        
     
+
     render() {
         return (
-            <div  style={{height: 'auto', backgroundColor: '#fff' }}>
+            
+            <div className='listbox'  style={{height: 'auto', backgroundColor: '#fff' }}>
+                <MyScroll>
                 <div className={newslist.swiper+ ' swiperbox'}>
                 <Swiper></Swiper>
                 </div>
+                
                 <div>
+                
                     <NewsItem></NewsItem>
                     <NewsItem></NewsItem>
                     <NewsItem></NewsItem>
                     <NewsItem></NewsItem>
                     <NewsItem></NewsItem>
+                
                 </div>
+                </MyScroll>
             </div>
+            
         )
     }
 }
+
+export default connect(
+    state => ({state}),
+    {}
+)(NewsList)

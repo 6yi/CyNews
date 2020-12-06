@@ -12,7 +12,7 @@ export default class NewsTabBar extends Component {
     render() {
         return (
             <div className={tabbar.box}>
-                <div className={tabbar.input}>
+                <div className={tabbar.input} onClick={this.props.inputClick}>
                     <img className={tabbar.img} src={editImge} alt="" />
                     <span className={tabbar.pac}>说两句</span>
                 </div>

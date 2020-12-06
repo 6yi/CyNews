@@ -12,7 +12,7 @@
     background-color: #fcfcfc !important;
 }
 .am-tabs-default-bar-content {        /* tab标签距顶部的高 */
-    position: fixed;
+    position: absolute;
     top: 2.8rem;
     height: 2.5rem;
 }

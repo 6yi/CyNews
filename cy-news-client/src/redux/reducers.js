@@ -1,12 +1,12 @@
-import {SAVE_USER,ERROR_MSG} from './action-types'
-
+import {SAVE_USER,ERROR_MSG,SAVE_BSCROLL} from './action-types'
+import {combineReducers} from "redux"
 var initUser = {
     userName: '',
     headerIcon: '',
     }
 
 function user(state=initUser,action) {
-    console.log(action);
+    
     switch (action.type) {
         case SAVE_USER:
             return action.data
@@ -16,4 +16,9 @@ function user(state=initUser,action) {
     
 }
 
-export default user
+
+
+export default combineReducers({
+    user
+    
+})
