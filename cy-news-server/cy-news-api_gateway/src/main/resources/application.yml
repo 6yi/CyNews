@@ -46,10 +46,9 @@ server:
 
 jwtfilter:
   filterUrl:
-    - /cy.news.user-server/test
-    - /cy.news.user-server/haha
-    - /cy.news.news-server/like
-    - /cy.news.news-server/addComments
+    - /newsServer/like
+    - /newsServer/addComments
+    - /newsServer/declike
 
 
 # 目前无效

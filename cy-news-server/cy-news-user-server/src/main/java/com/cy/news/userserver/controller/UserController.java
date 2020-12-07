@@ -12,6 +12,7 @@ import com.cy.news.common.VO.UserNameLoginVO;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,8 +31,15 @@ public class UserController {
     private final static Logger logger= LoggerFactory.getLogger(UserController.class);
 
 
+
     @DubboReference(version = "1.0.0")
     private UserService userService;
+
+
+    @GetMapping("/hello")
+    public ResultDTO hello(){
+        return ResultDTO.builder().code(200).data(22).build();
+    }
 
     @PostMapping("/login")
     public ResultDTO login(@RequestBody UserNameLoginVO userNameLoginVO){

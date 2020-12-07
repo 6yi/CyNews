@@ -37,7 +37,7 @@ public class NewsMessageController {
     @DeleteMapping("/declike/{nId}")
     public ResultDTO decLike(@PathVariable("nId")Long nId,
                              HttpServletRequest request){
-        String uId = request.getHeader("authority");
+        String uId = request.getHeader("uId");
         return newsMessageService.decLike(nId,Integer.parseInt(uId));
     }
 
