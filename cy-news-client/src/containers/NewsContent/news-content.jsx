@@ -1,10 +1,12 @@
 import React,{Component} from 'react'
 import Nav from '../../components/NavBar/nav'
 import CommentInput from './CommentInput/comment-input'
+import CommentCard from './CommentCard/commentcard'
 import MyScroll from '../../components/BScroll/better-scroll'
 import newscontent from './news-content.module.css'
 import NewsTabBar from './TabBar/tabbar'
 import './news-content.less'
+
 export default class NewsContent extends Component {
 
     constructor() {
@@ -31,6 +33,7 @@ export default class NewsContent extends Component {
     }
 
     render() {
+        var i = [1,2,3,4,5,6,7]
         return(
             <div className='contentbox'>
                 <Nav history={this.props.history}></Nav>
@@ -44,63 +47,18 @@ export default class NewsContent extends Component {
                         <span className={newscontent.authorname}>ss</span>
                         <span className={newscontent.releasetime}>ss</span>
                         </div>
-                        
-                        <div className={NewsContent.newscontent}>  
-                        </div>
+                    </div>
+
+                    <div className={newscontent.newscontent}>  
+                    </div>
+                    <div className={newscontent.comment}>
+                    
+                    {i.map((e) => {
+                      return  <CommentCard info ={e}></CommentCard>
+                    })}
                     </div>
                 </div>
-                <ul>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                    <li>sb</li>
-                </ul>
+                
                 </MyScroll>
 
                 {this.state.showInput===true?<CommentInput inputBlur={() => this.inputBlur()}></CommentInput>:null}

@@ -18,9 +18,9 @@ export default class Demo extends Component {
 render() {
     
     const tabs = [
-      { title: '推荐' },
-      { title: '政治' },
-      { title: '体育' },
+      { title: '推荐',type:'index' },
+      { title: '时政',type:'时政'},
+      { title: '国内',type:'国内'},
       { title: '娱乐' },
       { title: '5th Tab' },
       { title: '6th Tab' },

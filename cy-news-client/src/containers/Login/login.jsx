@@ -25,7 +25,7 @@ class Login extends Component {
     }
 
     loginClick() {
-        toLogin('/login',this.state.user).then(res => {
+        toLogin(this.state.user).then(res => {
             console.log(res);
             this.props.saveUser(res.data)
             localStorage.setItem('elementToken',res.data.token)    //存入token

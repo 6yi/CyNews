@@ -1,5 +1,5 @@
 import instance from '../index'
 
-export function toRegister(url,data) {
-    return instance.post(url,data)
+export function toRegister(data) {
+    return instance.post('/userServer/register',data)
 }

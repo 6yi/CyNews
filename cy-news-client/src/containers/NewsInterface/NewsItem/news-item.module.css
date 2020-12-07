@@ -4,3 +4,8 @@
 .img {
     margin-top: 10px;
 }
+.img img {
+    margin-left: 3%;
+    height: 13vh;
+    width: auto;
+}

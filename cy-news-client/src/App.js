@@ -17,6 +17,7 @@ function App() {
         <Route path="/login" component={Login}></Route>
         <Route path="/register" component={Register}></Route>
         <Route path="/content/:newsid" component={NewsContent}></Route>
+        <Redirect path="/" to="/news" />
       </Switch>
     </HashRouter>
     </Provider>

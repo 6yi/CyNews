@@ -13,7 +13,7 @@ export default class Login extends Component {
                 nickName:'',
                 email: '',
                 passWord: '',
-               /*  u_affirmpassword: '', */
+                confirmPassword:''
             },
             buttonActive: '1'
         }
@@ -29,7 +29,7 @@ export default class Login extends Component {
 
     registerClick() {
         console.log(this.state.user);
-        toRegister('/cy.news.user-server/register',this.state.user).then((res) => {
+        toRegister(this.state.user).then((res) => {
             Toast.success('注册成功，请查看邮箱以激活',2)
             setTimeout(() => {
                 this.props.history.push('/login')
@@ -56,6 +56,9 @@ export default class Login extends Component {
                     </List.Item>
                     <List.Item className={register.listItem}>
                     <input type="text" placeholder='请输入密码' className={register.input}   onChange={(e) => {this.inputOnChange('passWord',e.target.value)}}/>
+                    </List.Item>
+                    <List.Item>
+                    <input type="text" placeholder='请确认密码' className={register.input}   onChange={(e) => {this.inputOnChange('confirmPassword',e.target.value)}}/>
                     </List.Item>
                     <List.Item>
                     <input type="text" placeholder='请输入昵称' className={register.input}   onChange={(e) => {this.inputOnChange('nickName',e.target.value)}}/>

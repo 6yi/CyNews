@@ -13,14 +13,36 @@ class NewsList extends Component {
         this.state= {
             img:'',
             type:'',
-            
+            newslist: [],
+            BScroll:''    
         }
     }
 
     componentDidMount() {
         
-        getNewsList('https://yapi.baidu.com/mock/14577/cy.news.news-server/news/sb/0/10').then(res => {
-            console.log(res);
+        const wrapper = document.querySelector('.wrapper')
+
+        const scroll = new BScroll(wrapper, {
+            
+            click: true,  // better-scroll 默认会阻止浏览器的原生 click 事件
+            scrollY: true, //开启竖向滚动
+            pullDownRefresh:{
+                threshold: 50,
+                stop: 20
+            },
+            
+            tap: true,
+        })
+        this.setState({         //将s实例后的scroll保存到state中
+            BScroll:scroll
+        })
+        
+        getNewsList(this.props.tabs.type,0,10).then(res => {
+            this.setState({
+                newslist:res.data.data
+            },() => {
+                console.log(this.state.newslist);
+            })
         }).catch(err => {
             console.log(err);
         })
@@ -38,14 +60,10 @@ class NewsList extends Component {
                 <Swiper></Swiper>
                 </div>
                 
-                <div>
-                
-                    <NewsItem></NewsItem>
-                    <NewsItem></NewsItem>
-                    <NewsItem></NewsItem>
-                    <NewsItem></NewsItem>
-                    <NewsItem></NewsItem>
-                
+                <div onLoad = {() => {this.state.BScroll.refresh()}}>  {/* 监听加载，刷新高度 */}
+                {this.state.newslist.map((item) => {
+                    return  <NewsItem newsitem={item}></NewsItem>
+                })}
                 </div>
                 </MyScroll>
             </div>

@@ -1,5 +1,5 @@
 import instance from '../index'
 
-export function toLogin(url,data) {
-    return  instance.post(url,data) 
+export function toLogin(data) {
+    return  instance.post('/userServer/login',data) 
 }

@@ -6,17 +6,26 @@ class NewsItem extends Component {
     constructor() {
         super()
         this.state = {
-
+          newsitem:{}
         }
+    }
+
+    componentDidMount() {
+      this.setState({
+        newsitem: this.props.newsitem
+      },() => {
+        console.log(this.state.newsitem);
+      })
     }
 
     render() {
         return (
-            <div onClick={() => {this.props.history.push('/content/ssss')}}>
+            <div onClick={() => {this.props.history.push(`/content/${this.state.newsitem.nid}`)}}>
     
     <Card>
       <Card.Header
-        title={'name here'}
+        title={this.state.newsitem.nauthor}
+        extra={this.state.newsitem.tname}
         thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
         thumbStyle={{
           width:35+'px',
@@ -24,17 +33,14 @@ class NewsItem extends Component {
         }}
       />
       <Card.Body>
-        <span className={newsitem.title}>here is title</span>
+        <span className={newsitem.title}>{this.state.newsitem.ntitle}</span>
         <Flex className={newsitem.img}>
-          <img src="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg" alt=""/> 
-          <WingBlank size='sm' />
-          <img src="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg" alt=""/> 
-          <WingBlank size='sm' />
-          <img src="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg" alt=""/> 
-          <WingBlank size='sm' />
+          { this.state.newsitem.imgSrc == null? null:this.state.newsitem.imgSrc.map((src) => {
+            return  <img src={src} alt=""/>
+          }) }
         </Flex>
       </Card.Body>
-      <Card.Footer content="footer content" extra={<div>extra footer content</div>} />
+      <Card.Footer content={'时间'} extra={<div>extra footer content</div>} />
     </Card>
     
     </div>
