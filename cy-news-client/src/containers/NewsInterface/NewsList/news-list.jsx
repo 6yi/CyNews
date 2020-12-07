@@ -14,53 +14,63 @@ class NewsList extends Component {
             img:'',
             type:'',
             newslist: [],
-            BScroll:''    
+            Bscroll:{},
+            item:0      
         }
     }
 
     componentDidMount() {
+       
         
-        const wrapper = document.querySelector('.wrapper')
-
-        const scroll = new BScroll(wrapper, {
-            
-            click: true,  // better-scroll 默认会阻止浏览器的原生 click 事件
-            scrollY: true, //开启竖向滚动
-            pullDownRefresh:{
-                threshold: 50,
-                stop: 20
-            },
-            
-            tap: true,
-        })
-        this.setState({         //将s实例后的scroll保存到state中
-            BScroll:scroll
-        })
-        
-        getNewsList(this.props.tabs.type,0,10).then(res => {
+        getNewsList(this.props.tabs.type,this.state.item,this.state.item+10).then(res => {
+           
             this.setState({
-                newslist:res.data.data
+                newslist: res.data.data,
+                item:this.state.item+10
             },() => {
-                console.log(this.state.newslist);
+                
             })
         }).catch(err => {
             console.log(err);
         })
     }
    
+    getBscroll(Bscroll) {
         
+        this.setState({
+            Bscroll
+    },() => {console.log(this.state.Bscroll);})}
     
+    pullingUp() {
+       this.nextPage()
+    }
+
+    nextPage() {
+        getNewsList(this.props.tabs.type,this.state.item,this.state.item+10).then(res => {
+            const newsListArray = this.state.newslist
+            newsListArray.push(...res.data.data)
+            this.setState({
+                newslist:newsListArray,
+                item:this.state.item+10
+            },() => {
+                this.state.Bscroll.finishPullUp()
+            })
+        })
+    }
+
 
     render() {
         return (
             
             <div className='listbox'  style={{height: 'auto', backgroundColor: '#fff' }}>
-                <MyScroll>
+                <MyScroll 
+                getBscroll={(Bscroll) => this.getBscroll(Bscroll)} 
+                pullingUp={() =>this.pullingUp()}>
                 <div className={newslist.swiper+ ' swiperbox'}>
                 <Swiper></Swiper>
                 </div>
                 
-                <div onLoad = {() => {this.state.BScroll.refresh()}}>  {/* 监听加载，刷新高度 */}
+                <div onLoad = {() => {this.state.Bscroll.refresh()}}>  {/* 监听加载，刷新高度 */}
                 {this.state.newslist.map((item) => {
                     return  <NewsItem newsitem={item}></NewsItem>
                 })}
