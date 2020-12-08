@@ -14,6 +14,7 @@ class NewsList extends Component {
             img:'',
             type:'',
             newslist: [],
+            swiper: [],
             Bscroll:{},
             item:0      
         }
@@ -22,11 +23,10 @@ class NewsList extends Component {
     componentDidMount() {
        
         
-        getNewsList(this.props.tabs.type,this.state.item,this.state.item+10).then(res => {
-           
+        getNewsList(this.props.tabs.type,this.state.item,this.state.item+13).then(res => {
             this.setState({
                 newslist: res.data.data,
-                item:this.state.item+10
+                item:this.state.item+14
             },() => {
                 
             })
@@ -51,7 +51,7 @@ class NewsList extends Component {
             newsListArray.push(...res.data.data)
             this.setState({
                 newslist:newsListArray,
-                item:this.state.item+10
+                item:this.state.item+11
             },() => {
                 this.state.Bscroll.finishPullUp()
             })

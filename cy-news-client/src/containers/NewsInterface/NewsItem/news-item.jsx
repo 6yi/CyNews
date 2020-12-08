@@ -14,13 +14,14 @@ class NewsItem extends Component {
       this.setState({
         newsitem: this.props.newsitem
       },() => {
-        console.log(this.state.newsitem);
+        console.log(this.props.newsitem.nId,this.state.newsitem.nId);
       })
+    
     }
 
     render() {
         return (
-            <div onClick={() => {this.props.history.push(`/content/${this.state.newsitem.nid}`)}}>
+            <div onClick={() => {this.props.history.push(`/content/${this.props.newsitem.nId}`)}}>
     
     <Card>
       <Card.Header
