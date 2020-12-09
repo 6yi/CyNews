@@ -22,28 +22,25 @@ export default class NewsContent extends Component {
                     mwatch:''
                 }
             },
-            commentPage:0
+            commentPage:0,
+            commentList:[]
         }
     }
     componentDidMount() {
-        console.log(document.getElementsByClassName('newscontent')[0].offsetHeight);
-        console.log(this.props);
+        
         getNewscontent(this.props.match.params.newsid).then(res => {
             this.setState({
                 newsContent:res.data.data
             })
-            console.log(res.data.data);
+           
         })
         
     }
 
     componentDidUpdate() {
-       var h = document.getElementsByClassName('newscontent')[0].offsetTop
-       var H = document.getElementsByClassName('newscontent')[0].offsetHeight
        
-       document.getElementsByClassName('content')[0].style.height = h+H +'px'
         this.state.Bscroll.refresh()
-        console.log(document.getElementsByTagName('pre')[0]);
+        
     }
 
     inputClick() {
@@ -56,7 +53,7 @@ export default class NewsContent extends Component {
         
         this.setState({
             Bscroll
-    },() => {console.log(this.state.Bscroll);})}
+    })}
 
     inputBlur() {
         this.setState({
@@ -67,6 +64,9 @@ export default class NewsContent extends Component {
     nextPage() {
         getComment(this.props.match.params.newsid,this.state.commentPage).then(res => {
             console.log(res);
+            this.setState({
+                commentList:res.data.data
+            })
             this.state.Bscroll.finishPullUp()
         })
     }
@@ -101,8 +101,8 @@ export default class NewsContent extends Component {
                     ></div>
                     <div className={newscontent.comment}>
                     
-                    {i.map((e) => {
-                      return  <CommentCard info ={e}></CommentCard>
+                    {this.state.commentList.map((commentInfo) => {
+                      return  <CommentCard commentInfo ={commentInfo}></CommentCard>
                     })}
                     </div>
                 </div>
@@ -110,8 +110,8 @@ export default class NewsContent extends Component {
                 </MyScroll>
 
                 {this.state.showInput===true?<CommentInput inputBlur={() => this.inputBlur()}></CommentInput>:null}
-                
-                <NewsTabBar inputClick={() => {this.inputClick()}}></NewsTabBar>
+               
+                <NewsTabBar inputClick={() => {this.inputClick()}} newsMessage={this.state.newsContent.newsMessage}></NewsTabBar>
             </div>
         )
     }

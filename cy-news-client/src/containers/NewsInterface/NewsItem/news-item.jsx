@@ -13,10 +13,7 @@ class NewsItem extends Component {
     componentDidMount() {
       this.setState({
         newsitem: this.props.newsitem
-      },() => {
-        console.log(this.props.newsitem.nId,this.state.newsitem.nId);
       })
-    
     }
 
     render() {
@@ -25,13 +22,7 @@ class NewsItem extends Component {
     
     <Card>
       <Card.Header
-        title={this.state.newsitem.nauthor}
-        extra={this.state.newsitem.tname}
-        thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
-        thumbStyle={{
-          width:35+'px',
-          borderRadius:100+'%'
-        }}
+        extra={this.state.newsitem.tname}  
       />
       <Card.Body>
         <span className={newsitem.title}>{this.state.newsitem.ntitle}</span>

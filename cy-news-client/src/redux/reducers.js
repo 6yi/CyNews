@@ -19,7 +19,8 @@ function user(state=initUser,action) {
 function newsList(state={},action) {
     switch(action.type) {
         case SAVE_LIST:
-            return {...state,...action.data}
+            console.log(action.data);
+            return {state,[action.type.type]:action.data}
         default:
             return state
     }

@@ -9,6 +9,20 @@ import shareImage from '../../../assets/img/share.png'
 import './tabbar.less'
 
 export default class NewsTabBar extends Component {
+    constructor() {
+        super()
+        this.state ={
+            newsMessage:{}
+        }
+    }
+    
+    componentDidMount() {
+        
+        this.setState({
+            newsMessage:this.props.newsMessage
+        })
+    }
+    
     render() {
         return (
             <div className={tabbar.box}>
@@ -22,7 +36,7 @@ export default class NewsTabBar extends Component {
                 </div>
 
                 <div className={tabbar.like}>
-                    <Badge text={99}>
+                    <Badge text={this.props.newsMessage.mlike}>
                         <img src={likeImage} alt="" />
                     </Badge>
                 </div>

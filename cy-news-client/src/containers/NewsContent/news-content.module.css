@@ -1,0 +1,7 @@
+.newscontent h1, h2 ,h3{
+        text-align: center;
+}
+.newscontent {
+    width: 94%;
+    margin: auto;
+}

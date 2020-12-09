@@ -24,11 +24,10 @@ export default class MyScroll extends Component {
                 threshold: 100, // 当下拉到超过顶部 50px 时，触发 pullingDown 事件
                 stop: 50 // 刷新数据的过程中，回弹停留在距离顶部还有 20px 的位置
             },
-            hasHorizontalScroll:true,
+            
             bounce:true,
             tap: true,
             eventPassthrough:'horizontal',      /* 保留原生横向滚动 */
-            movable: true,
         })
         this.setState({
             BScroll: scroll

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import BScroll from 'better-scroll'
+
 import {getNewsList} from '../../../api/News/news'
 import Swiper from '../../../components/Swiper/swiper'
 import MyScroll from '../../../components/BScroll/better-scroll'
@@ -72,7 +72,7 @@ class NewsList extends Component {
                 
                 <div onLoad = {() => {this.state.Bscroll.refresh()}}>  {/* 监听加载，刷新高度 */}
                 {this.state.newslist.map((item) => {
-                    return  <NewsItem newsitem={item}></NewsItem>
+                    return  <NewsItem key={item.nId} newsitem={item}></NewsItem>
                 })}
                 </div>
                 </MyScroll>
@@ -86,3 +86,16 @@ export default connect(
     state => ({state}),
     {}
 )(NewsList)
+
+
+
+    // componentWillUnmount() {
+    //     /* console.log(this.state.newslist); */
+    //     this.props.saveList({
+    //         [this.props.tabs.type]: {
+    //             data: this.state.newslist,
+    //             /* position: this */
+    //         }
+                                   
+    //     })
+    // }

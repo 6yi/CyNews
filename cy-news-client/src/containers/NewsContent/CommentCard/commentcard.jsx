@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import {Card} from 'antd-mobile'
 import './commentcard.less'
+import mlike from '../../../assets/img/like.png'
 export default class CommentCard extends Component {
 
 
@@ -13,12 +14,12 @@ export default class CommentCard extends Component {
            <div>
             <Card>
             <Card.Header
-              title="This is title"
+              title={this.props.commentInfo.unickname}
               thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
-           extra={<span>sss</span>}
+           extra={<img src={mlike} />}
             />
             <Card.Body>
-           <div>sss</div>
+             <div>{this.props.commentInfo.ccontent}</div>
             </Card.Body>
             <Card.Footer content="footer content" extra={<div>extra footer content</div>} />
           </Card>
