@@ -1,6 +1,6 @@
 # CyNews
 
-![](https://img.shields.io/badge/SpringBoot-2.3.4.RELEASE-green)![](https://img.shields.io/badge/SpringCloud%20Gateway-Hoxton.SR5-green) ![](https://img.shields.io/badge/Apache%20Dubbo-2.7.7-blue)![](https://img.shields.io/badge/Alibaba%20Nacos-1.4.0-orange)![](https://img.shields.io/badge/Alibaba%20RocketMQ-%204.5.2-orange)![](https://img.shields.io/badge/Alibaba%20Sentinel-1.8.0-blue)
+![](https://img.shields.io/badge/SpringBoot-2.3.4.RELEASE-green)  ![](https://img.shields.io/badge/SpringCloud%20Gateway-Hoxton.SR5-green)  ![](https://img.shields.io/badge/Apache%20Dubbo-2.7.7-blue) ![](https://img.shields.io/badge/Alibaba%20Nacos-1.4.0-orange) ![](https://img.shields.io/badge/Alibaba%20RocketMQ-%204.5.2-orange) ![](https://img.shields.io/badge/Alibaba%20Sentinel-1.8.0-blue)
 
 
 
