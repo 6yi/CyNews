@@ -60,7 +60,7 @@ public class NewsController {
     @Value("cos.region")
     String regionId;
 
-    @Value("cos.bucketName")
+    @Value("cos.bucketname")
     String bucketName ;
 
     @Autowired
@@ -93,7 +93,6 @@ public class NewsController {
 
     @PostMapping("/news/showNewsList")
     public ResultDTO showNewsList(@RequestBody  Page page){
-
 
         return newsService.showNewsList(page);
     }
