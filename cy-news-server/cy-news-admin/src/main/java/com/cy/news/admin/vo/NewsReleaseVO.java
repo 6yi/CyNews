@@ -20,8 +20,9 @@ import java.io.Serializable;
 @Setter
 @Getter
 public class NewsReleaseVO implements Serializable {
+    private Integer status;
 
-    private MultipartFile[] files;
+    private String img;
 
     private String title;
 

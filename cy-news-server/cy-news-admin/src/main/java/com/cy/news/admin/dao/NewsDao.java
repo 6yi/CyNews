@@ -25,5 +25,10 @@ public interface NewsDao extends BaseMapper<NewsWithBLOBs> {
                         "values(#{nId},#{nTitle},#{nImg},#{nDate},#{nAuthor},#{nContent},#{tName},#{nStatus})")
     public void insertNews(NewsWithBLOBs news);
 
+    @Select("select * from news where n_status=1  limit #{pageStart},#{pageSize}")
+    public List<NewsWithBLOBs> showNewsList(int pageStart, int pageSize);
+    @Select("select count(*) from news where n_status=1")
+    public int getNewsNumber();
+
 
 }
