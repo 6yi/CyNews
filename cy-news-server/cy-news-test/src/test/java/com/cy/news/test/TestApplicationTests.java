@@ -50,8 +50,8 @@ class TestApplicationTests {
 
     public static void main(String[] args) {
 
-        String secretId = " AKIDpSx3rRosjLq6WfeGiYAg28m05I9Jo4XC";
-        String secretKey = "cS4xc3GvQghXilV61oMfpgMEwQiehqjN";
+        String secretId = "";
+        String secretKey = "";
 
         COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
         Region region = new Region("ap-guangzhou");
@@ -60,7 +60,7 @@ class TestApplicationTests {
 
         File file = new File("C:\\Users\\6yi\\Pictures\\Saved Pictures\\49f5e9cdly1g2slfi12onj215o0nrwnr.jpg");
 
-        String bucketName = "cy-news-1258023326";
+        String bucketName = "";
 
         String key = file.getName();
 
