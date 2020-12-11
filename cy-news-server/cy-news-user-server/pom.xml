@@ -19,6 +19,13 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.qcloud</groupId>
+            <artifactId>cos_api</artifactId>
+            <version>5.6.24</version>
+        </dependency>
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -31,6 +38,12 @@
         </dependency>
 
         <!--  naco      -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>0.2.1.RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
@@ -68,7 +81,7 @@
         <dependency>
             <groupId>com.cy.news</groupId>
             <artifactId>cy-news-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.cy.news</groupId>

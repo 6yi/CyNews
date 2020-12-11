@@ -1,13 +1,29 @@
 import React,{Component} from 'react'
-import Nav from '../../components/NavBar/Nav'
-import Tabs from './Tabs/Tab'
+import Nav from '../NavBar/nabvar'
+import Tabs from './Tabs/tab'
+import MyDrawer from '../Drawer/drawer'
+import NewsContent from '../NewsContent/news-content'
+import {HashRouter,Switch,Route} from 'react-router-dom'
+
 export default class NewInterface extends Component {
     
+    state= {
+        open:false
+    }
+
+
+    iconClick() {
+        
+        this.setState({
+            open: !this.state.open
+        })
+    }
     
     render() {
         return(
-            <div>
-                <Nav></Nav>
+            <div className='newsinterface'>
+                <Nav iconClick={() => {this.iconClick()}}></Nav>
+                <MyDrawer open={this.state.open} iconClick={() => {this.iconClick()}}></MyDrawer>
                 <Tabs></Tabs>
             </div>
         )

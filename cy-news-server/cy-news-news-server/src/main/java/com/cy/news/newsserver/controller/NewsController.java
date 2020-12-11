@@ -1,11 +1,13 @@
 package com.cy.news.newsserver.controller;
 
+import com.cy.news.api.service.NewsMessageService;
 import com.cy.news.api.service.NewsService;
 import com.cy.news.common.DTO.ResultDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName NewsController
@@ -16,19 +18,33 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
+@Slf4j
 public class NewsController {
 
     @DubboReference(version = "1.0.0")
     NewsService newsService;
 
 
-
-    @GetMapping("/News/{type}/{start}/{end}")
+    @GetMapping("/news/{type}/{start}/{end}")
     public ResultDTO getNews(@PathVariable("type")String type,
                              @PathVariable(name = "start")Long start,
                              @PathVariable(name = "end")Long end){
         return newsService.getNews(type,start,end);
     }
+
+    @GetMapping("/islike/{nId}")
+    public ResultDTO isLikeNews(@PathVariable("nId")Long nId,HttpServletRequest request){
+        String uId = request.getHeader("uId");
+        return newsService.isLikeNews(nId,Integer.parseInt(uId));
+    }
+
+
+
+    @GetMapping("/content/{nId}")
+    public ResultDTO getContent(@PathVariable("nId")Long nId){
+        return newsService.getNewsContent(nId);
+    }
+
 
 
 

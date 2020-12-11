@@ -1,9 +1,8 @@
 package com.cy.news.common.Pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,9 +15,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Setter
+@Getter
 public class Comments implements Serializable {
-    private Long cId;
 
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long cId;
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long nId;
 
     private Integer uId;

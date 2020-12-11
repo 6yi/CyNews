@@ -144,12 +144,11 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             log.info(e.getMessage());
             return ResultDTO.builder().code(UserRetErrorCode.REGISTER_ERROR).data("未知错误,请联系管理员").build();
-
         }
-
         sendEmailMQ(user.getuId(), EmailMQEntity.builder().uId(user.getuId()).email(user.getuEmail()).build());
         return ResultDTO.builder().code(UserRetErrorCode.OK).build();
     }
+
 
     /**
      * @author 6yi
@@ -166,7 +165,6 @@ public class UserServiceImpl implements UserService {
                 public void onSuccess(SendResult sendResult) {
                     log.info("消息写入成功");
                 }
-
                 @Override
                 public void onException(Throwable throwable) {
                     log.info("消息写入失败");
@@ -180,12 +178,16 @@ public class UserServiceImpl implements UserService {
 
 
 
-
+    /**
+     * @author 6yi
+     * @date 2020/12/7
+     * @return
+     * @Description 更改状态
+     **/
     @Override
     public ResultDTO updateUserStatus(Integer userStatusCode,Integer userId) {
         try {
             userDao.updateUserStatusById(userStatusCode,userId);
-
             return ResultDTO.builder().code(UserRetErrorCode.OK).build();
         }catch (Exception e){
             return ResultDTO.builder().code(UserRetErrorCode.ERROR).build();
@@ -194,16 +196,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultDTO addUserLikeNews(Long nId, Integer uId) {
-        String key="userLike:"+uId+":"+nId;
-        redisTemplate.opsForValue().set(key,"1");
+        String key="userLike:"+uId;
+        redisTemplate.opsForHash().put(key,nId.toString(),"1");
         return ResultDTO.builder().code(200).build();
     }
 
     @Override
     public ResultDTO delUserLikeNews(Long nId,Integer uId){
-        String key="userLike:"+uId+":"+nId;
-        redisTemplate.delete(key);
+        String key="userLike:"+uId;
+        redisTemplate.opsForHash().delete(key,nId.toString());
         return ResultDTO.builder().code(200).build();
+    }
+
+    @Override
+    public ResultDTO upLoadAvatar(String imgSrc, Integer uId) {
+        userDao.upLoadAvatar(imgSrc,uId);
+        return ResultDTO.builder().code(200).data(imgSrc).build();
     }
 
 

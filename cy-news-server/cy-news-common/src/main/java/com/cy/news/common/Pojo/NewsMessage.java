@@ -16,14 +16,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class NewsMessage implements Serializable {
-    private Integer mId;
-
-    private Long nId;
 
     private Integer mLike;
 
     private Integer mWatch;
-
-    private static final long serialVersionUID = 1L;
 
 }

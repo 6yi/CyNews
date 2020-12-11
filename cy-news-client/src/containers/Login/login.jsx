@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { List, InputItem, Icon, Button } from 'antd-mobile';
 import login from './login.module.css'
+import {saveUser} from '../../redux/action'
 import { toLogin } from '../../api/Login/login'
-
-export default class Login extends Component {
+import {connect} from "react-redux"
+class Login extends Component {
     constructor() {
         super()
 
@@ -24,10 +25,14 @@ export default class Login extends Component {
     }
 
     loginClick() {
-        toLogin('/cy.news.user-server/login',this.state.user).then(res => {
+        toLogin('/login',this.state.user).then(res => {
             console.log(res);
+            this.props.saveUser(res.data)
+            localStorage.setItem('elementToken',res.data.token)    //存入token
+            this.props.history.push('/news')
         }).catch((err) => {
             console.log(err);
+            this.props.saveUser(err.data)
         })
     }
 
@@ -71,3 +76,9 @@ export default class Login extends Component {
         )
     }
 }
+
+
+export default connect(
+    state => ({user:state}),
+    {saveUser}
+  )(Login)

@@ -96,7 +96,7 @@
         <dependency>
             <groupId>com.cy.news</groupId>
             <artifactId>cy-news-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
         <!--        api-->
 
@@ -114,6 +114,12 @@
             <version>2.3.5.RELEASE</version>
         </dependency>
         <!--        redis-->
+
+        <dependency>
+            <groupId>com.youbenzi</groupId>
+            <artifactId>MDTool</artifactId>
+            <version>1.2.4</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

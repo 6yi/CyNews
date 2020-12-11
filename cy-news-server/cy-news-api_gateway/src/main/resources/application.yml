@@ -9,7 +9,6 @@ spring:
         server-addr: 192.168.123.17:8848,192.168.123.17:8849,192.168.123.17:8850
     # 使用 Sentinel 作为熔断器
     sentinel:
-
       filter:
         enabled: true
       transport:
@@ -47,8 +46,10 @@ server:
 
 jwtfilter:
   filterUrl:
-    - /cy.news.user-server/test
-    - /cy.news.user-server/haha
+    - /newsServer/like
+    - /newsServer/addComments
+    - /newsServer/declike
+    - /newsServer/islike
 
 
 # 目前无效

@@ -10,7 +10,7 @@
     <groupId>cy.news</groupId>
     <artifactId>admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>admin</name>
+    <name>cy-news-admin</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -19,12 +19,18 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.6.0</version>
+        </dependency>
 
         <dependency>
             <groupId>com.qcloud</groupId>
             <artifactId>cos_api</artifactId>
             <version>5.6.24</version>
         </dependency>
+
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token</artifactId>
@@ -53,7 +59,7 @@
             <artifactId>spring-cloud-starter</artifactId>
         </dependency>
 
-        <!--  nacos      -->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
@@ -66,10 +72,8 @@
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
         </dependency>
-        <!--/nacos-->
 
 
-        <!--        dubbo  -->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
@@ -84,14 +88,14 @@
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-serialization-kryo</artifactId>
         </dependency>
-        <!--        dubbo  -->
+
 
 
         <!--        api-->
         <dependency>
             <groupId>com.cy.news</groupId>
             <artifactId>cy-news-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.2-SNAPSHOT</version>
         </dependency>
         <!--        api-->
 
@@ -126,6 +130,29 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

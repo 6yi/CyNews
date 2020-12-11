@@ -2,6 +2,7 @@ package com.cy.news.userprovider.dao;
 
 import com.cy.news.common.Pojo.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 @Mapper
@@ -26,6 +27,9 @@ public interface UserDao {
 
 
     User findUserByMail(String mail);
+
+    @Update("update user set u_avatar=#{imgSrc} where u_id=#{uId}")
+    int upLoadAvatar(String imgSrc,Integer uId);
 
 
 }
