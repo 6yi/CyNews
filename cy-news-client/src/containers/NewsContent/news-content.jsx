@@ -16,7 +16,7 @@ export default class NewsContent extends Component {
             showInput: false,
             Bscroll:{},
             newsContent:{
-                content:'',
+                news:{},
                 newsMessage:{
                     mlike:'',
                     mwatch:''
@@ -29,6 +29,7 @@ export default class NewsContent extends Component {
     componentDidMount() {
         
         getNewscontent(this.props.match.params.newsid).then(res => {
+            console.log(res.data.data);
             this.setState({
                 newsContent:res.data.data
             })
@@ -97,7 +98,7 @@ export default class NewsContent extends Component {
                     </div>
 
                     <div className={newscontent.newscontent +' newscontent'} 
-                    dangerouslySetInnerHTML={{__html: this.state.newsContent.content}} 
+                    dangerouslySetInnerHTML={{__html: this.state.newsContent.news.ncontent}} 
                     ></div>
                     <div className={newscontent.comment}>
                     

@@ -2,18 +2,34 @@ import React, { Component } from 'react'
 import BScroll from 'better-scroll'
 import { saveBScroll } from '../../redux/action'
 import { connect } from 'react-redux'
+
+
+// function debounce(fn, ms = 100) {        /* 防抖函数封装 */
+//     let timeoutId
+//     return function () {
+//       clearTimeout(timeoutId)
+//       timeoutId = setTimeout(() => {
+//           /* console.log(this,arguments); */
+//         fn.apply(this, arguments)
+//       }, ms)
+//     }
+// }
+
 export default class MyScroll extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
+            sccrollPosition: () => {},
             BScroll: {}
         }
+        // this.scrolling = debounce(this.scrolling,100)    /* ！！！react要在此绑定防抖，不然回调函数不执行 */
     }
 
 
 
     componentDidMount() {
+        
         const wrapper = document.querySelector('.wrapper')
 
         const scroll = new BScroll(wrapper, {
@@ -30,17 +46,22 @@ export default class MyScroll extends Component {
             eventPassthrough:'horizontal',      /* 保留原生横向滚动 */
         })
         this.setState({
-            BScroll: scroll
+            BScroll: scroll,
+            sccrollPosition: this.props.sccrollPosition
         }, () => {
-            this.state.BScroll.on('pullingUp', () => {
 
-                this.props.pullingUp()
-            })
+            this.state.BScroll.on('pullingUp',this.props.pullingUp)
+            // this.state.BScroll.on('scroll',(position) => this.scrolling(position))
+            this.props.getBscroll(scroll)   //向父组件传入betterscroll实例
+
         })
-        this.props.getBscroll(scroll)   //向父组件传入betterscroll实例
+        
     }
 
-
+   /*  scrolling = (position) => {
+        if(this.props.scrollPosition)
+        this.props.scrollPosition(position)
+    } */
 
     render() {
         return (

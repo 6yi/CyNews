@@ -1,18 +1,38 @@
 import React,{Component} from 'react'
 import {Icon,SearchBar} from 'antd-mobile';
+import {connect} from 'react-redux'
 import MyDrawer from '../Drawer/drawer'
+import Spider from '../../assets/img/Spider-man.png'
+import NOLogin from '../../assets/img/not-log-in.png'
 import './Nav.less'
-export default class Nav extends Component{
+import { withRouter } from 'react-router-dom';
+class Nav extends Component{
     
+    headimg = () => {
+        if(this.props.user) {
+            if(this.props.user.uAvatar) {
+                return <img src={this.props.user.uAvatar} style={{width:'45%'}} alt="" onClick={this.props.iconClick}/>
+            } else {
+                return <img src={Spider} style={{width:'61%'}} onClick={this.props.iconClick}/>
+            }
+        } else {
+            return(
+                <div style={{textAlign:'center'}} onClick={() => {this.props.history.push('/login')}}>
+                    <img style={{width:'45%'}} src={NOLogin} alt=""/>
+                </div>
+            )
+               
+        }
+    }
 
     render() {
     return (
         
         <div className='navbar'>
             <div className='top-nav'>
-            <span className='left' onClick={this.props.iconClick}>
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605717095531&di=8ea976b885c0d7783c402b2053f4ba41&imgtype=0&src=http%3A%2F%2Fimgcdn1.gzhtedu.cn%2Fimages%2Fxiaohui%2F20161124034151-27.jpg" alt=""/>
-                
+            <span className='left'>
+                {this.headimg()}
+               
             </span>
              <SearchBar placeholder="自动获取光标" /* ref={ref => this.autoFocusInst = ref} */ />
                
@@ -25,3 +45,9 @@ export default class Nav extends Component{
     )
     }
 }
+
+
+export default withRouter(connect(
+    state => (state),
+    { /* saveList */ }
+)(Nav))

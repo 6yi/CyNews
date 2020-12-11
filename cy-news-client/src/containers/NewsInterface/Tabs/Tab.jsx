@@ -21,7 +21,7 @@ render() {
       { title: '推荐',type:'index' },
       { title: '时政',type:'时政'},
       { title: '国内',type:'国内'},
-      { title: '娱乐' },
+      { title: '同城',type:'同城' },
       { title: '5th Tab' },
       { title: '6th Tab' },
       { title: '7th Tab' },

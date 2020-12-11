@@ -19,16 +19,30 @@ class Login extends Component {
     }
 
     componentDidMount() {   //获取用户设备高度
+        if(localStorage.getItem('userName') && localStorage.getItem('passWord')) {
+           const user = {
+            userName: localStorage.getItem('userName'),
+            passWord: localStorage.getItem('passWord'), 
+           }
+           this.setState({
+               user
+           },() => {
+               console.log(this.state);
+           })
+        }
         var _box = document.getElementsByClassName('loginbox')[0]
         _box.style.height = _box.clientHeight + 'px'
 
     }
 
     loginClick() {
+       
         toLogin(this.state.user).then(res => {
+            localStorage.setItem('userName',this.state.user.userName)
+            localStorage.setItem('passWord',this.state.user.passWord)
             console.log(res);
-            this.props.saveUser(res.data)
-            localStorage.setItem('elementToken',res.data.token)    //存入token
+            this.props.saveUser(res.data.data.user)
+            localStorage.setItem('elementToken',res.data.data.jwt_TOKEN)    //存入token
             this.props.history.push('/news')
         }).catch((err) => {
             console.log(err);
@@ -57,10 +71,10 @@ class Login extends Component {
                     <span className={login.logintitle}>账号密码登录</span>
                     <List className={login.list}>
                         <List.Item className={login.listItem}>
-                            <input type="text" placeholder='请输入邮箱' className={login.input + ' l-input'} onChange={(e) => {this.handlerChange('userName',e.target.value)}} />
+                            <input type="text" placeholder='请输入邮箱' value={this.state.user.userName} className={login.input + ' l-input'} onChange={(e) => {this.handlerChange('userName',e.target.value)}} />
                         </List.Item>
                         <List.Item className={login.listItem}>
-                            <input type="text" placeholder='请输入密码' className={login.input} onChange={(e) => {this.handlerChange('passWord',e.target.value)}} />
+                            <input type="text" placeholder='请输入密码' value={this.state.user.passWord} className={login.input} onChange={(e) => {this.handlerChange('passWord',e.target.value)}} />
                         </List.Item>
                         <Button className={login.button} disabled={this.state.buttonActive === '0'} onClick={() => { this.loginClick() }}>登录</Button>
                         <div className={login.toregister} onClick={() => { this.props.history.push('/register') }}>去注册</div>
