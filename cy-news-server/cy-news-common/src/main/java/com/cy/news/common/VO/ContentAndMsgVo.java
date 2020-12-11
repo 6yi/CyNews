@@ -1,6 +1,7 @@
 package com.cy.news.common.VO;
 
 import com.cy.news.common.Pojo.NewsMessage;
+import com.cy.news.common.Pojo.NewsWithBLOBs;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,7 +19,7 @@ import java.io.Serializable;
 @Builder
 public class ContentAndMsgVo implements Serializable {
 
-    private String content;
+    private NewsWithBLOBs news;
     private NewsMessage newsMessage;
 
 }

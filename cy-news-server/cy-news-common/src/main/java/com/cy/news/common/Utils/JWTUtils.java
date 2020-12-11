@@ -23,6 +23,7 @@ public class JWTUtils {
         long exp=now+1000*60*30;
         JwtBuilder builder= Jwts.builder().setId(user.getuId().toString())
                 .setIssuedAt(new Date())
+                .claim("nickName",user.getuNickname())
                 .signWith(SignatureAlgorithm.HS256,HASH_KEY)
                 .setExpiration(new Date(exp));//设置过期时间
        return builder.compact();

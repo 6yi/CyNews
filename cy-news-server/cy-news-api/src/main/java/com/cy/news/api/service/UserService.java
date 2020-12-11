@@ -26,4 +26,6 @@ public interface UserService {
 
     ResultDTO delUserLikeNews(Long nId,Integer uId);
 
+    ResultDTO upLoadAvatar(String imgSrc,Integer uId);
+
 }
