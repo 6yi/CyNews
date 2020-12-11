@@ -25,6 +25,7 @@
             <artifactId>cos_api</artifactId>
             <version>5.6.24</version>
         </dependency>
+
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token</artifactId>
@@ -53,7 +54,7 @@
             <artifactId>spring-cloud-starter</artifactId>
         </dependency>
 
-        <!--  nacos      -->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
@@ -66,10 +67,8 @@
             <groupId>com.alibaba.nacos</groupId>
             <artifactId>nacos-client</artifactId>
         </dependency>
-        <!--/nacos-->
 
 
-        <!--        dubbo  -->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
@@ -84,7 +83,7 @@
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-serialization-kryo</artifactId>
         </dependency>
-        <!--        dubbo  -->
+
 
 
         <!--        api-->

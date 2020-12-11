@@ -36,14 +36,22 @@ public class NewsMessageServiceImpl implements NewsMessageService {
     private RedisTemplate<String, String> numberRedisTemplate;
 
 
-    //todo 点赞
+
+    /**
+     * @author 6yi
+     * @Date 2020/12/11
+     * @return
+     * @Description:  给新闻点赞
+     *
+     **/
     @Override
     public ResultDTO incrLike(Long nId,Integer uId) {
         if(numberRedisTemplate.opsForHash().hasKey("userLike:" + uId, nId.toString())){
-            log.info("已经点赞");
+            // 已经点赞过了
             return ResultDTO.builder().code(200).data(-1).build();
         }
-        log.info("还没点赞");
+
+        //还未点赞
         long number=1;
         if((numberRedisTemplate.opsForHash().get("newsMessage:"+nId, "like"))==null){
             try{
@@ -64,6 +72,12 @@ public class NewsMessageServiceImpl implements NewsMessageService {
         return ResultDTO.builder().code(200).data(number).build();
     }
 
+    /**
+     * @author 6yi
+     * @date 2020/12/11
+     * @return
+     * @Description 取消点赞
+     **/
     @Override
     public ResultDTO decLike(Long nId, Integer uId) {
         Long number=-1L;

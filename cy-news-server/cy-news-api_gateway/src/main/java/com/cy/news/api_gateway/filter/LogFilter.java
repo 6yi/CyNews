@@ -1,4 +1,4 @@
-package com.cy.news.api_gateway.auth;
+package com.cy.news.api_gateway.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

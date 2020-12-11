@@ -1,5 +1,7 @@
 package com.cy.news.common.Pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +20,7 @@ import java.util.Date;
 public class News implements Serializable {
 
 
-
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long nId;
 
     private String nTitle;

@@ -28,12 +28,17 @@ public class RedisConfiguration {
 
 
 
+    /**
+     * @author 6yi
+     * @date 2020/12/10
+     * @return
+     * @Description  用来序列化对象为json
+     **/
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
-        Jackson2JsonRedisSerializer objectJackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-        template.setValueSerializer(objectJackson2JsonRedisSerializer);
+        template.setValueSerializer(new Jackson2JsonRedisSerializer<Object>(Object.class));
         template.setKeySerializer(new StringRedisSerializer());
         template.afterPropertiesSet();
         return template;

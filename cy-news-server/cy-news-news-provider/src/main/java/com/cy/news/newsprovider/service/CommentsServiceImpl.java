@@ -55,6 +55,13 @@ public class CommentsServiceImpl implements CommentsService {
     @Value("${mq.news.tag.send}")
     private String tag;
 
+    /**
+     * @author 6yi
+     * @date 2020/12/11
+     * @return
+     * @Description 添加评论
+     *
+     **/
     @Override
     public ResultDTO addComments(Long nId, Integer uId,String nickName ,String content) {
         Comments comments = Comments.builder()
@@ -68,7 +75,6 @@ public class CommentsServiceImpl implements CommentsService {
                 .build();
         String key = "comments:"+nId;
         jsonRedisTemplate.opsForList().leftPush(key,comments);
-        log.info("存进去了");
         sendCommentMQ(comments);
         return ResultDTO.builder().code(200).build();
     }
@@ -133,7 +139,7 @@ public class CommentsServiceImpl implements CommentsService {
      * @author 6yi
      * @date 2020/12/5
      * @return
-     * @Description 从数据获取
+     * @Description 从数据库获取
      **/
     private ResultDTO getAtDataBase(Long nId, Integer page, Integer number, String key) {
         PageHelper.offsetPage(page,number);

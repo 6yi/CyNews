@@ -9,13 +9,18 @@ import com.cy.news.common.Exception.RegisterRetErrorCode;
 import com.cy.news.common.Utils.RegisterUtils;
 import com.cy.news.common.VO.RegisterUserByEmailVO;
 import com.cy.news.common.VO.UserNameLoginVO;
+import com.cy.news.userserver.utils.TencentCosUtils;
+import com.qcloud.cos.auth.BasicCOSCredentials;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @ClassName UserController
@@ -31,9 +36,19 @@ public class UserController {
     private final static Logger logger= LoggerFactory.getLogger(UserController.class);
 
 
-
     @DubboReference(version = "1.0.0")
     private UserService userService;
+
+    @Autowired
+    TencentCosUtils tencentCosUtils;
+
+    @PutMapping("/uploadAvatar")
+    public ResultDTO uploadAvatar(MultipartFile files, HttpServletRequest request){
+        String uId = request.getParameter("uId");
+        String imgSrc = tencentCosUtils.upLoad(files);
+        return userService.upLoadAvatar(imgSrc,Integer.parseInt(uId));
+    }
+
 
 
     @GetMapping("/hello")

@@ -49,6 +49,7 @@ jwtfilter:
     - /newsServer/like
     - /newsServer/addComments
     - /newsServer/declike
+    - /newsServer/islike
 
 
 # 目前无效

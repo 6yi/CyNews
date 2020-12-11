@@ -22,11 +22,17 @@ public class NewsProviderApplication {
     }
 
 
-
+    /**
+     * @author 6yi
+     * @date 2020/12/11
+     * @return
+     * @Description hutool的雪花ID生成器，注入workID和数据中心ID
+     **/
     @Bean
     public Snowflake snowflake(){
         return IdUtil.createSnowflake(SnowFlakeUtils.getWorkId(),SnowFlakeUtils.getDataCenterId());
     }
+
 
     @Bean
     public GlobalExceptionHandler globalExceptionHandler(){

@@ -32,6 +32,12 @@ public class NewsController {
         return newsService.getNews(type,start,end);
     }
 
+    @GetMapping("/islike/{nId}")
+    public ResultDTO isLikeNews(@PathVariable("nId")Long nId,HttpServletRequest request){
+        String uId = request.getHeader("uId");
+        return newsService.isLikeNews(nId,Integer.parseInt(uId));
+    }
+
 
 
     @GetMapping("/content/{nId}")

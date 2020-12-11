@@ -41,7 +41,6 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsMessageDao newsMessageDao;
 
-
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
 
@@ -54,16 +53,19 @@ public class NewsServiceImpl implements NewsService {
 
 
 
-
     /**
      * @author 6yi
      * @date 2020/11/27
      * @return
      * @Description 首页获取热点新闻
+     *
+     *
+     * @param type 新闻类型
+     * @param start 起始位置
+     * @param end 结束位置
      **/
     @Override
     public ResultDTO getNews(String type,Long start,Long end) {
-
         String key="hotNews:"+type;
         Set<Object> hotNews = redisTemplate.opsForZSet().reverseRange(key, start, end);
         if(hotNews==null||hotNews.isEmpty()){
@@ -89,33 +91,33 @@ public class NewsServiceImpl implements NewsService {
     }
 
 
-
-
-
-
-    //todo 正文获取
+    /**
+     * @author 6yi
+     * @date 2020/12/10
+     * @return
+     * @Description 正文获取
+     *
+     * @param nId 新闻id
+     **/
     @Override
     public ResultDTO getNewsContent(Long nId) {
         String key="news:content:"+nId;
-        String content = (String) redisTemplate.opsForValue().get(key);
+        NewsWithBLOBs news = (NewsWithBLOBs) redisTemplate.opsForValue().get(key);
         ContentAndMsgVo data=null;
-        if(content==null){
+        if(news==null){
             try {
                 redisLockUtil.lock("content:lock",String.valueOf(Thread.currentThread().getId()));
-
-                if((content = (String)redisTemplate.opsForValue().get(key))==null){
+                if((news = (NewsWithBLOBs)redisTemplate.opsForValue().get(key))==null){
                     NewsWithBLOBs newsWithBLOBs = newsDao.selectContentById(nId);
                     if(newsWithBLOBs==null){
-
                         redisTemplate.opsForValue().set(key,"",1,TimeUnit.SECONDS);
                         return ResultDTO.builder().code(200).data(null).build();
                     }else{
-                        content=newsWithBLOBs.getNContent();
-                        data=getContentAndMsgVo(nId,content);
-                        redisTemplate.opsForValue().set(key,content,2,TimeUnit.HOURS);
+                        data=getContentAndMsgVo(nId,newsWithBLOBs);
+                        redisTemplate.opsForValue().set(key,news,2,TimeUnit.HOURS);
                     }
                 }else{
-                    data=getContentAndMsgVo(nId,content);
+                    data=getContentAndMsgVo(nId,news);
                 }
 
             } catch (Exception e) {
@@ -125,7 +127,7 @@ public class NewsServiceImpl implements NewsService {
                 redisLockUtil.unLock("content:lock",String.valueOf(Thread.currentThread().getId()));
             }
         }else{
-            data = getContentAndMsgVo(nId, content);
+            data = getContentAndMsgVo(nId, news);
         }
         //增加浏览量
         incrWatch(nId);
@@ -133,19 +135,34 @@ public class NewsServiceImpl implements NewsService {
         return ResultDTO.builder().code(200).data(data).build();
     }
 
+    /**
+     * @author 6yi
+     * @date 2020/12/10
+     * @return
+     * @Description 判断是否已经点过赞
+     *
+     * @param nId 新闻id
+     * @param uId 用户id
+     **/
+    @Override
+    public ResultDTO isLikeNews(Long nId, Integer uId) {
+        if(numberRedisTemplate.opsForHash().hasKey("userLike:" + uId, nId.toString())){
+            return ResultDTO.builder().code(300).data("已点赞").build();
+        }
+        return ResultDTO.builder().code(200).data("未点赞").build();
+    }
 
 
-
-
-
-
-
-
-
-    //封装成Vo
-    private ContentAndMsgVo getContentAndMsgVo(Long nId, String content) {
+    /**
+     * @author 6yi
+     * @date 2020/12/10
+     * @return
+     * @Description  封装成Vo
+     **/
+    private ContentAndMsgVo getContentAndMsgVo(Long nId, NewsWithBLOBs news) {
         ContentAndMsgVo data;
         NewsMessage message;
+
         try{
             message= NewsMessage.builder()
                     .mLike(Integer.parseInt((String) Objects.requireNonNull(numberRedisTemplate.opsForHash().get("newsMessage:" + nId, "like"))))
@@ -153,15 +170,23 @@ public class NewsServiceImpl implements NewsService {
         }catch (Exception e){
             message=NewsMessage.builder().mWatch(0).mLike(0).build();
         }
-        content= MDTool.markdown2Html(content);
-        data = ContentAndMsgVo.builder().content(content).newsMessage(message).build();
+
+        news.setNContent(MDTool.markdown2Html(news.getNContent()));
+
+        data = ContentAndMsgVo.builder().news(news).newsMessage(message).build();
         return data;
+
     }
 
 
 
 
-    //todo 增加浏览数量
+    /**
+     * @author 6yi
+     * @date 2020/12/10
+     * @return
+     * @Description  增加浏览数量
+     **/
     public void incrWatch(Long nId) {
         if((numberRedisTemplate.opsForHash().get("newsMessage:"+nId, "watch"))==null){
             try{
@@ -182,7 +207,12 @@ public class NewsServiceImpl implements NewsService {
 
 
 
-
+    /**
+     * @author 6yi
+     * @date 2020/12/10
+     * @return
+     * @Description   从数据库获取新闻并且加入到redis缓存中
+     **/
     private Set<Object> ResetAndGetHotNewsSet(String key,long start,long end,String type) {
             redisTemplate.delete(key);
             long nowTime = System.currentTimeMillis();
@@ -215,7 +245,7 @@ public class NewsServiceImpl implements NewsService {
                         NewsMessage msg = NewsMessage.builder().mLike(like).mWatch(watch).build();
                         hotNews.setNewsMessage(msg);
 
-                        //热度值算法
+                        //热度值算法 瞎吉儿写的，先凑合用着
                         long hotKey  =  (hotNews.getNDate().getTime() - nowTime) / 5000000 +
                                         hotNews.getNewsMessage().getMLike() * 10 +
                                         hotNews.getNewsMessage().getMWatch() * 6 +
@@ -226,10 +256,12 @@ public class NewsServiceImpl implements NewsService {
                     }).forEach(h->{
 
                         redisTemplate.opsForZSet().add(key,h,h.getHotKey());
+
             });
 
             redisTemplate.expire(key,1, TimeUnit.HOURS);
             return redisTemplate.opsForZSet().reverseRange(key, start, end);
+
     }
 
 

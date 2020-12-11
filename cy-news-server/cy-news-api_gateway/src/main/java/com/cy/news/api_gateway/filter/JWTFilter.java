@@ -1,4 +1,4 @@
-package com.cy.news.api_gateway.auth;
+package com.cy.news.api_gateway.filter;
 
 import com.cy.news.common.DTO.ResultDTO;
 import com.cy.news.common.Utils.JWTUtils;
@@ -23,7 +23,7 @@ import java.util.List;
  * @Date 2020/11/23 23:28
  * @Version 1.0
  * @Description:
- * JWT验证
+ *      JWT验证
  */
 @Slf4j
 @Component

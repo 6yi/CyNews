@@ -26,7 +26,6 @@ public class CommentsController {
     public ResultDTO getComments(@PathVariable("nId")Long nId,
                                  @PathVariable("page")Integer page,
                                  HttpServletRequest request){
-
        return commentsService.getComments(nId,page,10);
     }
 
@@ -34,8 +33,6 @@ public class CommentsController {
     public ResultDTO addComments(@RequestBody CommentsVO commentsVO,HttpServletRequest request){
         String nickName = request.getHeader("nickName");
         String uId = request.getHeader("uId");
-        log.info("uId:"+uId);
-        log.info(commentsVO.toString());
         return commentsService.addComments(commentsVO.getNId(),
                 Integer.parseInt(uId),
                 nickName,

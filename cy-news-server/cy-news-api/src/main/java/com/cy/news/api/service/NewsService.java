@@ -17,7 +17,7 @@ public interface NewsService {
 
     ResultDTO getNewsContent(Long nId);
 
-
+    ResultDTO isLikeNews(Long nId,Integer uId);
 
 
 
