@@ -1,5 +1,6 @@
 package com.cy.news.common.Pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.ExtensionMethod;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewsWithBLOBs extends News implements Serializable {
 
 

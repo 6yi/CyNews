@@ -26,7 +26,7 @@ public class NewsMessageController {
     NewsMessageService newsMessageService;
 
 
-    @PutMapping("/like/{nId}/")
+    @PutMapping("/like/{nId}")
     public ResultDTO incrLike(@PathVariable("nId")Long nId,
                               HttpServletRequest request){
         String uId = request.getHeader("uId");
